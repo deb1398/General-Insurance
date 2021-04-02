@@ -1,0 +1,8 @@
+body {
+	background-color: #e2e8f0; 
+}
+
+
+#contact .card:hover i,#contact .card:hover h4, .tcolor{
+	color: #264A9F;
+}
