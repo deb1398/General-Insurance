@@ -5,12 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { FAQComponent } from './faq/faq.component';
+import { PremiumCalcComponent } from './premium-calc/premium-calc.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserProfileComponent,
-    NavbarComponent
+    NavbarComponent,
+    FAQComponent,
+    PremiumCalcComponent
   ],
   imports: [
     BrowserModule,
