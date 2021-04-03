@@ -1,0 +1,90 @@
+<p>claim-insurance works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h2 class="claimheader">Claim Insurance</h2>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-6 form-group">
+                                <label for="policy_no">Policy Number</label>
+                                <input type="text" class="form-control" id="policy_no" name="policy_no" formControlName="policy_no">
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-6 form-group">
+                                <label for="mobile_no">Mobile Number</label>
+                                <input type="text" class="form-control" id="mobile_no" name="mobile_no" formControlName="mobile_no">
+                            </div>
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-md-4 form-group ">
+                                <label for="claim_reason">Reason to Claims Insurance</label>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" value="4-wheeler" id="claim_reason" name="claim_reason" formControlName="claim_reason">Natural Disaster
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" value="2-wheeler" id="claim_reason" name="claim_reason" formControlName="claim_reason">Man Made Disaster    
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">                        
+                                        <input type="radio" class="form-check-input" value="4-wheeler" id="claim_reason" name="claim_reason" formControlName="claim_reason">Road Accident    
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" value="2-wheeler" id="claim_reason" name="claim_reason" formControlName="claim_reason">Theft
+                                    </label>
+                                </div>                  
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4 form-group">
+                                <label for="date_of_loss">Date of Loss/Damage</label>
+                                <input type="text" class="form-control" id="date_of_loss" name="date_of_loss" formControlName="date_of_loss">
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4 form-group">
+                                <label for="place_of_loss">Place of Loss</label>
+                                <input type="text" class="form-control" id="place_of_loss" name="place_of_loss" formControlName="place_of_loss">
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4 form-group">
+                                <label for="loss_desc">Damage/Loss Description</label>
+                                <input type="text" class="form-control" id="loss_desc" name="loss_desc" formControlName="loss_desc">
+                            </div>
+                        </div>
+
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-md-12 form-group ">
+                                <label for="any_thirdparty_damage">Any injury to Third Party or Property Damage ?</label>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-inline" value="yes" id="any_thirdparty_damage" name="any_thirdparty_damage" formControlName="any_thirdparty_damage">Yes
+                                        <input type="radio" class="form-check-inline" value="No" id="any_thirdparty_damage" name="any_thirdparty_damage" formControlName="any_thirdparty_damage">No
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col lg-12">
+                                <label>Upload Suppoting Documents</label>
+                                <div class="custom-file form-group">
+                                    <input type="file" class="custom-file-input form-control" id="customFile">
+                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <input type="submit" class="btn btn-primary" value="Submit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

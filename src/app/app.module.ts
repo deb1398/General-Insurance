@@ -7,6 +7,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FAQComponent } from './faq/faq.component';
 import { PremiumCalcComponent } from './premium-calc/premium-calc.component';
+import { ClaimInsuranceComponent } from './claim-insurance/claim-insurance.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { PremiumCalcComponent } from './premium-calc/premium-calc.component';
     UserProfileComponent,
     NavbarComponent,
     FAQComponent,
-    PremiumCalcComponent
+    PremiumCalcComponent,
+    ClaimInsuranceComponent
   ],
   imports: [
     BrowserModule,

@@ -7,12 +7,82 @@
                     <h2 class="premheader">Premium Calculator</h2>
                 </div>
                 <div class="card-body">
-                    <p>
-                        <label for="veh_type">Vehicle Type</label>
-                        <input type="radio" value="4-wheeler" id="veh_type" name="veh_type" formControlName="veh_type"> 4-Wheeler
-                        <input type="radio" value="2-wheeler" id="veh_type" name="veh_type" formControlName="veh_type"> 2-Wheeler
-                    </p>
+                    <form>
+                        <div class="form-group">
+                            <label class="mr-3">Vehicle Type</label>
+                            <input type="radio" class="form-check-inline" value="4-wheeler" id="veh_type" name="veh_type" formControlName="veh_type" >4-Wheeler&nbsp;
+                            <input type="radio" class="form-check-inline" value="2-wheeler" id="veh_type" name="veh_type" formControlName="veh_type">2-Wheeler
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-4 form-group">
+                                <label for="brand_name">Brand Name</label>
+                                <select id="brand_name" class="form-control" name="brand_name" formControlName="brand_name">
+                                    <option [ngValue]="b.id" *ngFor="let b of fourWheelerBrandsList">
+                                    {{b.name}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-4 form-group">
+                                <label for="model_name">Model Name</label>
+                                <select id="model_name" class="form-control" name="model_name" formControlName="model_name">
+                                    <option [ngValue]="m.id" *ngFor="let m of fourWheelerModelsList">
+                                    {{m.name}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-4 form-group">
+                                <label for="market_price">Market Price</label>
+                                <input type="text" class="form-control" id="market_price" name="market_price" formControlName="market_price">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 form-group">
+                                <label for="market_price">Vehicle's CC</label>
+                                <input type="text" class="form-control" id="market_price" name="market_price" formControlName="market_price">
+                            </div>
+                            <div class="col-sm-12 col-md-6 form-group">
+                                <label for="veh_pur_date">Vehicle Purchase Date</label>
+                                <input type="text" class="form-control" id="veh_pur_date" name="veh_pur_date" formControlName="veh_pur_date">
+                            </div>
+                        </div>
+                        <p>
+                            <input class="form-control btn btn-primary" type="submit" value="Calculate Premium">
+                        </p>
+                    </form>
 
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="card h-100 text-center">
+                                <div class="card-header">
+                                    <h5 class="card-title">Comprehensive Plan</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-text">
+                                        <p>Price Rs.5800</p>
+                                        <p>Covers</p>
+                                        <p>Third party Insurance</p>
+                                        <p>Own Damage Insurance</p>
+                                    </div>
+                                    <input type="submit" value="Buy Now">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="card h-100 text-center">
+                                <div class="card-header">
+                                    <h5 class="card-title">Third Party Plan</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-text">
+                                        <p>Price Rs.2900</p>
+                                        <p>Covers</p>
+                                        <p>Only Third party Insurance</p>
+                                    </div>
+                                    <input type="submit" value="Buy Now">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
