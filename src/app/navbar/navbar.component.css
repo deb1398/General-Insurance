@@ -1,0 +1,21 @@
+img
+{
+    width: 20%;
+}
+
+nav ul li a
+{
+    font-size: large;
+    margin-top: 10px;
+    color: #e2e8f0;
+}
+nav ul li
+{
+    padding-left: 50px;
+}
+nav
+{
+    margin-top: 5px;
+    box-shadow: 10px 10px 10px grey;
+    background-color: #264A9F;
+}
