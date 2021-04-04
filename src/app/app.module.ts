@@ -8,15 +8,23 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ContactComponent } from './contact/contact.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { UserHomePageComponent } from './user-home-page/user-home-page.component';
+import { FAQComponent } from './faq/faq.component';
+import { PremiumCalcComponent } from './premium-calc/premium-calc.component';
+import { ClaimInsuranceComponent } from './claim-insurance/claim-insurance.component';
+import { PaymentGatewayComponent } from './payment-gateway/payment-gateway.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserProfileComponent,
     NavbarComponent,
+    FAQComponent,
+    PremiumCalcComponent,
+    ClaimInsuranceComponent,
     ContactComponent,
     AdminPageComponent,
-    UserHomePageComponent
+    UserHomePageComponent,
+    PaymentGatewayComponent
   ],
   imports: [
     BrowserModule,

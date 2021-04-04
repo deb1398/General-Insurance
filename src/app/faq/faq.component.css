@@ -1,0 +1,54 @@
+*
+{
+    color: #264A9F;
+}
+.btn
+{
+    text-align:left;
+    white-space:normal;
+}
+
+.faq-header
+{
+    text-align: center;
+}
+
+.faq h1
+{
+    font-weight: 900;
+    font-size: 34px;
+    text-align: center;
+    padding: 20px 0 50px 0;
+    color: #264A9F;
+}
+
+.accordion .card
+{
+    border-radius: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+}
+
+.accordion .card-header
+{
+    background-color: #e2e8f0;
+    text-align: left;
+}
+
+.accordion .card-header i
+{
+    position: absolute;
+    top: 1.6rem;
+    right:1rem;
+}
+
+.accordion .card .btn
+{
+    color: #264A9F;
+}
+
+.accordion .card-body, .accordion li
+{
+    background: #e2e8f0;
+    color:black;
+}
