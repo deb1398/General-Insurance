@@ -14,6 +14,10 @@ import { BuyInsuranceComponent } from './buy-insurance/buy-insurance.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { PlanSelectionComponent } from './plan-selection/plan-selection.component';
 import { ClaimDetailsComponent } from './claim-details/claim-details.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import { AboutusComponent } from './aboutus/aboutus.component';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,11 @@ import { ClaimDetailsComponent } from './claim-details/claim-details.component';
     BuyInsuranceComponent,
     AdminLoginComponent,
     PlanSelectionComponent,
-    ClaimDetailsComponent
+    ClaimDetailsComponent,
+    RegisterComponent,
+    LoginComponent,
+    AboutusComponent,
+    ForgetPasswordComponent
   ],
   imports: [
     BrowserModule,

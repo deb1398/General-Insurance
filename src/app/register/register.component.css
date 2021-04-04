@@ -1,0 +1,16 @@
+.shadow
+{
+    box-shadow: 10px 10px 10px 10px gainsboro;
+}
+h3{
+    color:#264A9F;
+}
+#btnLogin
+{
+    background-color: #4CAF50;
+    width: 100%
+}
+
+.tcolor{
+	color: #264A9F;
+}

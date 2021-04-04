@@ -1,0 +1,33 @@
+.container
+{
+    margin-top: 2%;
+}
+.shadow
+{
+    box-shadow: 10px 10px 10px 10px gainsboro;
+}
+img
+{
+    width: 30%;
+}
+h3{
+    color:#264A9F;
+}
+#btnLogin
+{
+    background-color: #4CAF50;
+    width: 100%
+}
+.bt1
+{
+    background-color: #f1f1f1 ; 
+}
+.cancelbtn{
+background-color: #f44336;
+}
+span.psw {
+    float: right;
+}
+.tcolor{
+	color: #264A9F;
+}
