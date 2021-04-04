@@ -3,25 +3,6 @@
     margin-top: 2%;
 }
 
-.why_Insurance
-{
-    box-shadow: 10px 10px 10px  grey;
-    width: 70%;
-    float: left;
-}
-
-h4
-{
-    text-align: center;
-}
-.options
-{
-    width: 25%;
-    float: right;
-    margin-left: 5%;
-    border: 1px solid black;
-    box-shadow: 10px 10px 10px grey;
-}
 button
 {
     width: 90%;
@@ -33,7 +14,6 @@ button
     background-color: #264A9F;
     border: #264A9F;
     color: #e2e8f0;
-    box-shadow: 10px 10px 10px grey;
 }
 button a
 {
