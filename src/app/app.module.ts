@@ -12,6 +12,8 @@ import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { BuyInsuranceComponent } from './buy-insurance/buy-insurance.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { PlanSelectionComponent } from './plan-selection/plan-selection.component';
+import { ClaimDetailsComponent } from './claim-details/claim-details.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
     HomeComponent,
     FooterComponent,
     BuyInsuranceComponent,
-    AdminLoginComponent
+    AdminLoginComponent,
+    PlanSelectionComponent,
+    ClaimDetailsComponent
   ],
   imports: [
     BrowserModule,

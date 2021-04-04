@@ -3,11 +3,12 @@ h3
     text-align: center;
     color: #264A9F;
 }
+
 .btn-default
 {
-    background-color: #264A9F;
-    color: #e2e9f0;
+    background-color:#d9d9d9;
 }
+
 .shadow
 {
     box-shadow: 10px 10px 10px grey;

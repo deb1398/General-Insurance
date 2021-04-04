@@ -35,3 +35,7 @@ button
     color: #e2e8f0;
     box-shadow: 10px 10px 10px grey;
 }
+button a
+{
+    color: #e2e8f0;
+}
