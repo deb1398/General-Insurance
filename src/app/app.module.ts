@@ -47,7 +47,7 @@ import { PaymentGatewayComponent } from './payment-gateway/payment-gateway.compo
     RegisterComponent,
     LoginComponent,
     AboutusComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
 
     PaymentGatewayComponent
 

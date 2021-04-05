@@ -157,10 +157,10 @@
       </div>
     </div>
     <div class="col-md-4 themed-grid-col">
-    <button type="button" class="btn btn-lg btn-block btnstyle text-white"><a routerLink="BuyInsurance">Buy Insurance</a></button>
-    <button type="button" class="btn btnstyle btn-lg btn-block text-white">Renew Insurance</button>
-    <button type="button" class="btn btnstyle btn-lg btn-block text-white">Claim Insurance</button>
-    <button type="button" class="btn btnstyle btn-lg btn-block text-white">Estimate Insurance Calculation</button>
+    <button type="button" class="btn btn-lg btn-block btnstyle text-white" [routerLink]="'BuyInsurance'">Buy Insurance</button>
+    <button type="button" class="btn btnstyle btn-lg btn-block text-white" [routerLink]="'plan-selection'">Renew Insurance</button>
+    <button type="button" class="btn btnstyle btn-lg btn-block text-white" [routerLink]="'claim-insurance'">Claim Insurance</button>
+    <button type="button" class="btn btnstyle btn-lg btn-block text-white" [routerLink]="'premium-calc'">Estimate Insurance Calculation</button>
     </div>
   </div>
 </div>

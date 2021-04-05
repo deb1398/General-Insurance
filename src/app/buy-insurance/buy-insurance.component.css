@@ -8,6 +8,12 @@ h3
     background-color: #264A9F;
     color: #e2e9f0;
 }
+
+.btn-primary1
+{
+    background-color: #264A9F;
+    color: white;
+}
 .shadow
 {
     box-shadow: 10px 10px 10px grey;

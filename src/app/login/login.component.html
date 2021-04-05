@@ -26,15 +26,15 @@
                                     </label>
                                 </div>
                                 <div >
-                                    <button type="submit" class="btn btn-success btn-lg" id="btnLogin">Login</button>
+                                    <button type="button" class="btn btn-success btn-lg" id="btnLogin" [routerLink]="'user-home-page'"><a class="text-white" href="user-home-page">Login</a></button>
                                 </div>
                                 <p></p>
                                 <div class="container">
                                     <button type="button" class="cancelbtn">Cancel</button>
-                                    <span class="psw">Forgot <a routerLink="">password?</a></span>
+                                    <span class="psw">Forgot <a href="ForgetPwd">password?</a></span>
                                 </div>
                                 <div class="text-center p-3">
-                                    Need an account ? <a href="#">Register</a>
+                                    Need an account ? <a href="register">Register</a>
                                 </div>
                             </form>
                         </div>
