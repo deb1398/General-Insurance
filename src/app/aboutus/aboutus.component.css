@@ -7,3 +7,8 @@ body {
 #contact .card:hover i,#contact .card:hover h4, .tcolor{
 	color: #264A9F;
 }
+
+.container
+{
+	margin-top: 0%;
+}
