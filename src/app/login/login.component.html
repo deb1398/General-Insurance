@@ -3,12 +3,12 @@
         <div class="col-md-12 min-vh-100 d-flex flex-column justify-content-center">
             <div class="row">
                 <div class="col-lg-6 col-md-8 mx-auto">
-                    <div class="shadow">
+                    <div>
                         <div class="card-header">
                             <h3>User Login</h3>
                         </div>
                         <div class="card-body">
-                            <div class="text-center"><img src="assets/images/avatarlogo.jpg" alt="avatar"></div>
+                            <div class="text-center"><img src="assets/images/avatarlogoblue.png" alt="avatar"></div>
                             <form class="form">
                                 <div class="form-group">
                                     <label for="uname1" class="tcolor">Username</label>
@@ -26,15 +26,15 @@
                                     </label>
                                 </div>
                                 <div >
-                                    <button type="submit" class="btn btn-success btn-lg" id="btnLogin">Login</button>
+                                    <button type="button" class="btn btn-success btn-lg" id="btnLogin" [routerLink]="'user-home-page'"><a class="text-white" href="user-home-page">Login</a></button>
                                 </div>
                                 <p></p>
                                 <div class="container">
                                     <button type="button" class="cancelbtn">Cancel</button>
-                                    <span class="psw">Forgot <a routerLink="">password?</a></span>
+                                    <span class="psw">Forgot <a href="ForgetPwd">password?</a></span>
                                 </div>
                                 <div class="text-center p-3">
-                                    Need an account ? <a href="#">Register</a>
+                                    Need an account ? <a href="register">Register</a>
                                 </div>
                             </form>
                         </div>
