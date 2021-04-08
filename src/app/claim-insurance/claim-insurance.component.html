@@ -18,35 +18,39 @@
                             </div>
                         </div>
                         <div class="row d-flex justify-content-center">
-                            <div class="col-md-4 form-group ">
+                            <div class="col form-group ">
                                 <label for="claim_reason">Reason to Claims Insurance</label>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" value="4-wheeler" id="claim_reason" name="claim_reason" formControlName="claim_reason">Natural Disaster
-                                    </label>
+                                <div class="row" style="margin-left: 5px;">
+                                    <div class="form-check col-sm-12 col-lg-6">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" value="4-wheeler" id="claim_reason" name="claim_reason" formControlName="claim_reason">Natural Disaster
+                                        </label>
+                                    </div>
+                                    <div class="form-check col-sm-12 col-lg-6">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" value="2-wheeler" id="claim_reason" name="claim_reason" formControlName="claim_reason">Man Made Disaster    
+                                        </label>
+                                    </div>
                                 </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" value="2-wheeler" id="claim_reason" name="claim_reason" formControlName="claim_reason">Man Made Disaster    
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">                        
-                                        <input type="radio" class="form-check-input" value="4-wheeler" id="claim_reason" name="claim_reason" formControlName="claim_reason">Road Accident    
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" value="2-wheeler" id="claim_reason" name="claim_reason" formControlName="claim_reason">Theft
-                                    </label>
-                                </div>                  
+                                <div class="row"style="margin-left: 5px;">
+                                    <div class="form-check col-sm-12 col-lg-6">
+                                        <label class="form-check-label">                        
+                                            <input type="radio" class="form-check-input" value="4-wheeler" id="claim_reason" name="claim_reason" formControlName="claim_reason">Road Accident    
+                                        </label>
+                                    </div>
+                                    <div class="form-check col-sm-12 col-lg-6">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" value="2-wheeler" id="claim_reason" name="claim_reason" formControlName="claim_reason">Theft
+                                        </label>
+                                    </div>
+                                </div>                 
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-sm-12 col-md-4 col-lg-4 form-group">
                                 <label for="date_of_loss">Date of Loss/Damage</label>
-                                <input type="text" class="form-control" id="date_of_loss" name="date_of_loss" formControlName="date_of_loss">
+                                <input type="date" class="form-control" id="date_of_loss" name="date_of_loss" formControlName="date_of_loss">
                             </div>
                             <div class="col-sm-12 col-md-4 col-lg-4 form-group">
                                 <label for="place_of_loss">Place of Loss</label>

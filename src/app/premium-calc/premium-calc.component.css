@@ -11,3 +11,19 @@
     background-color: #264A9F;
     color: white;
 }
+
+.inner-card-body
+{
+    background-color: white;
+}
+
+.inner-card-header
+{
+    background-color: #f1f1f1;
+    
+}
+
+.inner-card
+{
+    border: 1px solid gray;
+}

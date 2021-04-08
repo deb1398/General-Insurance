@@ -8,14 +8,17 @@ img
     height: 30px;
     margin: 0px;
     width: 200px;*/
-    margin: 0;
-    padding:0;
-    width: 350px;
+    margin: 0px;
+    padding:10px 0px;
+    
+}
+.navbar-brand img
+{
+    width: 115px;
 }
 nav ul li a
 {
     font-size: large;
-    margin-top: 10px;
     color: white;
 }
 nav ul li
@@ -26,7 +29,6 @@ nav ul li
 }
 nav
 {
-    
     margin-top: 5px;
     box-shadow: 10px 10px 10px grey;
     background-color: #264A9F;

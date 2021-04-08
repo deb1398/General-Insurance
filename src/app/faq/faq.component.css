@@ -52,3 +52,8 @@
     background: #e2e8f0;
     color:black;
 }
+
+.card a
+{
+    font-weight:500;
+}
