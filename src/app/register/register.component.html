@@ -9,37 +9,97 @@
                         </div>
                         <div class="card-body">
                             
-                            <form class="form">
+                            <form class="form" [formGroup]="registerForm" (ngSubmit)="submitForm()" novalidate>
                                 <div class="form-group">
-                                    <label for="name1" class="tcolor">First Name</label>
-                                    <input type="text" class="form-control form-control-lg rounded-0" name="name1">
+                                    <label for="firstName" class="tcolor">First Name</label>
+                                    <input type="text" class="form-control form-control-lg rounded-0" name="firstName" formControlName="firstName">
+                                    <div *ngIf="!firstName.valid && (firstName.dirty ||firstName.touched)" id="error-div">
+                                        <div [hidden]="!firstName.errors.required">
+                                          First Name is required
+                                        </div>
+                                        <div [hidden]="!firstName.errors.pattern">
+                                            Only Characters are Allowed
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="name2" class="tcolor">Last Name</label>
-                                    <input type="text" class="form-control form-control-lg rounded-0" name="name2">
+                                    <label for="lastName" class="tcolor">Last Name</label>
+                                    <input type="text" class="form-control form-control-lg rounded-0" name="lastName" formControlName="lastName">
+                                    <div *ngIf="!lastName.valid && (lastName.dirty ||lastName.touched)" id="error-div">
+                                        <div [hidden]="!lastName.errors.required">
+                                          Last Name is required
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="email" class="tcolor">Email</label>
-                                    <input type="email" class="form-control form-control-lg rounded-0" name="email">
-                                </div><div class="form-group">
-                                    <label for="dob" class="tcolor">Date Of Birth</label>
-                                    <input type="date" class="form-control form-control-lg rounded-0" name="dob">
-                                </div><div class="form-group">
-                                    <label for="contact" class="tcolor">Contact Number</label>
-                                    <input type="number" class="form-control form-control-lg rounded-0" name="contact">
-                                </div><div class="form-group">
-                                    <label for="add" class="tcolor">Address</label>
-                                    <input type="text" class="form-control form-control-lg rounded-0" name="add">
+                                    <input type="email" class="form-control form-control-lg rounded-0" name="email" formControlName="email">
+                                    <div *ngIf="!email.valid && (email.dirty ||email.touched)" id="error-div">
+                                        <div [hidden]="!email.errors.required">
+                                          Email is required
+                                        </div>
+                                        <div [hidden]="!email.errors.email">
+                                          Invalid Email
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="pwd1" class="tcolor">Password</label>
-                                    <input type="password" class="form-control form-control-lg rounded-0" name="pwd1"> 
+                                    <label for="dob" class="tcolor">Date Of Birth</label>
+                                    <input type="date" class="form-control form-control-lg rounded-0" name="dob" formControlName="dob">
+                                    <div *ngIf="!dob.valid && (dob.dirty ||dob.touched)" id="error-div">
+                                        <div [hidden]="!dob.errors.required">
+                                          DOB is required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact" class="tcolor">Contact Number</label>
+                                    <input type="number" class="form-control form-control-lg rounded-0" name="contact" formControlName="contact">
+                                    <div *ngIf="!contact.valid && (contact.dirty ||contact.touched)" id="error-div">
+                                        <div [hidden]="!contact.errors.required">
+                                          Contact Nois required
+                                        </div>
+                                        <div [hidden]="!contact.errors.pattern">
+                                            Only Numbers of length 10 are Allowed
+                                        </div>
+                                    </div>
                                 </div><div class="form-group">
-                                    <label for="pwd1" class="tcolor">Confirm Password</label>
-                                    <input type="password" class="form-control form-control-lg rounded-0" name="pwd1"> 
+                                    <label for="address" class="tcolor">Address</label>
+                                    <input type="text" class="form-control form-control-lg rounded-0" name="address" formCOntrolName="address">
+                                    <div *ngIf="!address.valid && (address.dirty ||address.touched)" id="error-div">
+                                        <div [hidden]="!address.errors.required">
+                                          Address is required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="tcolor">Password</label>
+                                    <input type="password" class="form-control form-control-lg rounded-0" name="password" formControlName="password">
+                                    <div *ngIf="!password?.valid && (password?.dirty ||password?.touched)" id="error-div">
+                                        <div [hidden]="!password.errors.required">
+                                            Password is required
+                                        </div>
+                                        <div [hidden]="!password.errors.minlength">
+                                            Min Length 8 required
+                                        </div>
+                                        <div [hidden]="!password.errors.pattern">
+                                            Atleast one Uppercase, Lowercase, Number & Special character
+                                        </div>
+                                    </div>  
+                                </div><div class="form-group">
+                                    <label for="cpassword" class="tcolor">Confirm Password</label>
+                                    <input type="password" class="form-control form-control-lg rounded-0" name="cpassword" formControlName="cpassword"> 
+                                    <div *ngIf="!password?.valid && (password?.dirty ||password?.touched)" id="error-div">
+                                        <div [hidden]="!password.errors.required">
+                                            Confirm Password is required
+                                        </div>
+                                    </div> 
+                                    <div *ngIf = "registerForm.value.password !== registerForm.value.cpassword">
+                                        Password doesn't match
+                                    </div> 
                                 </div>
                                 <div >
-                                    <button type="submit" class="btn btn-success btn-lg" id="btnLogin"><a class="text-white" routerLink="register">Register</a></button>
+                                    <button type="submit" class="btn btn-lg text-white" id="btnLogin" [disabled]="!registerForm.valid">Register</button>
                                 </div>
                             </form>
                         </div>
