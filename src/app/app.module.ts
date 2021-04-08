@@ -24,6 +24,7 @@ import { FAQComponent } from './faq/faq.component';
 import { PremiumCalcComponent } from './premium-calc/premium-calc.component';
 import { ClaimInsuranceComponent } from './claim-insurance/claim-insurance.component';
 import { PaymentGatewayComponent } from './payment-gateway/payment-gateway.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 @NgModule({
@@ -49,7 +50,9 @@ import { PaymentGatewayComponent } from './payment-gateway/payment-gateway.compo
     AboutusComponent,
     ForgetPasswordComponent,
 
-    PaymentGatewayComponent
+    PaymentGatewayComponent,
+
+    ResetPasswordComponent
 
   ],
   imports: [
