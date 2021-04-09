@@ -14,7 +14,12 @@ h3
     background-color: #264A9F;
     color: white;
 }
-.shadow
+* 
 {
-    box-shadow: 10px 10px 10px grey;
+    color: #264A9F;
+    text-align: left;
+}
+::placeholder
+{
+    color:rgb(172, 169, 169);
 }

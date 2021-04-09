@@ -2,10 +2,6 @@
 {
     margin-top: 2%;
 }
-.shadow
-{
-    box-shadow: 10px 10px 10px 10px gainsboro;
-}
 img
 {
     width: 30%;
@@ -30,4 +26,15 @@ span.psw {
 }
 .tcolor{
 	color: #264A9F;
+}
+
+.card-body
+{
+    background-color: #f1f1f1;
+}
+
+.card-header
+{
+    text-align: center;
+    background-color: white;
 }
