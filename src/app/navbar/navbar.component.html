@@ -43,9 +43,16 @@
             <li class="nav-item active">
               <a class="nav-link" routerLink="register">Register</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="Login">Login</a>
-            </li>
+           
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Login
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" routerLink="Login">User Login</a>
+                  <a class="dropdown-item" routerLink="Adminlogin">Admin Login</a>
+                </div>
+              </li>
             <li class="nav-item">
                 <a class="nav-link" routerLink="AboutUs">About Us</a>
             </li>

@@ -33,3 +33,10 @@ nav
     box-shadow: 10px 10px 10px grey;
     background-color: #264A9F;
 }
+
+.dropdown-menu,.dropdown-item:hover
+{
+    background-color: #101d3b;
+    color: black;
+}
+

@@ -21,7 +21,7 @@ import { PaymentGatewayComponent } from './payment-gateway/payment-gateway.compo
 const routes: Routes = [
   {path:'', component : HomeComponent},
   {path:'Login', component : LoginComponent},
-  {path:'Admin-logins', component : AdminLoginComponent},
+  {path:'Adminlogin', component : AdminLoginComponent},
   {path:'Contact', component : ContactComponent},
   {path:'BuyInsurance', component : BuyInsuranceComponent},
   {path:'AboutUs', component : AboutusComponent},
