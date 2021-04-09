@@ -20,6 +20,7 @@ import { UserHomePageComponent } from './user-home-page/user-home-page.component
 import { PaymentGatewayComponent } from './payment-gateway/payment-gateway.component';
 const routes: Routes = [
   {path:'', component : HomeComponent},
+  {path:'Home', component : HomeComponent},
   {path:'Login', component : LoginComponent},
   {path:'Admin-logins', component : AdminLoginComponent},
   {path:'Contact', component : ContactComponent},
