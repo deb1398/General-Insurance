@@ -6,15 +6,31 @@
                     <h2 class="claimheader">Claim Insurance</h2>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form [formGroup]="claimForm" (ngSubmit)="onSubmit()" novalidate>
                         <div class="row">
                             <div class="col-sm-12 col-md-6 col-lg-6 form-group">
                                 <label for="policy_no">Policy Number</label>
-                                <input type="text" class="form-control" id="policy_no" name="policy_no" formControlName="policy_no">
+                                <input type="text" class="form-control" id="policy_no" name="policy_no" formControlName="policy_no" [ngClass]="{'is-invalid': policy_no.errors && (policy_no.touched || policy_no.dirty), 'is-valid':policy_no.valid}">
+                                    <div *ngIf="!policy_no?.valid && (policy_no?.dirty || policy_no?.touched)" id="error-div">
+                                        <div [hidden]="!policy_no.errors.required">
+                                            Policy Number is required
+                                        </div>
+                                        <div [hidden]="!policy_no.errors.pattern">
+                                            Invalid policy number
+                                        </div>
+                                    </div>
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-6 form-group">
                                 <label for="mobile_no">Mobile Number</label>
-                                <input type="text" class="form-control" id="mobile_no" name="mobile_no" formControlName="mobile_no">
+                                <input type="text" class="form-control" id="mobile_no" name="mobile_no" formControlName="mobile_no" [ngClass]="{'is-invalid': mobile_no.errors && (mobile_no.touched || mobile_no.dirty), 'is-valid':mobile_no.valid}">
+                                <div *ngIf="!mobile_no?.valid && (mobile_no?.dirty || mobile_no?.touched)" id="error-div">
+                                    <div [hidden]="!mobile_no.errors.required">
+                                        Contact Number is required
+                                    </div>
+                                    <div [hidden]="!mobile_no.errors.pattern">
+                                        Contact Number should be of length 10
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row d-flex justify-content-center">
@@ -23,42 +39,66 @@
                                 <div class="row" style="margin-left: 5px;">
                                     <div class="form-check col-sm-12 col-lg-6">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" value="4-wheeler" id="claim_reason" name="claim_reason" formControlName="claim_reason">Natural Disaster
+                                            <input type="radio" class="form-check-input" value="Natural Disaster" id="claim_reason1" name="claim_reason" formControlName="claim_reason">Natural Disaster
                                         </label>
                                     </div>
                                     <div class="form-check col-sm-12 col-lg-6">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" value="2-wheeler" id="claim_reason" name="claim_reason" formControlName="claim_reason">Man Made Disaster    
+                                            <input type="radio" class="form-check-input" value="Man Made Disaster" id="claim_reason2" name="claim_reason" formControlName="claim_reason">Man Made Disaster    
                                         </label>
                                     </div>
                                 </div>
                                 <div class="row"style="margin-left: 5px;">
                                     <div class="form-check col-sm-12 col-lg-6">
                                         <label class="form-check-label">                        
-                                            <input type="radio" class="form-check-input" value="4-wheeler" id="claim_reason" name="claim_reason" formControlName="claim_reason">Road Accident    
+                                            <input type="radio" class="form-check-input" value="Road Accident" id="claim_reason3" name="claim_reason" formControlName="claim_reason">Road Accident    
                                         </label>
                                     </div>
                                     <div class="form-check col-sm-12 col-lg-6">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" value="2-wheeler" id="claim_reason" name="claim_reason" formControlName="claim_reason">Theft
+                                            <input type="radio" class="form-check-input" value="Theft" id="claim_reason4" name="claim_reason" formControlName="claim_reason">Theft
                                         </label>
                                     </div>
-                                </div>                 
+                                </div>
+                                <div *ngIf="!claim_reason?.valid && (claim_reason?.dirty || claim_reason?.touched)" id="error-div">
+                                    <div [hidden]="!claim_reason.errors.required">
+                                        Claim Reason is required
+                                    </div>
+                                </div>
+                                                 
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-sm-12 col-md-4 col-lg-4 form-group">
                                 <label for="date_of_loss">Date of Loss/Damage</label>
-                                <input type="date" class="form-control" id="date_of_loss" name="date_of_loss" formControlName="date_of_loss">
+                                <input type="date" class="form-control" id="date_of_loss" name="date_of_loss" formControlName="date_of_loss" [ngClass]="{'is-invalid': date_of_loss.errors && (date_of_loss.touched || date_of_loss.dirty), 'is-valid':date_of_loss.valid}">
+                                <div *ngIf="!date_of_loss?.valid && (date_of_loss?.dirty || date_of_loss?.touched)" id="error-div">
+                                    <div [hidden]="!date_of_loss.errors.required">
+                                        Date of Loss is required
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-sm-12 col-md-4 col-lg-4 form-group">
                                 <label for="place_of_loss">Place of Loss</label>
-                                <input type="text" class="form-control" id="place_of_loss" name="place_of_loss" formControlName="place_of_loss">
+                                <input type="text" class="form-control" id="place_of_loss" name="place_of_loss" formControlName="place_of_loss" [ngClass]="{'is-invalid': place_of_loss.errors && (place_of_loss.touched || place_of_loss.dirty), 'is-valid':place_of_loss.valid}">
+                                <div *ngIf="!place_of_loss?.valid && (place_of_loss?.dirty || place_of_loss?.touched)" id="error-div">
+                                    <div [hidden]="!place_of_loss.errors.required">
+                                        Place of Loss is required
+                                    </div>
+                                    <div [hidden]="!place_of_loss.errors.pattern">
+                                        Only Characters allowed
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-sm-12 col-md-4 col-lg-4 form-group">
                                 <label for="loss_desc">Damage/Loss Description</label>
-                                <input type="text" class="form-control" id="loss_desc" name="loss_desc" formControlName="loss_desc">
+                                <input type="text" class="form-control" id="loss_desc" name="loss_desc" formControlName="loss_desc" [ngClass]="{'is-invalid': loss_desc.errors && (loss_desc.touched || loss_desc.dirty), 'is-valid':loss_desc.valid}">
+                                <div *ngIf="!loss_desc?.valid && (loss_desc?.dirty || loss_desc?.touched)" id="error-div">
+                                    <div [hidden]="!loss_desc.errors.required">
+                                        Damage/Loss Description is required
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -70,6 +110,11 @@
                                         <input type="radio" class="form-check-inline" value="yes" id="any_thirdparty_damage" name="any_thirdparty_damage" formControlName="any_thirdparty_damage">Yes
                                         <input type="radio" class="form-check-inline" value="No" id="any_thirdparty_damage" name="any_thirdparty_damage" formControlName="any_thirdparty_damage">No
                                     </label>
+                                </div>
+                                <div *ngIf="!any_thirdparty_damage?.valid && (any_thirdparty_damage?.dirty || any_thirdparty_damage?.touched)" id="error-div">
+                                    <div [hidden]="!any_thirdparty_damage.errors.required">
+                                        This field is required
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -83,7 +128,7 @@
                             </div>
                         </div>
                         <div class="text-center mt-4">
-                            <input type="submit" class="btn btn-primary" value="Submit">
+                            <input type="submit" [disabled]="!claimForm.valid" class="btn btn-primary" value="Submit">
                         </div>
                     </form>
                 </div>

@@ -24,6 +24,10 @@ import { FAQComponent } from './faq/faq.component';
 import { PremiumCalcComponent } from './premium-calc/premium-calc.component';
 import { ClaimInsuranceComponent } from './claim-insurance/claim-insurance.component';
 import { PaymentGatewayComponent } from './payment-gateway/payment-gateway.component';
+
+import { HttpClientModule } from '@angular/common/http';
+
+
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
@@ -57,6 +61,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule, 
     ReactiveFormsModule
   ],
