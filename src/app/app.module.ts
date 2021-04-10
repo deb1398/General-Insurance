@@ -24,6 +24,9 @@ import { FAQComponent } from './faq/faq.component';
 import { PremiumCalcComponent } from './premium-calc/premium-calc.component';
 import { ClaimInsuranceComponent } from './claim-insurance/claim-insurance.component';
 import { PaymentGatewayComponent } from './payment-gateway/payment-gateway.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -54,7 +57,9 @@ import { PaymentGatewayComponent } from './payment-gateway/payment-gateway.compo
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
