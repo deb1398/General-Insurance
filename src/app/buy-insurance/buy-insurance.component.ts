@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+
 
 @Component({
   selector: 'app-buy-insurance',
@@ -33,12 +35,54 @@ export class BuyInsuranceComponent implements OnInit {
     new fourWheelerModel('9', 'Verna'),
   ];
 
+  buyiForm = new FormGroup({
+    vehtype : new FormControl('',[Validators.required]),
+    driLicence : new FormControl ('', [Validators.required,Validators.maxLength(16), Validators.pattern("")]),
+    purdate : new FormControl('',[Validators.required]),
+    regisno : new FormControl('',[Validators.required,Validators.maxLength(10), Validators.pattern("")]),
+    engno : new FormControl ('', [Validators.required]),
+    chasno : new FormControl('',[Validators.required])
+  })
+
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  get vehtype()
+  {
+    return this.buyiForm.get('vehtype');
+  }
+  get driLicence()
+  {
+    return this.buyiForm.get('driLicence');
+  }
+  get purdate()
+  {
+    return this.buyiForm.get('purdate');
+  }
+  get regisno()
+  {
+    return this.buyiForm.get('regisno');
+  }
+  get engno()
+  {
+    return this.buyiForm.get('engno');
+  }
+  get chasno()
+  {
+    return this.buyiForm.get('chasno');
+  }
+
+  onSubmit()
+  {
+    console.log(this.buyiForm.value);
+  }
+
+
 }
+
 export class fourWheelerBrand {
   id:string;
   name:string;
@@ -66,4 +110,14 @@ export class fourWheelerModel {
     this.id=id;
     this.name=name;
   }
+}
+
+export class user
+{
+  //vehtype : ;
+  driLicence : number;
+  purdate: Date;
+  regisno : number;
+  engno : number;
+  chasno : number;
 }

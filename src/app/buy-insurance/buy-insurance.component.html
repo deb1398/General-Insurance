@@ -8,11 +8,16 @@
                             <h3 class="text-center">Buy Insurance</h3>
                         </div>
                         <div class="card-body">
-                            <form class="form">
+                            <form [formGroup]="buyiForm" (ngSubmit)="onSubmit()" novalidate>
                                 <div class="form-group text-center">
                                     <label class="mr-3">Vehicle Type</label>
-                                    <input type="radio" class="form-check-inline" value="4-wheeler" id="veh_type" name="veh_type" formControlName="veh_type" >4-Wheeler&nbsp;
-                                    <input type="radio" class="form-check-inline" value="2-wheeler" id="veh_type" name="veh_type" formControlName="veh_type">2-Wheeler
+                                    <input type="radio" class="form-check-inline" value="4-wheeler" id="veh_type" name="veh_type" formControlName="vehtype" [ngClass]="{'is-invalid': vehtype.errors && (vehtype.touched || vehtype.dirty), 'is-valid':vehtype.valid}" >4-Wheeler&nbsp;
+                                    <input type="radio" class="form-check-inline" value="2-wheeler" id="veh_type" name="veh_type" formControlName="vehtype" [ngClass]="{'is-invalid': vehtype.errors && (vehtype.touched || vehtype.dirty), 'is-valid':vehtype.valid}">2-Wheeler
+                                    <div *ngIf="!vehtype?.valid && (vehtype?.dirty || vehtype?.touched)" id="error-div">
+                                        <div [hidden]="!vehtype.errors.required">
+                                            Select the vehicle type(required)
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="brand_name">Brand Name</label>
@@ -31,27 +36,64 @@
                             </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="license">Driving License</label>
-                                    <input type="text" class="form-control  rounded-0" name="license">
+                                    <label for="license">Driving Licence</label>
+                                    <input type="text" class="form-control  rounded-0" name="licence" formControlName="driLicence" [ngClass]="{'is-invalid': driLicence.errors && (driLicence.touched || driLicence.dirty), 'is-valid':driLicence.valid}">
+                                    <div *ngIf="!driLicence?.valid && (driLicence?.dirty || driLicence?.touched)" id="error-div">
+                                        <div [hidden]="!driLicence.errors.required">
+                                            driving licence is required
+                                        </div>
+                                        <div [hidden]="!driLicence.errors.maxlength">
+                                            driving licence can contain maximum 16 characters
+                                        </div>
+                                        <div [hidden]="!driLicence.errors.pattern">
+                                            should contain a pattern
+                                        </div>
+                                    </div> 
                                 </div>
                                 <div class="form-group">
                                     <label for="purchaseDate">Purchase Date</label>
-                                    <input type="date" class="form-control  rounded-0" name="purchaseDate">
+                                    <input type="date" class="form-control  rounded-0" name="purchaseDate" formControlName="purdate" [ngClass]="{'is-invalid': purdate.errors && (purdate.touched || purdate.dirty), 'is-valid':purdate.valid}" >
+                                    <div *ngIf="!purdate?.valid && (purdate?.dirty || purdate?.touched)" id="error-div">
+                                        <div [hidden]="!purdate.errors.required">
+                                            purchase date is required
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="regNo">Registration Number</label>
-                                    <input type="text" class="form-control  rounded-0" name="RegNo">
+                                    <input type="text" class="form-control  rounded-0" name="RegNo" formControlName="regisno" [ngClass]="{'is-invalid': regisno.errors && (regisno.touched || regisno.dirty), 'is-valid':regisno.valid}">
+                                    <div *ngIf="!regisno?.valid && (regisno?.dirty || regisno?.touched)" id="error-div">
+                                        <div [hidden]="!regisno.errors.required">
+                                            Registration number is required
+                                        </div>
+                                        <div [hidden]="!regisno.errors.maxlength">
+                                            Registration number can contain maximum 10 characters
+                                        </div>
+                                        <div [hidden]="!regisno.errors.pattern">
+                                            should contain a pattern
+                                        </div>
+                                    </div> 
                                 </div>
                                 <div class="form-group">
                                     <label for="engineNo">Engine Number</label>
-                                    <input type="text" class="form-control rounded-0" name="engineNo">
+                                    <input type="text" class="form-control rounded-0" name="engineNo" formControlName="engno" [ngClass]="{'is-invalid': engno.errors && (engno.touched || engno.dirty), 'is-valid':engno.valid}" >
+                                    <div *ngIf="!engno?.valid && (engno?.dirty || engno?.touched)" id="error-div">
+                                        <div [hidden]="!engno.errors.required">
+                                            engine number is required
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="chassisNo">Chasis Number</label>
-                                    <input type="text" class="form-control rounded-0" name="chassisNo">
+                                    <input type="text" class="form-control rounded-0" name="chassisNo" formControlName="chasno" [ngClass]="{'is-invalid': chasno.errors && (chasno.touched || chasno.dirty), 'is-valid':chasno.valid}" >
+                                    <div *ngIf="!chasno?.valid && (chasno?.dirty || chasno?.touched)" id="error-div">
+                                        <div [hidden]="!chasno.errors.required">
+                                            chasis number is required
+                                        </div>
+                                    </div>
                                 </div>
                                 <div>
-                                    <button type="button" class="btn btn-default text-white text-center" id="" [routerLink]="'plan-selection'">Submit</button>
+                                    <button type="button" class="btn btn-default text-white text-center" id="" [disabled]="!buyiForm.valid" [routerLink]="'plan-selection'">Submit</button>
                                 </div>
                             </form>
                         </div>
