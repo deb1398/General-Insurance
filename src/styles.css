@@ -20,11 +20,3 @@ body{
 
 }
 
-.btn {
-  background-color: #373e4d;
-}
-
-.btn:hover{
-  background-color: #264A9F;
-  color: white;
-}
