@@ -1,18 +1,24 @@
-h3
-{
+h3 {
     color: #264A9F;
 }
 
-.btn-default
-{
+.btn-default {
     background-color:#264A9F;
     width: 100%;
+    color: white;
 }
-*
-{
+*{
     color: #264A9F;
 }
-.inner-card
-{
+.inner-card {
     border: 1px solid #264A9F;
 }
+
+.btn:hover{
+    background-color: #94a3c4;
+    color: white;
+  }
+
+  .submit-button:hover{
+    background-color: #264A9F;
+  }
