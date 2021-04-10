@@ -1,11 +1,18 @@
-*
-{
-    color: #264A9F;
-}
+
 
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited
 {
     background-color: #264A9F;
     color: white;
 
+}
+
+#error-div
+{
+    color: red;
+}
+
+.container
+{
+    color: #264A9F;
 }
