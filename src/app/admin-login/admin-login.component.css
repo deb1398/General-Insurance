@@ -3,10 +3,6 @@
     margin-top: 2%;
 }
 
-.shadow
-{
-    box-shadow: 10px 10px 10px 10px gainsboro;
-}
 img
 {
     width: 30%;
@@ -14,3 +10,13 @@ img
 h3{
     color:#264A9F;
 }
+.btn-default
+{
+    background-color: #264A9F;
+    width: 100%;
+}
+#error-div
+{
+    color: red;
+}
+

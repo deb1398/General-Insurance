@@ -42,3 +42,8 @@ span.psw {
     text-align: center;
     background-color: white;
 }
+#error-div
+{
+    color: red;
+}
+
