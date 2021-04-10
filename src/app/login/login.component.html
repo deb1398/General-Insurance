@@ -9,15 +9,24 @@
                         </div>
                         <div class="card-body">
                             <div class="text-center"><img src="assets/images/avatarlogoblue.png" alt="avatar"></div>
-                            <form class="form">
+                            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
                                 <div class="form-group">
                                     <label for="uname1" class="tcolor">Username</label>
-                                    <input type="text" class="form-control form-control-lg rounded-0" name="uname1">
+                                    <input type="text" class="form-control form-control-lg rounded-0" name="uname1" formControlName="username" [ngClass]="{'is-invalid': username.errors && (username.touched || username.dirty), 'is-valid':username.valid}">
+                                    <div *ngIf="!username?.valid && (username?.dirty || username?.touched)" id="error-div">
+                                        <div [hidden]="!username.errors.required">
+                                            Username is required
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="pwd1" class="tcolor">Password</label>
-                                    <input type="text" class="form-control form-control-lg rounded-0" name="pwd1">
-                                    
+                                    <input type="text" class="form-control form-control-lg rounded-0" name="pwd1" formControlName="password" [ngClass]="{'is-invalid': password.errors && (password.touched || password.dirty), 'is-valid':password.valid}">
+                                    <div *ngIf="!password?.valid && (password?.dirty || password?.touched)" id="error-div">
+                                        <div [hidden]="!password.errors.required">
+                                            Password is required
+                                        </div>
+                                    </div>
                                 </div>
                                 <div>
                                     <label class="custom-control custom-checkbox">
@@ -26,7 +35,7 @@
                                     </label>
                                 </div>
                                 <div >
-                                    <button type="button" class="btn btn-success btn-lg" id="btnLogin" [routerLink]="'user-home-page'"><a class="text-white" href="user-home-page">Login</a></button>
+                                    <button type="button" class="btn btn-success btn-lg" id="btnLogin" [routerLink]="'user-home-page'" [disabled]="!loginForm.valid">Login</button>
                                 </div>
                                 <p></p>
                                 <div class="container">

@@ -7,6 +7,44 @@ body {
   color: #264A9F;
 }
 
+i .tstyle {
+  color: #264A9F;
+  display: none;
+}
+
 .btnstyle {
   background-color: #264A9F;
+}
+
+.btn-default{
+  width:100%;
+  background-color:orange!important;
+  margin:5px!important;
+}
+
+@media screen and (max-width: 1200px) {
+  .btn {
+      width: 100%;
+      margin-bottom: 5px;
+  }
+}
+
+.btn {
+  background-color: #373e4d;
+}
+
+.btn:hover{
+  background-color: #94a3c4;
+  color: white;
+}
+
+.button-style{
+  background-color: transparent;
+  border:0px;
+  color: black;
+}
+
+.img-style{
+  height: 200px;
+  width: 200px;
 }

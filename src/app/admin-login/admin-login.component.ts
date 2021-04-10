@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 @Component({
   selector: 'app-admin-login',
   templateUrl: './admin-login.component.html',
@@ -7,9 +7,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminLoginComponent implements OnInit {
 
+  loginForm = new FormGroup({
+    username : new FormControl('',[Validators.required]),
+    password : new FormControl('',[Validators.required])
+  })
+
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
+  get username()
+  {
+    return this.loginForm.get('username');
+  }
+
+  get password()
+  {
+    return this.loginForm.get('password');
+  }
+
+  onSubmit()
+  {
+    console.log(this.loginForm.value);
+  }
+}
+export class logindetails
+{
+  username : string;
+  password : string;
 }
