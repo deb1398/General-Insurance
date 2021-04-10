@@ -52,3 +52,14 @@
     background: #e2e8f0;
     color:black;
 }
+
+.card a
+{
+    font-weight:500;
+}
+
+.btncontactus
+{
+    background-color: #264A9F;
+    color: white;
+}

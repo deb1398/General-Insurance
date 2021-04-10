@@ -42,7 +42,7 @@
                             </div>
                             <div class="col-sm-12 col-md-6 form-group">
                                 <label for="veh_pur_date">Vehicle Purchase Date</label>
-                                <input type="text" class="form-control" id="veh_pur_date" name="veh_pur_date" formControlName="veh_pur_date">
+                                <input type="date" class="form-control" id="veh_pur_date" name="veh_pur_date" formControlName="veh_pur_date">
                             </div>
                         </div>
                         <p>
@@ -52,33 +52,35 @@
 
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
-                            <div class="card h-100 text-center">
-                                <div class="card-header">
+                            <div class="card h-100 text-center inner-card">
+                                <div class="card-header inner-card-header">
                                     <h5 class="card-title">Comprehensive Plan</h5>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body inner-card-body">
                                     <div class="card-text">
                                         <p>Price Rs.5800</p>
                                         <p>Covers</p>
                                         <p>Third party Insurance</p>
                                         <p>Own Damage Insurance</p>
                                     </div>
-                                    <input type="submit" value="Buy Now">
+                                    <input type="submit" value="Buy Now"><br>
+                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#comprehensivemodal">View price breakup</button>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6">
-                            <div class="card h-100 text-center">
-                                <div class="card-header">
+                            <div class="card h-100 text-center inner-card">
+                                <div class="card-header inner-card-header">
                                     <h5 class="card-title">Third Party Plan</h5>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body inner-card-body">
                                     <div class="card-text">
                                         <p>Price Rs.2900</p>
                                         <p>Covers</p>
                                         <p>Only Third party Insurance</p>
                                     </div>
-                                    <input type="submit" value="Buy Now">
+                                    <input type="submit" value="Buy Now"><br>
+                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#thirdpartymodal">View price breakup</button>
                                 </div>
                             </div>
                         </div>
@@ -88,4 +90,93 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="thirdpartymodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Third Party Price Breakup</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+              <div class="col-md-9">Basic Third Party</div>
+              <div class="col-md-3">2072</div>
+            </div>
+            <hr class="my-2">
+            <div class="row">
+                <div class="col-md-9">Net Premium</div>
+                <div class="col-md-3">2072</div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">GST</div>
+                <div class="col-md-3">616</div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">Total Premium</div>
+                <div class="col-md-3">2688</div>
+            </div>
+            <hr class="my-3">
+            <div class="row">
+                <div class="col-md-9">Total Payable</div>
+                <div class="col-md-3">2688</div>
+            </div>
+        </div>
+        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+
+  
+<div class="modal fade" id="comprehensivemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Comprehensive Price Breakup</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-9">Basic Own Damage</div>
+                <div class="col-md-3">3079</div>
+              </div>
+              <hr class="my-2">
+            <div class="row">
+              <div class="col-md-9">Basic Third Party</div>
+              <div class="col-md-3">2072</div>
+            </div>
+            <hr class="my-2">
+            <div class="row">
+                <div class="col-md-9">Net Premium</div>
+                <div class="col-md-3">5151</div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">GST</div>
+                <div class="col-md-3">616</div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">Total Premium</div>
+                <div class="col-md-3">5767</div>
+            </div>
+            <hr class="my-3">
+            <div class="row">
+                <div class="col-md-9">Total Payable</div>
+                <div class="col-md-3">5767</div>
+            </div>
+        </div>
+        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div> -->
+      </div>
+    </div>
+</div>
+
 
