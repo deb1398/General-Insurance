@@ -7,11 +7,23 @@
                     <h2 class="premheader">Premium Calculator</h2>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form [formGroup]="calcForm" (ngSubmit)="onSubmit()" novalidate>
                         <div class="form-group">
                             <label class="mr-3">Vehicle Type</label>
-                            <input type="radio" class="form-check-inline" value="4-wheeler" id="veh_type" name="veh_type" formControlName="veh_type" >4-Wheeler&nbsp;
-                            <input type="radio" class="form-check-inline" value="2-wheeler" id="veh_type" name="veh_type" formControlName="veh_type">2-Wheeler
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-inline" value="4-wheeler" id="veh_type1" name="veh_type" formControlName="veh_type">4-Wheeler
+                            </label>
+                            &nbsp;
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-inline" value="2-wheeler" id="veh_type2" name="veh_type" formControlName="veh_type">2-Wheeler
+                            </label>
+                            <!-- <input type="radio" class="form-check-inline" value="4-wheeler" id="veh_type1" name="veh_type" formControlName="veh_type" >4-Wheeler&nbsp;
+                            <input type="radio" class="form-check-inline" value="2-wheeler" id="veh_type2" name="veh_type" formControlName="veh_type">2-Wheeler -->
+                            <div *ngIf="!veh_type?.valid && (veh_type?.dirty || veh_type?.touched)" id="error-div">
+                                <div [hidden]="!veh_type.errors.required">
+                                    Vehicle Type is required
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12 col-md-6 col-lg-4 form-group">
@@ -21,6 +33,11 @@
                                     {{b.name}}
                                     </option>
                                 </select>
+                                <div *ngIf="!brand_name?.valid && (brand_name?.dirty || brand_name?.touched)" id="error-div">
+                                    <div [hidden]="!brand_name.errors.required">
+                                        Brand Name is required
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-4 form-group">
                                 <label for="model_name">Model Name</label>
@@ -29,24 +46,44 @@
                                     {{m.name}}
                                     </option>
                                 </select>
+                                <div *ngIf="!model_name?.valid && (model_name?.dirty || model_name?.touched)" id="error-div">
+                                    <div [hidden]="!model_name.errors.required">
+                                        Model Name is required
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-4 form-group">
                                 <label for="market_price">Market Price</label>
-                                <input type="text" class="form-control" id="market_price" name="market_price" formControlName="market_price">
+                                <input type="number" class="form-control" id="market_price" name="market_price" formControlName="market_price">
+                                <div *ngIf="!market_price?.valid && (market_price?.dirty || market_price?.touched)" id="error-div">
+                                    <div [hidden]="!market_price.errors.required">
+                                        Market Price is required
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12 col-md-6 form-group">
-                                <label for="market_price">Vehicle's CC</label>
-                                <input type="text" class="form-control" id="market_price" name="market_price" formControlName="market_price">
+                                <label for="veh_cc">Vehicle's CC</label>
+                                <input type="number" class="form-control" id="veh_cc" name="veh_cc" formControlName="veh_cc">
+                                <div *ngIf="!veh_cc?.valid && (veh_cc?.dirty || veh_cc?.touched)" id="error-div">
+                                    <div [hidden]="!veh_cc.errors.required">
+                                        Vehicle CC is required
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-sm-12 col-md-6 form-group">
                                 <label for="veh_pur_date">Vehicle Purchase Date</label>
                                 <input type="date" class="form-control" id="veh_pur_date" name="veh_pur_date" formControlName="veh_pur_date">
+                                <div *ngIf="!veh_pur_date?.valid && (veh_pur_date?.dirty || veh_pur_date?.touched)" id="error-div">
+                                    <div [hidden]="!veh_pur_date.errors.required">
+                                        Vehicle Purchase Date is required
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <p>
-                            <input class="form-control btn btn-primary" type="submit" value="Calculate Premium">
+                            <input class="form-control btn btn-primary" [disabled]="!calcForm.valid" type="submit" value="Calculate Premium">
                         </p>
                     </form>
 

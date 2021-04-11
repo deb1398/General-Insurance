@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-premium-calc',
@@ -35,10 +37,56 @@ export class PremiumCalcComponent implements OnInit {
     new fourWheelerModel('9', 'Verna'),
   ];
 
-  constructor() { }
+  constructor(
+    public fb: FormBuilder,
+    private router: Router
+  ) { }
+
+
+  calcForm = new FormGroup({
+    veh_type: new FormControl('',[Validators.required]),
+    brand_name: new FormControl('',[Validators.required]),
+    model_name: new FormControl('',[Validators.required]),
+    market_price: new FormControl('',[Validators.required]),
+    veh_cc: new FormControl('',[Validators.required]),
+    veh_pur_date: new FormControl('',[Validators.required]),
+    
+   
+  })
+
+  get veh_type()
+  { 
+    return this.calcForm.get('veh_type');
+  }
+  get brand_name()
+  { 
+    return this.calcForm.get('brand_name');
+  }
+  get model_name()
+  { 
+    return this.calcForm.get('model_name');
+  }
+  get market_price()
+  { 
+    return this.calcForm.get('market_price');
+  }
+  get veh_cc()
+  { 
+    return this.calcForm.get('veh_cc');
+  }
+  get veh_pur_date()
+  { 
+    return this.calcForm.get('veh_pur_date');
+  }
 
   ngOnInit(): void {
 
+  }
+
+  onSubmit()
+  {
+    
+    console.log(this.calcForm.value);
   }
 
 }
