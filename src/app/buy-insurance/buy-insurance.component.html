@@ -1,3 +1,4 @@
+
 <div class="container">
     <div class="row">
         <div class="col-md-12 min-vh-100 d-flex flex-column justify-content-center">
@@ -8,92 +9,104 @@
                             <h3 class="text-center">Buy Insurance</h3>
                         </div>
                         <div class="card-body">
-                            <form [formGroup]="buyiForm" (ngSubmit)="onSubmit()" novalidate>
+                            <form [formGroup]="buyinsuranceForm" (ngSubmit)="onSubmit()" novalidate>
                                 <div class="form-group text-center">
-                                    <label class="mr-3">Vehicle Type</label>
-                                    <input type="radio" class="form-check-inline" value="4-wheeler" id="veh_type" name="veh_type" formControlName="vehtype" [ngClass]="{'is-invalid': vehtype.errors && (vehtype.touched || vehtype.dirty), 'is-valid':vehtype.valid}" >4-Wheeler&nbsp;
-                                    <input type="radio" class="form-check-inline" value="2-wheeler" id="veh_type" name="veh_type" formControlName="vehtype" [ngClass]="{'is-invalid': vehtype.errors && (vehtype.touched || vehtype.dirty), 'is-valid':vehtype.valid}">2-Wheeler
-                                    <div *ngIf="!vehtype?.valid && (vehtype?.dirty || vehtype?.touched)" id="error-div">
-                                        <div [hidden]="!vehtype.errors.required">
-                                            Select the vehicle type(required)
+                                    <label for="veh_type" class="mr-3">Vehicle Type</label>
+                                    <input type="radio" class="form-check-inline" value="4-wheeler" id="2wheeler" name="veh_type" formControlName="veh_type" >4-Wheeler&nbsp;
+                                    <input type="radio" class="form-check-inline" value="2-wheeler" id="4wheeler" name="veh_type" formControlName="veh_type">2-Wheeler
+                                    <div *ngIf="!veh_type?.valid && (veh_type?.dirty || veh_type?.touched)" id="error-div">
+                                        <div [hidden]="!veh_type.errors.required">
+                                            Vehicle Type is required
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="brand">Brand Name</label>
+                                    <select id="brand" class="form-control" name="brand" formControlName="brand_name" [ngClass]="{'is-invalid': brand_name.errors && (brand_name.touched || brand_name.dirty), 'is-valid':brand_name.valid}">
+                                        <option [ngValue]="b.id" *ngFor="let b of fourWheelerBrandsList">
+                                            {{b.name}}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="!brand_name?.valid && (brand_name?.dirty || brand_name?.touched)" id="error-div">
+                                        <div [hidden]="!brand_name.errors.required" style="color: red;">
+                                            Brand Name is required
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="model">Model Name</label>
+                                    <select id="model" class="form-control" name="model" formControlName="model_name" [ngClass]="{'is-invalid': model_name.errors && (model_name.touched || model_name.dirty), 'is-valid':model_name.valid}">
+                                        <option [ngValue]="m.id" *ngFor="let m of fourWheelerModelsList">
+                                            {{m.name}}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="!model_name?.valid && (model_name?.dirty || model_name?.touched)" id="error-div">
+                                        <div [hidden]="!model_name.errors.required" style="color: red;">
+                                            Model Name is required
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="brand_name">Brand Name</label>
-                            <select id="brand_name" class="form-control" name="brand_name" formControlName="brand_name">
-                                <option [ngValue]="b.id" *ngFor="let b of fourWheelerBrandsList">
-                                {{b.name}}
-                                </option>
-                            </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="model_name">Model Name</label>
-                            <select id="model_name" class="form-control" name="model_name" formControlName="model_name">
-                                <option [ngValue]="m.id" *ngFor="let m of fourWheelerModelsList">
-                                {{m.name}}
-                                </option>
-                            </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="license">Driving Licence</label>
-                                    <input type="text" class="form-control  rounded-0" name="licence" formControlName="driLicence" [ngClass]="{'is-invalid': driLicence.errors && (driLicence.touched || driLicence.dirty), 'is-valid':driLicence.valid}">
-                                    <div *ngIf="!driLicence?.valid && (driLicence?.dirty || driLicence?.touched)" id="error-div">
-                                        <div [hidden]="!driLicence.errors.required">
-                                            driving licence is required
+                                    <label for="license">Driving License</label>
+                                    <input type="text" class="form-control  rounded-0" name="license" formControlName="license_no" [ngClass]="{'is-invalid': license_no.errors && (license_no.touched || license_no.dirty), 'is-valid':license_no.valid}">
+                                    <div *ngIf="!license_no?.valid && (license_no?.dirty || license_no?.touched)" id="error-div">
+                                        <div [hidden]="!license_no.errors.required" style="color: red;">
+                                            License Number is required
                                         </div>
-                                        <div [hidden]="!driLicence.errors.maxlength">
-                                            driving licence can contain maximum 16 characters
+                                        <div [hidden]="!license_no.errors.minlength" style="color: red;">
+                                            License Number should be of length 16
                                         </div>
-                                        <div [hidden]="!driLicence.errors.pattern">
-                                            should contain a pattern
+                                        <div [hidden]="!license_no.errors.pattern" style="color: red;">
+                                            Invalid License Number
                                         </div>
-                                    </div> 
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="purchaseDate">Purchase Date</label>
-                                    <input type="date" class="form-control  rounded-0" name="purchaseDate" formControlName="purdate" [ngClass]="{'is-invalid': purdate.errors && (purdate.touched || purdate.dirty), 'is-valid':purdate.valid}" >
-                                    <div *ngIf="!purdate?.valid && (purdate?.dirty || purdate?.touched)" id="error-div">
-                                        <div [hidden]="!purdate.errors.required">
-                                            purchase date is required
+                                    <input type="date" class="form-control  rounded-0" name="purchaseDate" formControlName="purchase_date" [ngClass]="{'is-invalid': purchase_date.errors && (purchase_date.touched || purchase_date.dirty), 'is-valid':purchase_date.valid}">
+                                    <div *ngIf="!purchase_date?.valid && (purchase_date?.dirty || purchase_date?.touched)" id="error-div">
+                                        <div [hidden]="!purchase_date.errors.required" style="color: red;">
+                                            Purchase Date is required
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="regNo">Registration Number</label>
-                                    <input type="text" class="form-control  rounded-0" name="RegNo" formControlName="regisno" [ngClass]="{'is-invalid': regisno.errors && (regisno.touched || regisno.dirty), 'is-valid':regisno.valid}">
-                                    <div *ngIf="!regisno?.valid && (regisno?.dirty || regisno?.touched)" id="error-div">
-                                        <div [hidden]="!regisno.errors.required">
-                                            Registration number is required
+                                    <input type="text" class="form-control  rounded-0" name="RegNo" formControlName="registeration_number" [ngClass]="{'is-invalid': registeration_number.errors && (registeration_number.touched || registeration_number.dirty), 'is-valid':registeration_number.valid}">
+                                    <div *ngIf="!registeration_number?.valid && (registeration_number?.dirty || registeration_number?.touched)" id="error-div">
+                                        <div [hidden]="!registeration_number.errors.required" style="color: red;">
+                                            Registeration Number is required
                                         </div>
-                                        <div [hidden]="!regisno.errors.maxlength">
-                                            Registration number can contain maximum 10 characters
+                                        <div [hidden]="!registeration_number.errors.minlength" style="color: red;">
+                                            Registeration Number should be of length 10
                                         </div>
-                                        <div [hidden]="!regisno.errors.pattern">
-                                            should contain a pattern
+                                        <div [hidden]="!registeration_number.errors.pattern" style="color: red;">
+                                            Invalid Registeration Number
                                         </div>
-                                    </div> 
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="engineNo">Engine Number</label>
-                                    <input type="text" class="form-control rounded-0" name="engineNo" formControlName="engno" [ngClass]="{'is-invalid': engno.errors && (engno.touched || engno.dirty), 'is-valid':engno.valid}" >
-                                    <div *ngIf="!engno?.valid && (engno?.dirty || engno?.touched)" id="error-div">
-                                        <div [hidden]="!engno.errors.required">
-                                            engine number is required
+                                    <input type="text" class="form-control rounded-0" name="engineNo" formControlName="engine_number" [ngClass]="{'is-invalid': engine_number.errors && (engine_number.touched || engine_number.dirty), 'is-valid':engine_number.valid}">
+                                    <div *ngIf="!engine_number?.valid && (engine_number?.dirty || engine_number?.touched)" id="error-div">
+                                        <div [hidden]="!engine_number.errors.required" style="color: red;">
+                                            Engine Number is required
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="chassisNo">Chasis Number</label>
-                                    <input type="text" class="form-control rounded-0" name="chassisNo" formControlName="chasno" [ngClass]="{'is-invalid': chasno.errors && (chasno.touched || chasno.dirty), 'is-valid':chasno.valid}" >
-                                    <div *ngIf="!chasno?.valid && (chasno?.dirty || chasno?.touched)" id="error-div">
-                                        <div [hidden]="!chasno.errors.required">
-                                            chasis number is required
+                                    <input type="text" class="form-control rounded-0" name="chassisNo" formControlName="chassis_number" [ngClass]="{'is-invalid': chassis_number.errors && (chassis_number.touched || chassis_number.dirty), 'is-valid':chassis_number.valid}">
+                                    <div *ngIf="!chassis_number?.valid && (chassis_number?.dirty || chassis_number?.touched)" id="error-div">
+                                        <div [hidden]="!chassis_number.errors.required" style="color: red;">
+                                            Chassis Number is required
                                         </div>
                                     </div>
                                 </div>
                                 <div>
-                                    <button type="button" class="btn btn-default text-white text-center" id="" [disabled]="!buyiForm.valid" [routerLink]="'plan-selection'">Submit</button>
+                                    <button type="submit" class="btn btn-default text-white text-center" [disabled]="!buyinsuranceForm.valid">Submit</button>
                                 </div>
                             </form>
                         </div>
