@@ -2,7 +2,7 @@
 {
     color: #264A9F;
 }
-.btn-default
+.btn-default, .nav-pills .nav-link.active
 {
     background-color: #264A9F;
 }
@@ -13,6 +13,14 @@ div .card .card-header
 i{
     color:gray;
 }
-ul{
+ul
+{
     list-style-type: none;
 }
+.nav-link:hover
+{
+    background-color: #94a3c4;
+    color: white;
+}
+
+
