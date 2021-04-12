@@ -10,7 +10,7 @@ export class UserProfileComponent implements OnInit {
   constructor() { }
 
   
-  usernamevar:string = sessionStorage.getItem('username');
+  usernamevar:string = localStorage.getItem('Name');
 
   ngOnInit(): void {
   }

@@ -19,8 +19,8 @@ export class CRUDApiService {
     return this.httpClient.post<RegisterUser>(this.apiServer + '/Register/', JSON.stringify(ruser), this.httpOptions)
   }
 
-  check(luser): Observable<LoginUser> {
-    return this.httpClient.post<LoginUser>(this.apiServer + '/Login/', JSON.stringify(luser), this.httpOptions)
+  check(luser): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + '/Login/', JSON.stringify(luser), this.httpOptions)
   }
 
 
