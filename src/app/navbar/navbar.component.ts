@@ -11,7 +11,8 @@ export class NavbarComponent implements OnInit {
 
   logout()
   {
-    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('User_Id');
+    localStorage.clear();
   }
 
   ngOnInit(): void {
