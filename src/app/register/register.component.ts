@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router} from '@angular/router';
+import { CRUDApiService } from '../crud-api.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -19,7 +20,11 @@ export class RegisterComponent implements OnInit {
     cpassword : new FormControl ('', [Validators.required])
   })
 
-  constructor() { }
+  constructor(
+    public fb: FormBuilder,
+    private router: Router,
+    public crudService: CRUDApiService
+  ) { }
 
   ngOnInit(){ }
 
@@ -67,18 +72,45 @@ export class RegisterComponent implements OnInit {
   onSubmit()
   {
     console.log(this.registerForm.value);
+
+    let us = new user(
+      this.firstName.value+" "+this.lastName.value,
+      this.emailid.value,
+      this.dateofbirth.value,
+      this.contactno.value,
+      this.address.value,
+      this.password.value      
+      );
+    
+    this.crudService.create(us).subscribe(res => {
+      console.log('User Registrations created!'),
+      this.router.navigateByUrl('/Login')
+    });
   }
 
 }
 
 export class user
 {
-  firstName : string;
-  lastName : string;
-  emailid : string;
-  dateofbirth : Date;
-  contactno : number;
-  address : string;
-  password : string;
-  cpassword : string;
+  Name : string;
+  Email_ID : string;
+  DOB : Date;
+  Phone_No : number;
+  Address : string;
+  Password : string;
+
+  constructor(Name : string,
+    Email_ID : string,
+    DOB : Date,
+    Phone_No : number,
+    Address : string,
+    Password : string)
+    {
+      this.Name = Name;
+      this.Email_ID = Email_ID;
+      this.DOB = DOB;
+      this.Phone_No = Phone_No;
+      this.Address = Address;
+      this.Password = Password;
+    }
 }

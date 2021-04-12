@@ -9,6 +9,11 @@ export class NavbarComponent implements OnInit {
 
   constructor() { }
 
+  logout()
+  {
+    sessionStorage.removeItem('username');
+  }
+
   ngOnInit(): void {
   }
 

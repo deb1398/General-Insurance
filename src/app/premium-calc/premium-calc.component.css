@@ -1,4 +1,4 @@
-*
+.container
 {
     color: #264A9F;
 }
@@ -26,4 +26,9 @@
 .inner-card
 {
     border: 1px solid gray;
+}
+
+#error-div
+{
+    color: red;
 }
