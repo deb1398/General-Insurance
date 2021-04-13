@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { WheelerBrand, WheelerModel } from './buy-insurance/buy-insurance.component';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,13 @@ export class CRUDApiService {
     return this.httpClient.post<any>(this.apiServer + '/Login/', JSON.stringify(luser), this.httpOptions)
   }
 
+  getBrands(VehicleType): Observable<WheelerBrand[]>{
+    return this.httpClient.post<WheelerBrand[]>(this.apiServer + '/RamBuyCheck/', JSON.stringify(VehicleType), this.httpOptions)
+  }
+
+  getModels(ModelType): Observable<WheelerModel[]>{
+    return this.httpClient.post<WheelerModel[]>(this.apiServer + '/RamBuyCheck2/', JSON.stringify(ModelType), this.httpOptions)
+  }
 
 }
 

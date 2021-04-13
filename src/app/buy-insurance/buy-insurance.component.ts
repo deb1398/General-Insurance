@@ -2,6 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router} from '@angular/router';
+import { CRUDApiService } from '../crud-api.service';
+
 @Component({
   selector: 'app-buy-insurance',
   templateUrl: './buy-insurance.component.html',
@@ -20,37 +22,25 @@ export class BuyInsuranceComponent implements OnInit {
     chassis_number : new FormControl('',[Validators.required])
   })
 
-  fourWheelerBrandsList:fourWheelerBrand[] = [
-    
-    new fourWheelerBrand("1", "Hyundai"),
-    new fourWheelerBrand('2', 'Toyota'),
-    new fourWheelerBrand('3', 'Tata'),
-    new fourWheelerBrand('3', 'Kia'),
-    new fourWheelerBrand('3', 'MG'),
-    new fourWheelerBrand('4', 'Mahindra'),
-    new fourWheelerBrand('5', 'Maruti'),
-    new fourWheelerBrand('6', 'Honda'),
-    new fourWheelerBrand('7', 'Volkswagen'),
-    new fourWheelerBrand('8', 'Renault'),
-    new fourWheelerBrand('9', 'Skoda'),
-  ];
   
-  fourWheelerModelsList:fourWheelerModel[] = [
-    
-    new fourWheelerModel("1", "Xcent"),
-    new fourWheelerModel('2', 'i20'),
-    new fourWheelerModel('3', 'i10'),
-    new fourWheelerModel('4', 'Sonata'),
-    new fourWheelerModel('5', 'Eon'),
-    new fourWheelerModel('6', 'Accent'),
-    new fourWheelerModel('7', 'Creta'),
-    new fourWheelerModel('8', 'Aura'),
-    new fourWheelerModel('9', 'Verna'),
-  ];
 
-  constructor() { }
+  
+
+  brandsList:WheelerBrand[];
+  
+  modelsList:WheelerModel[];
+
+  constructor( public service: CRUDApiService) { }
+  
+  
+  
 
   ngOnInit(): void {
+    
+  }
+
+  get f(){
+    return this.buyinsuranceForm.controls;
   }
 
   get veh_type()
@@ -93,6 +83,32 @@ export class BuyInsuranceComponent implements OnInit {
     return this.buyinsuranceForm.get('chassis_number');
   }
 
+  globalVehicleType: string
+
+  onItemChange(e){
+    this.globalVehicleType = e.target.value;
+    let vehicleType = new VehicleType;
+    vehicleType.vehicle_type = e.target.value; 
+    this.service.getBrands(vehicleType).subscribe((data) => {
+      this.brandsList = data;
+    })
+    
+    //this.vehicle_type = e.target.value;
+    // console.log(e.target.value);
+  }
+
+  onChange(e){
+    let modelType = new ModelType;
+    let id = e[3];
+    modelType.Brand_ID = id;
+    modelType.vehicle_type = this.globalVehicleType;
+    console.log(modelType);
+    this.service.getModels(modelType).subscribe((data) => {
+      this.modelsList = data;
+    })
+    // console.log(e.target.value);
+  }
+
   onSubmit()
   {
     
@@ -101,31 +117,32 @@ export class BuyInsuranceComponent implements OnInit {
 
 }
 
-export class fourWheelerBrand {
-  id:string;
-  name:string;
- 
-  constructor(id:string, name:string) {
-    this.id=id;
-    this.name=name;
-  }
-}
-export class twoWheelerBrand {
-  id:string;
-  name:string;
- 
-  constructor(id:string, name:string) {
-    this.id=id;
-    this.name=name;
-  }
+export class VehicleType{
+  vehicle_type: string;
 }
 
-export class fourWheelerModel {
-  id:string;
-  name:string;
+export class ModelType{
+  Brand_ID: number;
+  vehicle_type: string;
+}
+
+export class WheelerBrand {
+  vehicle_type: string;
+  brand_names: string;
+  Brand_Id: number
+}
+
+// export class twoWheelerBrand {
+//   id:string;
+//   name:string;
  
-  constructor(id:string, name:string) {
-    this.id=id;
-    this.name=name;
-  }
+//   constructor(id:string, name:string) {
+//     this.id=id;
+//     this.name=name;
+//   }
+// }
+
+export class WheelerModel {
+  Brand_Id:number;
+  Model_Name:string;
 }
