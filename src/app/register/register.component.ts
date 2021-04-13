@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router} from '@angular/router';
+
 import { CRUDApiService } from '../crud-api.service';
 @Component({
   selector: 'app-register',
@@ -19,6 +20,9 @@ export class RegisterComponent implements OnInit {
     password : new FormControl('',[Validators.required,Validators.minLength(8), Validators.pattern("(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[$@$!%*#?&])[A-Za-z0-9$@$!%*#?&]{8,32}")]),
     cpassword : new FormControl ('', [Validators.required])
   })
+  // },{ 
+  //   validators: this.passwordcheck.bind(this)
+  // })
 
   constructor(
     public fb: FormBuilder,
@@ -68,6 +72,11 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get('cpassword');
   }
 
+  // passwordcheck(formGroup: FormGroup) {
+  //   const { value: password } = formGroup.get('password');
+  //   const { value: confirmPassword } = formGroup.get('cpassword');
+  //   return password === confirmPassword ? null : { passwordNotMatch: true };
+  // }
 
   onSubmit()
   {
@@ -79,11 +88,13 @@ export class RegisterComponent implements OnInit {
       this.dateofbirth.value,
       this.contactno.value,
       this.address.value,
-      this.password.value      
+      this.password.value,      
       );
+
     
     this.crudService.create(us).subscribe(res => {
       console.log('User Registrations created!'),
+      window.alert('Registration Successful'),
       this.router.navigateByUrl('/Login')
     });
   }

@@ -13,7 +13,7 @@ export class BuyInsuranceComponent implements OnInit {
     veh_type : new FormControl('',[Validators.required]),
     brand_name : new FormControl('',[Validators.required]),
     model_name : new FormControl('',[Validators.required]),
-    license_no : new FormControl('',[Validators.required, Validators.minLength(16),Validators.pattern("(?=.[A-Z]{2})(?=.[0-9]{2})[A-Za-z0-9]{16}")]),
+    license_no : new FormControl('',[Validators.required, Validators.minLength(16),Validators.pattern("(?=.*[A-Z]{2})(?=.*[0-9]{2})[A-Za-z0-9]{16}")]),
     purchase_date : new FormControl('',[Validators.required]),
     registeration_number : new FormControl('',[Validators.required, Validators.minLength(10),Validators.pattern("(?=.[A-Z]{2})(?=.[0-9]{2})[A-Za-z0-9]{10}")]),
     engine_number : new FormControl('',[Validators.required]),

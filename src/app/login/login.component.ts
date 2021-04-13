@@ -46,7 +46,8 @@ export class LoginComponent implements OnInit {
       if(res.message === "Successfull")
       {
         
-        console.log("Successfull");        
+        console.log("Successfull");    
+        window.alert("Login Successful");    
         sessionStorage.setItem('username',this.username.value);
         this.router.navigateByUrl('user-home-page');
 
@@ -54,6 +55,7 @@ export class LoginComponent implements OnInit {
       else
       {
         console.log("Invalid Username/Password");
+        window.alert("Invalid User\nEnter the correct credentials");
         //this.Display Error Message
       }
     });

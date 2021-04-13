@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,17 +14,33 @@ export class CRUDApiService {
       'Content-Type': 'application/json'
     })
   }
+  error: any;
   constructor(private httpClient: HttpClient) { }
 
   create(ruser): Observable<RegisterUser> {
-    return this.httpClient.post<RegisterUser>(this.apiServer + '/Register/', JSON.stringify(ruser), this.httpOptions)
+    return this.httpClient.post<RegisterUser>(this.apiServer + '/Register/', JSON.stringify(ruser), this.httpOptions).pipe(catchError(this.handleError));
   }
 
   check(luser): Observable<LoginUser> {
     return this.httpClient.post<LoginUser>(this.apiServer + '/Login/', JSON.stringify(luser), this.httpOptions)
   }
 
+  handleError(error)
+  {
+    let errorMessage = '';
+    if(error.error instanceof ErrorEvent)
+    {
+      errorMessage = `Error: ${error.error.message}`;
+    }
+    else
+    {
+      errorMessage = `Email Id or Phone Number is already taken`;
+    }
 
+    window.alert(errorMessage);
+    return throwError(errorMessage);
+  }
+  
 }
 
 export class RegisterUser {
