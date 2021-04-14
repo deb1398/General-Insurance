@@ -25,11 +25,11 @@ export class CRUDApiService {
   }
 
   getBrands(VehicleType): Observable<WheelerBrand[]>{
-    return this.httpClient.post<WheelerBrand[]>(this.apiServer + '/RamBuyCheck/', JSON.stringify(VehicleType), this.httpOptions)
+    return this.httpClient.post<WheelerBrand[]>(this.apiServer + '/BrandName/', JSON.stringify(VehicleType), this.httpOptions)
   }
 
   getModels(ModelType): Observable<WheelerModel[]>{
-    return this.httpClient.post<WheelerModel[]>(this.apiServer + '/RamBuyCheck2/', JSON.stringify(ModelType), this.httpOptions)
+    return this.httpClient.post<WheelerModel[]>(this.apiServer + '/ModelName/', JSON.stringify(ModelType), this.httpOptions)
   }
 
 }

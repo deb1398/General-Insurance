@@ -102,7 +102,7 @@ export class BuyInsuranceComponent implements OnInit {
     let id = e[3];
     modelType.Brand_ID = id;
     modelType.vehicle_type = this.globalVehicleType;
-    console.log(modelType);
+    // console.log(modelType);
     this.service.getModels(modelType).subscribe((data) => {
       this.modelsList = data;
     })
