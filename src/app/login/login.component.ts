@@ -48,13 +48,15 @@ export class LoginComponent implements OnInit {
         
         console.log("Successfull");        
         sessionStorage.setItem('User_Id',res.User_Id);
-        localStorage.setItem('Name',res.Name);
-        localStorage.setItem('Email_ID',res.Email_ID);
-        localStorage.setItem('Phone_No',res.Phone_No);
-        localStorage.setItem('DOB',res.DOB);
-        localStorage.setItem('Address',res.Address);
+        sessionStorage.setItem('Name',res.Name);
+        sessionStorage.setItem('Email_ID',res.Email_ID);
+        sessionStorage.setItem('Phone_No',res.Phone_No);
+        sessionStorage.setItem('DOB',res.DOB);
+        sessionStorage.setItem('Address',res.Address);
 
         this.router.navigateByUrl('user-home-page');
+        console.log(sessionStorage.length);
+        this.crudService.loginstatus.next(true);
 
       }
       else

@@ -10,7 +10,11 @@ export class UserProfileComponent implements OnInit {
   constructor() { }
 
   
-  usernamevar:string = localStorage.getItem('Name');
+  Name:string = sessionStorage.getItem('Name');
+  Email_ID:string = sessionStorage.getItem('Email_ID');
+  Phone_No:string = sessionStorage.getItem('Phone_No');
+  DOB:string = sessionStorage.getItem('DOB');
+  Address:string = sessionStorage.getItem('Address');
 
   ngOnInit(): void {
   }
