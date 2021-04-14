@@ -14,7 +14,7 @@ export class CRUDApiService {
       'Content-Type': 'application/json'
     })
   }
-  error: any;
+  
   constructor(private httpClient: HttpClient) { }
 
   create(ruser): Observable<RegisterUser> {
