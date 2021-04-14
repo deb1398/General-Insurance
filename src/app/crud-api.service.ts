@@ -1,12 +1,26 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+
 import { WheelerBrand, WheelerModel } from './buy-insurance/buy-insurance.component';
+
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
+import { catchError, retry} from 'rxjs/operators';
+
+import { fakeAsync } from '@angular/core/testing';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CRUDApiService {
+
+
+  public loginstatus = new BehaviorSubject<boolean>((sessionStorage.length!=0)?true:false);
+
+  get isLoggedin()
+  {
+    return this.loginstatus.asObservable();
+  }
 
   private apiServer = "http://localhost:64977/api";
   httpOptions = {
@@ -14,10 +28,11 @@ export class CRUDApiService {
       'Content-Type': 'application/json'
     })
   }
+  error: any;
   constructor(private httpClient: HttpClient) { }
 
   create(ruser): Observable<RegisterUser> {
-    return this.httpClient.post<RegisterUser>(this.apiServer + '/Register/', JSON.stringify(ruser), this.httpOptions)
+    return this.httpClient.post<RegisterUser>(this.apiServer + '/Register/', JSON.stringify(ruser), this.httpOptions).pipe(catchError(this.handleError));
   }
 
   check(luser): Observable<any> {
@@ -31,6 +46,32 @@ export class CRUDApiService {
   getModels(ModelType): Observable<WheelerModel[]>{
     return this.httpClient.post<WheelerModel[]>(this.apiServer + '/ModelName/', JSON.stringify(ModelType), this.httpOptions)
   }
+
+  handleError(error)
+  {
+    let errorMessage = '';
+    if(error.error instanceof ErrorEvent)
+    {
+      errorMessage = `Error: ${error.error.message}`;
+    }
+    else
+    {
+      errorMessage = `Email Id or Phone Number is already taken`;
+    }
+
+    window.alert(errorMessage);
+    return throwError(errorMessage);
+  }
+  
+
+  getbrandsapi(vehtype): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + '/RamBuyCheck/', JSON.stringify(vehtype), this.httpOptions)
+  }
+  
+  getmodelsapi(vehtypebrandid): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + '/RamBuyCheck2/', JSON.stringify(vehtypebrandid), this.httpOptions)
+  }
+
 
 }
 
@@ -50,3 +91,11 @@ export class LoginUser
   Password:string;
   message: string;
 }
+
+// export class brands
+// {
+//   vehicle_type:string;
+//   brand_names:string;
+//   Brand_Id:number;
+
+// }

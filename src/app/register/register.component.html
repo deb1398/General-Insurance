@@ -34,7 +34,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="email" class="tcolor">Email</label>
+                                        <label for="email" class="tcolor">Email</label>
                                     <input type="email" class="form-control form-control-lg rounded-0" name="email" formControlName="emailid" [ngClass]="{'is-invalid': emailid.errors && (emailid.touched || emailid.dirty), 'is-valid':emailid.valid}" >
                                     <div *ngIf="!emailid?.valid && (emailid?.dirty || emailid?.touched)" id="error-div">
                                         <div [hidden]="!emailid.errors.required">
@@ -90,18 +90,18 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="pwd1" class="tcolor">Confirm Password</label>
-                                    <input type="password" class="form-control form-control-lg rounded-0" name="pwd1" formControlName="cpassword" [ngClass]="{'is-invalid': cpassword.errors && (cpassword.touched || cpassword.dirty), 'is-valid':cpassword.valid}" >
+                                    <input type="password" class="form-control form-control-lg rounded-0" name="pwd1" formControlName="cpassword" [ngClass]="{'is-invalid': (cpassword.errors && (cpassword.touched || cpassword.dirty)) || (registerForm.value.password !== registerForm.value.cpassword), 'is-valid':cpassword.valid}" >
                                     <div *ngIf="!cpassword?.valid && (cpassword?.dirty || cpassword?.touched)" id="error-div">
                                         <div [hidden]="!cpassword.errors.required">
                                             Confirm password is required
                                         </div>
-                                    </div> 
-                                    <div *ngIf="registerForm.value.password !== registerForm.value.cpassword">
-                                        password is not matching
                                     </div>
+                                    <div *ngIf="registerForm.value.password !== registerForm.value.cpassword" id="error-div">
+                                        password is not matching
+                                    </div> 
                                 </div>
-                                <div >
-                                    <button type="submit" class="btn btn-default btn-lg text-white" id="btnLogin" [disabled]="!registerForm.valid">Register</button>
+                                <div>
+                                    <button type="submit" class="btn btn-default btn-lg text-white" id="btnLogin" [disabled]="!registerForm.valid || (registerForm.value.password !== registerForm.value.cpassword)">Register</button>
                                 </div>
                             </form>
                         </div>

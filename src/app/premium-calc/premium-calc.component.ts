@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CRUDApiService } from '../crud-api.service';
 
 @Component({
   selector: 'app-premium-calc',
@@ -9,37 +10,57 @@ import { Router } from '@angular/router';
 })
 export class PremiumCalcComponent implements OnInit {
 
+  public vehicle_typeg:string;
+  public getbrands(vehicle_type:string)
+  {
+    this.vehicle_typeg = vehicle_type;
+    this.BrandsList = [];
+    
+
+    let vehtypeobj = new vehicletypeclass();
+    vehtypeobj.vehicle_type = vehicle_type;
+    this.crudService.getbrandsapi(vehtypeobj).subscribe(res => {
+      res.forEach(element => {
+        console.log(element.brand_names)
+        console.log(element.Brand_Id)
+        let c = new Brand(element.Brand_Id,element.brand_names);
+        this.BrandsList.push(c);
+      });
+    });
+    
+  }
+
+
+  public getmodels(Brand_Id:number)
+  {
+    console.log(Brand_Id[3]+""+Brand_Id);
+    this.ModelsList = [];
+    
+    let brandidobj = new brandidclass();
+    brandidobj.Brand_Id = Brand_Id[3];
+    brandidobj.vehicle_type = this.vehicle_typeg;
+    this.crudService.getmodelsapi(brandidobj).subscribe(res => {
+      console.log(res)
+      res.forEach(element => {
+        console.log(element.model_name)
+        let c = new Brand(element.Model_Name,element.Model_Name);
+        this.ModelsList.push(c);
+      });
+    });
+    
+
+  }
+
   
 
-  fourWheelerBrandsList:fourWheelerBrand[] = [
-    
-    new fourWheelerBrand("1", "Hyundai"),
-    new fourWheelerBrand('2', 'Toyota'),
-    new fourWheelerBrand('3', 'Tata'),
-    new fourWheelerBrand('4', 'Mahindra'),
-    new fourWheelerBrand('5', 'Maruti'),
-    new fourWheelerBrand('6', 'Honda'),
-    new fourWheelerBrand('7', 'Volkswagen'),
-    new fourWheelerBrand('8', 'Renault'),
-    new fourWheelerBrand('9', 'Volkswagen'),
-  ];
-  
-  fourWheelerModelsList:fourWheelerModel[] = [
-    
-    new fourWheelerModel("1", "Xcent"),
-    new fourWheelerModel('2', 'i20'),
-    new fourWheelerModel('3', 'i10'),
-    new fourWheelerModel('4', 'Sonata'),
-    new fourWheelerModel('5', 'Eon'),
-    new fourWheelerModel('6', 'Accent'),
-    new fourWheelerModel('7', 'Creta'),
-    new fourWheelerModel('8', 'Aura'),
-    new fourWheelerModel('9', 'Verna'),
-  ];
+  public BrandsList:Brand[] =[];
+  public ModelsList:Model[] =[];
+
 
   constructor(
     public fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    public crudService: CRUDApiService
   ) { }
 
 
@@ -91,31 +112,34 @@ export class PremiumCalcComponent implements OnInit {
 
 }
 
-export class fourWheelerBrand {
-  id:string;
+export class vehicletypeclass
+{
+  vehicle_type:string;
+}
+
+export class brandidclass
+{
+  Brand_Id:number;
+  vehicle_type:string;
+}
+
+
+export class Brand {
+  id:number;
   name:string;
  
-  constructor(id:string, name:string) {
+  constructor(id:number, name:string) {
     this.id=id;
     this.name=name;
   }
 }
 
-export class twoWheelerBrand {
-  id:string;
-  name:string;
- 
-  constructor(id:string, name:string) {
-    this.id=id;
-    this.name=name;
-  }
-}
 
-export class fourWheelerModel {
-  id:string;
+export class Model {
+  id:number;
   name:string;
  
-  constructor(id:string, name:string) {
+  constructor(id:number, name:string) {
     this.id=id;
     this.name=name;
   }
