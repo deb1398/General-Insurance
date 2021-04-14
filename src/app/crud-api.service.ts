@@ -1,7 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
+import { catchError, retry} from 'rxjs/operators';
+
 import { fakeAsync } from '@angular/core/testing';
-import { BehaviorSubject, Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,15 +26,34 @@ export class CRUDApiService {
       'Content-Type': 'application/json'
     })
   }
+  error: any;
   constructor(private httpClient: HttpClient) { }
 
   create(ruser): Observable<RegisterUser> {
-    return this.httpClient.post<RegisterUser>(this.apiServer + '/Register/', JSON.stringify(ruser), this.httpOptions)
+    return this.httpClient.post<RegisterUser>(this.apiServer + '/Register/', JSON.stringify(ruser), this.httpOptions).pipe(catchError(this.handleError));
   }
 
   check(luser): Observable<any> {
     return this.httpClient.post<any>(this.apiServer + '/Login/', JSON.stringify(luser), this.httpOptions)
   }
+
+
+  handleError(error)
+  {
+    let errorMessage = '';
+    if(error.error instanceof ErrorEvent)
+    {
+      errorMessage = `Error: ${error.error.message}`;
+    }
+    else
+    {
+      errorMessage = `Email Id or Phone Number is already taken`;
+    }
+
+    window.alert(errorMessage);
+    return throwError(errorMessage);
+  }
+  
 
   getbrandsapi(vehtype): Observable<any> {
     return this.httpClient.post<any>(this.apiServer + '/RamBuyCheck/', JSON.stringify(vehtype), this.httpOptions)
@@ -39,6 +62,7 @@ export class CRUDApiService {
   getmodelsapi(vehtypebrandid): Observable<any> {
     return this.httpClient.post<any>(this.apiServer + '/RamBuyCheck2/', JSON.stringify(vehtypebrandid), this.httpOptions)
   }
+
 
 }
 
