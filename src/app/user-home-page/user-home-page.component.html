@@ -60,16 +60,16 @@
     </div> -->
 
     <div class="col-xl-3 col-md-6">
-      <button type="button" class="btn btn-primary btn-lg btn-block mr-1 button-style"><img class="img-style" src="../../assets/images/buy-insurance.png" alt=""><br><h4>Buy Insurance</h4></button>
+      <button type="button" [routerLink]="['/BuyInsurance']" class="btn btn-primary btn-lg btn-block mr-1 button-style"><img class="img-style" src="../../assets/images/buy-insurance.png" alt=""><br><h4>Buy Insurance</h4></button>
     </div>
     <div class="col-xl-3 col-md-6">
-      <button type="button" class="btn btn-primary btn-lg btn-block mr-1 button-style"><img class="img-style" src="../../assets/images/renew-insurance.png" alt=""><br><h4>Renew Insurance</h4></button>
+      <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary btn-lg btn-block mr-1 button-style"><img class="img-style" src="../../assets/images/renew-insurance.png" alt=""><br><h4>Renew Insurance</h4></button>
     </div>
     <div class="col-xl-3 col-md-6">
-      <button type="button" class="btn btn-primary btn-lg btn-block mr-1 button-style"><img class="img-style" src="../../assets/images/claim-insurance.png" alt=""><br><h4>Claim Insurance</h4></button>
+      <button type="button" [routerLink]="['/claim-insurance']" class="btn btn-primary btn-lg btn-block mr-1 button-style"><img class="img-style" src="../../assets/images/claim-insurance.png" alt=""><br><h4>Claim Insurance</h4></button>
     </div>
     <div class="col-xl-3 col-md-6">
-      <button type="button" class="btn btn-primary btn-lg btn-block mr-1 button-style"><img class="img-style" src="../../assets/images/cal-insurance.png" alt=""><br><h4>Insurance Calculation</h4></button>
+      <button type="button" [routerLink]="['/premium-calc']" class="btn btn-primary btn-lg btn-block mr-1 button-style"><img class="img-style" src="../../assets/images/cal-insurance.png" alt=""><br><h4>Insurance Calculation</h4></button>
     </div>
  </div><hr>
  <br>
@@ -159,7 +159,7 @@
       <div class="modal-body">
         <form [formGroup]="renewForm" (ngSubmit)="onSubmit()" novalidate>
           <div class="form-group">
-            <label for="policyNumber" class="col-form-label">Polic Number</label>
+            <label for="policyNumber" class="col-form-label">Policy Number</label>
             <input type="number" class="form-control" formControlName="policyNumber" name="policyNumber" id="policyNumber" required>
             <div *ngIf="!policyNumber?.valid && (policyNumber?.dirty ||policyNumber?.touched)">
               <div [hidden]="!policyNumber.errors.required">
