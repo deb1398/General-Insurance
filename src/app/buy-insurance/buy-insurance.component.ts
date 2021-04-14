@@ -15,7 +15,7 @@ export class BuyInsuranceComponent implements OnInit {
     model_name : new FormControl('',[Validators.required]),
     license_no : new FormControl('',[Validators.required, Validators.minLength(16),Validators.pattern("(?=.*[A-Z]{2})(?=.*[0-9]{2})[A-Za-z0-9]{16}")]),
     purchase_date : new FormControl('',[Validators.required]),
-    registeration_number : new FormControl('',[Validators.required, Validators.minLength(10),Validators.pattern("(?=.[A-Z]{2})(?=.[0-9]{2})[A-Za-z0-9]{10}")]),
+    registeration_number : new FormControl('',[Validators.required, Validators.minLength(10),Validators.pattern("(?=.*[A-Z]{2})(?=.*[0-9]{2})[A-Za-z0-9]{10}")]),
     engine_number : new FormControl('',[Validators.required]),
     chassis_number : new FormControl('',[Validators.required])
   })
@@ -25,14 +25,14 @@ export class BuyInsuranceComponent implements OnInit {
     new fourWheelerBrand("1", "Hyundai"),
     new fourWheelerBrand('2', 'Toyota'),
     new fourWheelerBrand('3', 'Tata'),
-    new fourWheelerBrand('3', 'Kia'),
-    new fourWheelerBrand('3', 'MG'),
-    new fourWheelerBrand('4', 'Mahindra'),
-    new fourWheelerBrand('5', 'Maruti'),
-    new fourWheelerBrand('6', 'Honda'),
-    new fourWheelerBrand('7', 'Volkswagen'),
-    new fourWheelerBrand('8', 'Renault'),
-    new fourWheelerBrand('9', 'Skoda'),
+    new fourWheelerBrand('4', 'Kia'),
+    new fourWheelerBrand('5', 'MG'),
+    new fourWheelerBrand('6', 'Mahindra'),
+    new fourWheelerBrand('7', 'Maruti'),
+    new fourWheelerBrand('8', 'Honda'),
+    new fourWheelerBrand('9', 'Volkswagen'),
+    new fourWheelerBrand('10', 'Renault'),
+    new fourWheelerBrand('11', 'Skoda'),
   ];
   
   fourWheelerModelsList:fourWheelerModel[] = [

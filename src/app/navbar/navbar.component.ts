@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { CRUDApiService } from '../crud-api.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,14 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private service:CRUDApiService
+  ) { }
+
+  public loginstatus$:Observable<boolean>;
 
   logout()
   {
-    sessionStorage.removeItem('username');
+    sessionStorage.clear();
+    this.service.loginstatus.next(false); 
   }
 
   ngOnInit(): void {
+    this.loginstatus$ = this.service.isLoggedin;
   }
 
 }
