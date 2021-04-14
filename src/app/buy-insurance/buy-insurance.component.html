@@ -12,8 +12,8 @@
                             <form [formGroup]="buyinsuranceForm" (ngSubmit)="onSubmit()" novalidate>
                                 <div class="form-group text-center">
                                     <label for="veh_type" class="mr-3">Vehicle Type</label>
-                                    <input type="radio" class="form-check-inline" value="4-wheeler" id="2wheeler" name="veh_type" formControlName="veh_type" >4-Wheeler&nbsp;
-                                    <input type="radio" class="form-check-inline" value="2-wheeler" id="4wheeler" name="veh_type" formControlName="veh_type">2-Wheeler
+                                    <input type="radio" class="form-check-inline" value="4-wheeler" (change)="onItemChange($event)" id="4-wheeler" name="veh_type" formControlName="veh_type" >4-Wheeler&nbsp;
+                                    <input type="radio" class="form-check-inline" value="2-wheeler" id="2-wheeler" (change)="onItemChange($event)" name="veh_type" formControlName="veh_type">2-Wheeler
                                     <div *ngIf="!veh_type?.valid && (veh_type?.dirty || veh_type?.touched)" id="error-div">
                                         <div [hidden]="!veh_type.errors.required">
                                             Vehicle Type is required
@@ -23,9 +23,9 @@
                                 
                                 <div class="form-group">
                                     <label for="brand">Brand Name</label>
-                                    <select id="brand" class="form-control" name="brand" formControlName="brand_name" [ngClass]="{'is-invalid': brand_name.errors && (brand_name.touched || brand_name.dirty), 'is-valid':brand_name.valid}">
-                                        <option [ngValue]="b.id" *ngFor="let b of fourWheelerBrandsList">
-                                            {{b.name}}
+                                    <select id="brand" (change)="onChange($event.target.value)" class="form-control" name="brand" formControlName="brand_name" [ngClass]="{'is-invalid': brand_name.errors && (brand_name.touched || brand_name.dirty), 'is-valid':brand_name.valid}">
+                                        <option *ngFor="let b of brandsList" [ngValue]="b.Brand_Id">
+                                            {{b.brand_names}}
                                         </option>
                                     </select>
                                     <div *ngIf="!brand_name?.valid && (brand_name?.dirty || brand_name?.touched)" id="error-div">
@@ -38,8 +38,8 @@
                                 <div class="form-group">
                                     <label for="model">Model Name</label>
                                     <select id="model" class="form-control" name="model" formControlName="model_name" [ngClass]="{'is-invalid': model_name.errors && (model_name.touched || model_name.dirty), 'is-valid':model_name.valid}">
-                                        <option [ngValue]="m.id" *ngFor="let m of fourWheelerModelsList">
-                                            {{m.name}}
+                                        <option [ngValue]="m.Model_Name" *ngFor="let m of modelsList">
+                                            {{m.Model_Name}}
                                         </option>
                                     </select>
                                     <div *ngIf="!model_name?.valid && (model_name?.dirty || model_name?.touched)" id="error-div">

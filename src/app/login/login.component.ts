@@ -46,10 +46,21 @@ export class LoginComponent implements OnInit {
       if(res.message === "Successfull")
       {
         
+
         console.log("Successfull");    
-        window.alert("Login Successful");    
-        sessionStorage.setItem('username',this.username.value);
+        window.alert("Login Successful");
+        
+        sessionStorage.setItem('User_Id',res.User_Id);
+        sessionStorage.setItem('Name',res.Name);
+        sessionStorage.setItem('Email_ID',res.Email_ID);
+        sessionStorage.setItem('Phone_No',res.Phone_No);
+        sessionStorage.setItem('DOB',res.DOB);
+        sessionStorage.setItem('Address',res.Address);
+
+
         this.router.navigateByUrl('user-home-page');
+        console.log(sessionStorage.length);
+        this.crudService.loginstatus.next(true);
 
       }
       else
