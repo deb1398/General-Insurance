@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+import { WheelerBrand, WheelerModel } from './buy-insurance/buy-insurance.component';
+
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, retry} from 'rxjs/operators';
 
@@ -37,6 +39,13 @@ export class CRUDApiService {
     return this.httpClient.post<any>(this.apiServer + '/Login/', JSON.stringify(luser), this.httpOptions)
   }
 
+  getBrands(VehicleType): Observable<WheelerBrand[]>{
+    return this.httpClient.post<WheelerBrand[]>(this.apiServer + '/BrandName/', JSON.stringify(VehicleType), this.httpOptions)
+  }
+
+  getModels(ModelType): Observable<WheelerModel[]>{
+    return this.httpClient.post<WheelerModel[]>(this.apiServer + '/ModelName/', JSON.stringify(ModelType), this.httpOptions)
+  }
 
   handleError(error)
   {
