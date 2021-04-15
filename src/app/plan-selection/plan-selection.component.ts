@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+<<<<<<< HEAD
 import { CRUDApiService } from '../crud-api.service';
+=======
+import { BuyInsClass } from '../buy-insurance/buy-insurance.component';
+import { SharedService } from '../shared/shared.service';
+>>>>>>> origin/main
 
 @Component({
   selector: 'app-plan-selection',
@@ -15,6 +20,7 @@ export class PlanSelectionComponent implements OnInit {
     planDuration: new FormControl('', [Validators.required])
   })
 
+<<<<<<< HEAD
   buyinsobj = new BuyInsClass();
   constructor(
     public service : CRUDApiService
@@ -28,6 +34,15 @@ export class PlanSelectionComponent implements OnInit {
 
   ngOnInit(): void {
     
+=======
+  constructor(public shared: SharedService) { }
+
+  buyInsData: BuyInsClass;
+
+  ngOnInit(): void {
+    this.buyInsData = this.shared.getBuyInsData();
+    console.log(this.buyInsData);
+>>>>>>> origin/main
   }
 
   gloalplantype:string;

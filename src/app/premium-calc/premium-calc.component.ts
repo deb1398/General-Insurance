@@ -33,13 +33,16 @@ export class PremiumCalcComponent implements OnInit {
   }
 
 
-  public getmodels(Brand_Id:number)
+  public getmodels(Brand_Id)
   {
-    console.log(Brand_Id[3]+""+Brand_Id);
+    //console.log(Brand_Id[3]+""+Brand_Id);
+
+    var index = Brand_Id.indexOf(":")
+    var id = Brand_Id.substring(index+1,);
     this.ModelsList = [];
     
     let brandidobj = new brandidclass();
-    brandidobj.Brand_Id = Brand_Id[3];
+    brandidobj.Brand_Id = id;
     brandidobj.vehicle_type = this.vehicle_typeg;
     this.crudService.getModels(brandidobj).subscribe(res => {
       console.log(res)
@@ -70,7 +73,7 @@ export class PremiumCalcComponent implements OnInit {
     veh_type: new FormControl('',[Validators.required]),
     brand_name: new FormControl('',[Validators.required]),
     model_name: new FormControl('',[Validators.required]),
-    market_price: new FormControl('',[Validators.required]),
+    market_price: new FormControl('',[Validators.required, Validators.pattern("[0-9]{4,7}")]),
     veh_cc: new FormControl('',[Validators.required]),
     veh_pur_date: new FormControl('',[Validators.required]),
     

@@ -1,8 +1,9 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { CRUDApiService } from '../crud-api.service';
+import { SharedService } from '../shared/shared.service';
 
 @Component({
   selector: 'app-buy-insurance',
@@ -19,19 +20,22 @@ export class BuyInsuranceComponent implements OnInit {
     purchase_date : new FormControl('',[Validators.required]),
     registeration_number : new FormControl('',[Validators.required, Validators.minLength(10),Validators.pattern("(?=.*[A-Z]{2})(?=.*[0-9]{2})[A-Za-z0-9]{10}")]),
     engine_number : new FormControl('',[Validators.required]),
-    chassis_number : new FormControl('',[Validators.required])
+    vehicleCC: new FormControl('',[Validators.required]),
+    chassis_number : new FormControl('',[Validators.required]),
+    market_price : new FormControl('',[Validators.required, Validators.pattern("[0-9]{4,7}")])
   })
 
+  
+
+  
 
   brandsList:WheelerBrand[];
   
   modelsList:WheelerModel[];
 
-  constructor( public service: CRUDApiService) { }
+  constructor( public service: CRUDApiService, public shared: SharedService, private router: Router) { }
   
   
-  
-
   ngOnInit(): void {
     
   }
@@ -80,7 +84,19 @@ export class BuyInsuranceComponent implements OnInit {
     return this.buyinsuranceForm.get('chassis_number');
   }
 
+  get vehicleCC()
+  {
+    return this.buyinsuranceForm.get('vehicleCC');
+  }
+
+  get market_price()
+  {
+    return this.buyinsuranceForm.get('market_price');
+  }
+
   globalVehicleType: string
+
+  modelType: ModelType;
 
   onItemChange(e){
     this.globalVehicleType = e.target.value;
@@ -95,8 +111,10 @@ export class BuyInsuranceComponent implements OnInit {
   }
 
   onChange(e){
+    var index = e.target.value.indexOf(":")
+    var id = e.target.value.substring(index+1,);
     let modelType = new ModelType;
-    let id = e[3];
+    
     modelType.Brand_ID = id;
     modelType.vehicle_type = this.globalVehicleType;
     // console.log(modelType);
@@ -106,10 +124,14 @@ export class BuyInsuranceComponent implements OnInit {
     // console.log(e.target.value);
   }
 
+  buyInsurance: BuyInsClass;
+
   onSubmit()
   {
-    
-    console.log(this.buyinsuranceForm.value);
+    this.buyInsurance = this.buyinsuranceForm.value;
+    this.shared.setBuyInsData(this.buyInsurance);
+    console.log(this.buyInsurance);
+    this.router.navigateByUrl('/plan-selection');
   }
 
 }
@@ -142,4 +164,18 @@ export class WheelerBrand {
 export class WheelerModel {
   Brand_Id:number;
   Model_Name:string;
+}
+
+export class BuyInsClass {
+  Vehicle_Type:string;
+  Manufacturer_Name:string;
+  Model_Name:string;
+  Driving_license:string;
+  Veh_purchase_date:string;
+  Reg_No:string;
+  Engine_No:string;
+  Vehicle_cc:number;
+  Chasis_No:string;
+  Market_price:number;
+
 }
