@@ -130,11 +130,13 @@ export class BuyInsuranceComponent implements OnInit {
   {
     this.buyInsurance = this.buyinsuranceForm.value;
     this.shared.setBuyInsData(this.buyInsurance);
+    
+    
     //console.log(this.buyInsurance);
     sessionStorage.setItem('sessionbuyins', JSON.stringify(this.buyInsurance));
-    var temp = sessionStorage.getItem('sessionbuyins');
-    var sessionbuyInsData = JSON.parse(temp);
-    console.log(sessionbuyInsData);
+    //var temp = sessionStorage.getItem('sessionbuyins');
+    //var sessionbuyInsData = JSON.parse(temp);
+    //console.log(sessionbuyInsData);
     this.router.navigateByUrl('/plan-selection');
   }
 
