@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-
+import { CRUDApiService } from '../crud-api.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -14,9 +14,10 @@ export class ResetPasswordComponent implements OnInit {
   })
 
 
-  constructor() { }
+  constructor(public crudService: CRUDApiService) { }
 
   ngOnInit(): void {
+    
   }
   get emailid()
   {
@@ -24,11 +25,31 @@ export class ResetPasswordComponent implements OnInit {
   }
   onSubmit()
   {
+    
     console.log(this.resetForm.value);
-  }
+    let resetobj = new user();
+    resetobj.Email_ID = this.emailid.value;
+    resetobj.message="";
 
+    this.crudService.mail(resetobj).subscribe(res => {
+      console.log(res);
+      //window.alert(res);
+      if(res == "Successfull")
+      {
+        //console.log("Successfull");    
+        window.alert("Mail Sent successfully");
+      }
+      else
+      {
+        console.log("Failed to sent");
+        window.alert("Failed to sent");
+        //this.Display Error Message
+      }
+    });
+  }
 }
 export class user
 {
-  emailid : string;
+  Email_ID : string;
+  message : string;
 }
