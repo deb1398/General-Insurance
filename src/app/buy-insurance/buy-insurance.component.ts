@@ -130,7 +130,11 @@ export class BuyInsuranceComponent implements OnInit {
   {
     this.buyInsurance = this.buyinsuranceForm.value;
     this.shared.setBuyInsData(this.buyInsurance);
-    console.log(this.buyInsurance);
+    //console.log(this.buyInsurance);
+    sessionStorage.setItem('sessionbuyins', JSON.stringify(this.buyInsurance));
+    var temp = sessionStorage.getItem('sessionbuyins');
+    var sessionbuyInsData = JSON.parse(temp);
+    console.log(sessionbuyInsData);
     this.router.navigateByUrl('/plan-selection');
   }
 
@@ -167,15 +171,26 @@ export class WheelerModel {
 }
 
 export class BuyInsClass {
-  Vehicle_Type:string;
-  Manufacturer_Name:string;
-  Model_Name:string;
-  Driving_license:string;
-  Veh_purchase_date:string;
-  Reg_No:string;
-  Engine_No:string;
-  Vehicle_cc:number;
-  Chasis_No:string;
-  Market_price:number;
+  veh_type:string;
+  brand_name:string;
+  model_name:string;
+  license_no:string;
+  purchase_date:string;
+  registeration_number:string;
+  engine_number:string;
+  vehicleCC:number;
+  chassis_number:string;
+  market_price:number;
+
+  plan_type:number;
+  plan_duration:number;
+  total_payable:number;
+
+  card_holder_name:string;
+  card_no:number;
+  card_exp_month:number;
+  card_exp_year:number;
+  card_cvc:number;
+  
 
 }
