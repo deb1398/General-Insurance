@@ -18,6 +18,7 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { ClaimDetailsComponent } from './claim-details/claim-details.component';
 import { UserHomePageComponent } from './user-home-page/user-home-page.component';
 import { PaymentGatewayComponent } from './payment-gateway/payment-gateway.component';
+import { ResetPasswordComponent} from './reset-password/reset-password.component';
 const routes: Routes = [
   {path:'', component : HomeComponent},
   {path:'Home', component : HomeComponent},
@@ -36,8 +37,8 @@ const routes: Routes = [
   {path:'admin-page', component : AdminPageComponent},
   {path:'user-home-page', component : UserHomePageComponent},
   {path:'payment-gateway', component : PaymentGatewayComponent},
-  {path:'claim-details', component : ClaimDetailsComponent}
-  
+  {path:'claim-details', component : ClaimDetailsComponent},
+  {path: 'reset-pwd', component : ResetPasswordComponent}
 
   
 ];
