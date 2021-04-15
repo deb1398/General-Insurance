@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { BuyInsClass } from '../buy-insurance/buy-insurance.component';
+import { SharedService } from '../shared/shared.service';
 
 @Component({
   selector: 'app-plan-selection',
@@ -13,9 +15,13 @@ export class PlanSelectionComponent implements OnInit {
     planDuration: new FormControl('', [Validators.required])
   })
 
-  constructor() { }
+  constructor(public shared: SharedService) { }
+
+  buyInsData: BuyInsClass;
 
   ngOnInit(): void {
+    this.buyInsData = this.shared.getBuyInsData();
+    console.log(this.buyInsData);
   }
   
   get planType(){

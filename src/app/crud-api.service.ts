@@ -39,12 +39,12 @@ export class CRUDApiService {
     return this.httpClient.post<any>(this.apiServer + '/Login/', JSON.stringify(luser), this.httpOptions)
   }
 
-  getBrands(VehicleType): Observable<WheelerBrand[]>{
-    return this.httpClient.post<WheelerBrand[]>(this.apiServer + '/BrandName/', JSON.stringify(VehicleType), this.httpOptions)
+  getBrands(VehicleType): Observable<any>{
+    return this.httpClient.post<any>(this.apiServer + '/BrandName/', JSON.stringify(VehicleType), this.httpOptions)
   }
 
-  getModels(ModelType): Observable<WheelerModel[]>{
-    return this.httpClient.post<WheelerModel[]>(this.apiServer + '/ModelName/', JSON.stringify(ModelType), this.httpOptions)
+  getModels(ModelType): Observable<any>{
+    return this.httpClient.post<any>(this.apiServer + '/ModelName/', JSON.stringify(ModelType), this.httpOptions)
   }
 
   handleError(error)
@@ -65,11 +65,11 @@ export class CRUDApiService {
   
 
   getbrandsapi(vehtype): Observable<any> {
-    return this.httpClient.post<any>(this.apiServer + '/RamBuyCheck/', JSON.stringify(vehtype), this.httpOptions)
+    return this.httpClient.post<any>(this.apiServer + '/BrandName/', JSON.stringify(vehtype), this.httpOptions)
   }
   
   getmodelsapi(vehtypebrandid): Observable<any> {
-    return this.httpClient.post<any>(this.apiServer + '/RamBuyCheck2/', JSON.stringify(vehtypebrandid), this.httpOptions)
+    return this.httpClient.post<any>(this.apiServer + '/ModelName/', JSON.stringify(vehtypebrandid), this.httpOptions)
   }
 
 
