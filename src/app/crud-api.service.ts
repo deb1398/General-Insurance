@@ -47,6 +47,14 @@ export class CRUDApiService {
     return this.httpClient.post<WheelerModel[]>(this.apiServer + '/ModelName/', JSON.stringify(ModelType), this.httpOptions)
   }
 
+  mail(muser): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + '/Mail/', JSON.stringify(muser), this.httpOptions)
+  }
+
+  reset_pwd(fuser): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + '/Reset_pwd/', JSON.stringify(fuser), this.httpOptions)
+  }
+
   handleError(error)
   {
     let errorMessage = '';
@@ -92,6 +100,17 @@ export class LoginUser
   message: string;
 }
 
+export class Mailuser
+{
+  Email_ID : string;
+  message : string;
+}
+export class reset_pwd
+{
+  token : string;
+  password : string;
+  //cpassword : string;
+}
 // export class brands
 // {
 //   vehicle_type:string;

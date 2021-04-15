@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { CRUDApiService } from '../crud-api.service';
+
 @Component({
   selector: 'app-forget-password',
   templateUrl: './forget-password.component.html',
@@ -14,9 +16,10 @@ export class ForgetPasswordComponent implements OnInit {
   })
 
 
-  constructor() { }
+  constructor(public crudService: CRUDApiService) { }
 
-  ngOnInit(): void {
+  ngOnInit():void {
+    
   }
   get emailid()
   {
@@ -35,13 +38,38 @@ export class ForgetPasswordComponent implements OnInit {
 
   onSubmit()
   {
-    console.log(this.forgetForm.value);
-  }
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token')
+    console.log(token);
 
+    console.log(this.forgetForm.value);
+    let forgot_pwdobj = new user();
+    forgot_pwdobj.token = token;
+    forgot_pwdobj.password=this.password.value;
+    forgot_pwdobj.message="";
+
+    this.crudService.reset_pwd(forgot_pwdobj).subscribe(res => {
+      console.log(res);
+      //window.alert(res);
+      if(res == "Successfull")
+      {
+        console.log("Successfull");    
+        window.alert("Password Changed successfully");
+      }
+      else
+      {
+        console.log("Failed to change");
+        window.alert("Failed to change");
+        //this.Display Error Message
+      }
+    });
+  }
 }
+
 export class user
 {
-  emailid : string;
+  token : string;
   password : string;
-  cpassword : string;
+  message : string;
+  //cpassword : string;
 }
