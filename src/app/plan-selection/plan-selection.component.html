@@ -13,11 +13,11 @@
                                     <label for="planType" class="h6">Plan Type</label>
                                     <br>
                                     <span class="float-left">
-                                        <input type="radio" class="form-check-inline" value="Third Party" id="planType"
+                                        <input (change)="plantypechange($event)" type="radio" class="form-check-inline" value="Third-Party" id="planType"
                                             name="planType" formControlName="planType">Third Party Liability
                                     </span>
                                     <span class="float-right">
-                                        <input type="radio" class="form-check-inline" value="Comprehensive"
+                                        <input type="radio" (change)="plantypechange($event)" class="form-check-inline" value="Comprehensive"
                                             id="planType" name="planType" formControlName="planType">Comprehensive
                                     </span>
                                 </div>
@@ -31,15 +31,15 @@
                                     <label for="planDuration" class="h6">Plan Duration</label>
                                     <br>
                                     <span class="float-left">
-                                        <input type="radio" class="form-check-inline" value="1" id="planDuration"
+                                        <input type="radio" (change)="plandurchange($event)" class="form-check-inline" value=1 id="planDuration"
                                             name="planDuration" formControlName="planDuration">One Year
                                     </span>
                                     <span>
-                                        <input type="radio" class="form-check-inline" value="2" id="planDuration"
+                                        <input type="radio" (change)="plandurchange($event)" class="form-check-inline" value=2 id="planDuration"
                                             name="planDuration" formControlName="planDuration">Two Year
                                     </span>
                                     <span class="float-right">
-                                        <input type="radio" class="form-check-inline" value="3" id="planDuration"
+                                        <input type="radio" (change)="plandurchange($event)" class="form-check-inline" value=3 id="planDuration"
                                             name="planDuration" formControlName="planDuration">Three Year
                                     </span>
                                 </div>
@@ -49,45 +49,50 @@
                                     </div>
                                   </div>
                                 <div class="inner-card">
+                                    <div>
+                                        IDV = {{idv}}
+                                    </div>
                                     <div class="card-header inner-card-header">
                                         <h6>Selected Plan Price Breakup</h6>
                                     </div>
                                     <div class="card-body inner-card-body">
                                         <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-md-9">Basic Own Damage</div>
-                                                <div class="col-md-3">2415</div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-9">No Claim Bonus Discount</div>
-                                                <div class="col-md-3">845</div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-9">Net Own Damage</div>
-                                                <div class="col-md-3">1570</div>
+                                            <div *ngIf="planType.value==='Comprehensive'?true:false">
+                                                <div class="row">
+                                                    <div class="col-md-9">Basic Own Damage</div>
+                                                    <div class="col-md-3">{{basic_own_damagef}}</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-9">No Claim Bonus Discount</div>
+                                                    <div class="col-md-3"></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-9">Net Own Damage</div>
+                                                    <div class="col-md-3"></div>
+                                                </div>
                                             </div>
                                             <hr class="my-2">
                                             <div class="row">
                                                 <div class="col-md-9">Basic Third Party</div>
-                                                <div class="col-md-3">3221</div>
+                                                <div class="col-md-3">{{basic_third_partyf}}</div>
                                             </div>
                                             <hr class="my-2">
                                             <div class="row">
                                                 <div class="col-md-9">Net Premium</div>
-                                                <div class="col-md-3">4791</div>
+                                                <div class="col-md-3">{{net_premium}}</div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-9">GST</div>
-                                                <div class="col-md-3">862</div>
+                                                <div class="col-md-3">{{gst}}</div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-9">Total Premium</div>
-                                                <div class="col-md-3">5653</div>
+                                                <div class="col-md-3">{{total_premium}}</div>
                                             </div>
                                             <hr class="my-3">
                                             <div class="row">
                                                 <div class="col-md-9">Total Payable</div>
-                                                <div class="col-md-3">5653</div>
+                                                <div class="col-md-3">{{total_premium}}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -96,6 +101,7 @@
                                 <div>
                                     <button type="submit" [disabled]="!planForm.valid" class="btn btn-default submit-button" id="pay">Make Payment</button>
                                 </div>
+                                <div ng-if="planForm.valid" ng-init="calcprem()"></div>
                             </form>
                         </div>
 

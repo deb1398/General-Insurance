@@ -72,6 +72,11 @@ export class CRUDApiService {
     return this.httpClient.post<any>(this.apiServer + '/RamBuyCheck2/', JSON.stringify(vehtypebrandid), this.httpOptions)
   }
 
+  getpremfacors(premamtobj): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + '/PremiumAmount/', JSON.stringify(premamtobj), this.httpOptions)
+  }
+
+
 
 }
 
