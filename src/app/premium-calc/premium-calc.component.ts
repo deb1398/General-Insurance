@@ -8,14 +8,16 @@ import { CRUDApiService } from '../crud-api.service';
   templateUrl: './premium-calc.component.html',
   styleUrls: ['./premium-calc.component.css']
 })
+
 export class PremiumCalcComponent implements OnInit {
+  
 
   public vehicle_typeg:string;
   public getbrands(vehicle_type:string)
   {
     this.vehicle_typeg = vehicle_type;
     this.BrandsList = [];
-    
+    this.ModelsList = [];
 
     let vehtypeobj = new vehicletypeclass();
     vehtypeobj.vehicle_type = vehicle_type;
@@ -45,8 +47,8 @@ export class PremiumCalcComponent implements OnInit {
     this.crudService.getModels(brandidobj).subscribe(res => {
       console.log(res)
       res.forEach(element => {
-        console.log(element.model_name)
-        let c = new Brand(element.Model_Name,element.Model_Name);
+        console.log(element.Model_Name)
+        let c = new Brand(1,element.Model_Name);
         this.ModelsList.push(c);
       });
     });
