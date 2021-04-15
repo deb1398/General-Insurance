@@ -42,10 +42,13 @@ export class PlanSelectionComponent implements OnInit {
   buyInsData: BuyInsClass;
 
   ngOnInit(): void {
-    this.buyInsData = this.shared.getBuyInsData();
+    //this.buyInsData = this.shared.getBuyInsData();
     //console.log(this.buyInsData);
     var temp = sessionStorage.getItem('sessionbuyins');
     var sessionbuyInsData = JSON.parse(temp);
+    
+    this.buyInsData = sessionbuyInsData;
+
     console.log(sessionbuyInsData);
   }
 
@@ -177,8 +180,11 @@ export class PlanSelectionComponent implements OnInit {
     this.buyInsData.plan_type = this.planType.value;
     this.buyInsData.plan_duration = this.planDuration.value;
     this.buyInsData.total_payable = this.total_premium;
-    this.shared.setBuyInsData(this.buyInsData);
-    console.log(this.buyInsData);
+    //this.shared.setBuyInsData(this.buyInsData);
+    //console.log(this.buyInsData);
+
+    sessionStorage.setItem('sessionbuyins', JSON.stringify(this.buyInsData));
+    
     this.router.navigateByUrl('/payment-gateway');
 
   }
