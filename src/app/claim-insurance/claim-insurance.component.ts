@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CRUDApiService } from '../crud-api.service';
 
 @Component({
   selector: 'app-claim-insurance',
@@ -11,7 +12,8 @@ export class ClaimInsuranceComponent implements OnInit {
 
   constructor(
     public fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    public crudService: CRUDApiService
   ) { }
 
   claimForm = new FormGroup({
@@ -70,6 +72,35 @@ export class ClaimInsuranceComponent implements OnInit {
   {
     
     console.log(this.claimForm.value);
+    let cl=new claim();
+    cl.Policy_No=this.policy_no.value;
+    cl.Reasons=this.claim_reason.value;
+    cl.Date_claimed=new Date();
+    cl.Date_of_Loss=this.date_of_loss.value;
+    cl.Place_of_Loss=this.place_of_loss.value;
+    cl.Damage_Description=this.loss_desc.value;
+    cl.Injury_to_Thirdparty=this.any_thirdparty_damage.value;
+    cl.Claim_approval_status="Pending";
+    cl.Claim_amt=40000;
+
+    this.crudService.claim(cl).subscribe(res => {
+      console.log('Submitted Successfully'),
+      window.alert('Submitted Successfully'),
+      this.router.navigateByUrl('')
+    });
   }
 
+}
+
+export class claim
+{
+  Policy_No : string;
+  Reasons : string;
+  Date_claimed : Date;
+  Date_of_Loss : Date;
+  Place_of_Loss : string;
+  Damage_Description : string;
+  Injury_to_Thirdparty : boolean;
+  Claim_approval_status : string;
+  Claim_amt : number;
 }

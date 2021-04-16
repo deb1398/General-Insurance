@@ -20,10 +20,7 @@ export class ForgetPasswordComponent implements OnInit {
   ngOnInit():void {
     
   }
-  get emailid()
-  {
-    return this.forgetForm.get('emailid');
-  }
+  
   get password()
   {
     return this.forgetForm.get('password');
@@ -38,8 +35,9 @@ export class ForgetPasswordComponent implements OnInit {
   onSubmit()
   {
     const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token')
+    const token = decodeURI(urlParams.get('token'));
     console.log(token);
+    console.log(decodeURI(token));
 
     console.log(this.forgetForm.value);
     let forgot_pwdobj = new user();
