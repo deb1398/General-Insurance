@@ -129,6 +129,7 @@ export class BuyInsuranceComponent implements OnInit {
   onSubmit()
   {
     this.buyInsurance = this.buyinsuranceForm.value;
+    this.buyInsurance.User_Id = Number(sessionStorage.getItem('User_Id'));
     //this.shared.setBuyInsData(this.buyInsurance);
     
     
@@ -173,6 +174,8 @@ export class WheelerModel {
 }
 
 export class BuyInsClass {
+  User_Id:number;
+
   veh_type:string;
   brand_name:string;
   model_name:string;
@@ -181,11 +184,14 @@ export class BuyInsClass {
   registeration_number:string;
   engine_number:string;
   vehicleCC:number;
-  chassis_number:string;
+  chassis_number:string;  
   market_price:number;
 
-  plan_type:number;
+  plan_type:string;
   plan_duration:number;
+  idv:number;
+  total_tp:number;
+  total_od:number;
   total_payable:number;
 
   card_holder_name:string;
@@ -193,6 +199,8 @@ export class BuyInsClass {
   card_exp_month:number;
   card_exp_year:number;
   card_cvc:number;
+
   
+
 
 }

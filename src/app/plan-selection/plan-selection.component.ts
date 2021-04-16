@@ -81,7 +81,7 @@ export class PlanSelectionComponent implements OnInit {
 
 
   
-  idv:Number;
+  idv:number;
   basic_third_party:number=0;
   basic_own_damage:number=0;
 
@@ -183,6 +183,9 @@ export class PlanSelectionComponent implements OnInit {
     this.buyInsData.plan_type = this.planType.value;
     this.buyInsData.plan_duration = this.planDuration.value;
     this.buyInsData.total_payable = this.total_premium;
+    this.buyInsData.total_tp = this.basic_third_partyf;
+    this.buyInsData.total_od = this.basic_own_damagef;
+    this.buyInsData.idv = this.idv;
     //this.shared.setBuyInsData(this.buyInsData);
     //console.log(this.buyInsData);
 

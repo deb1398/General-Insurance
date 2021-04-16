@@ -18,11 +18,11 @@ export class PaymentGatewayComponent implements OnInit {
   ) { }
 
   paymentForm = new FormGroup({
-    card_name: new FormControl('',[Validators.required]),
-    card_number: new FormControl('',[Validators.required]),
+    card_name: new FormControl('',[Validators.required, Validators.minLength(3),Validators.pattern("^[a-zA-Z]+$")]),
+    card_number: new FormControl('',[Validators.required,Validators.pattern("[0-9]{16}")]),
     card_exp_no: new FormControl('',[Validators.required]),
     cc_exp_yr: new FormControl('',[Validators.required]),
-    card_cvc: new FormControl('',[Validators.required]) 
+    card_cvc: new FormControl('',[Validators.required,Validators.pattern("[0-9]{3}")]) 
     
   })
 
@@ -70,6 +70,8 @@ export class PaymentGatewayComponent implements OnInit {
     this.buyInsData.card_exp_month = this.card_exp_no.value;
     this.buyInsData.card_exp_year = this.cc_exp_yr.value;
     this.buyInsData.card_cvc = this.card_cvc.value;
+
+    
     
     //this.shared.setBuyInsData(this.buyInsData);
     

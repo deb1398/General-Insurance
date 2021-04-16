@@ -16,19 +16,28 @@
                             <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()" novalidate role="form" autocomplete="off">
                                 <div class="form-group">
                                     <label for="cc_name">Card Holder's Name</label>
-                                    <input type="text" class="form-control" formControlName="card_name" id="cc_name" pattern="\w+ \w+.*" title="First and last name" required="required" [ngClass]="{'is-invalid': card_name.errors && (card_name.touched || card_name.dirty), 'is-valid':card_name.valid}">
+                                    <input type="text" class="form-control" formControlName="card_name" id="cc_name" title="First and last name" required="" [ngClass]="{'is-invalid': card_name.errors && (card_name.touched || card_name.dirty), 'is-valid':card_name.valid}">
                                     <div *ngIf="!card_name?.valid && (card_name?.dirty || card_name?.touched)" id="error-div">
                                         <div [hidden]="!card_name.errors.required">
                                             Card Holder Name is required
+                                        </div>
+                                        <div [hidden]="!card_name.errors.minlength">
+                                            Should contain atleast 3 letters
+                                        </div>
+                                        <div [hidden]="!card_name.errors.pattern">
+                                            Only alphabets are allowed
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Card Number</label>
-                                    <input type="text" class="form-control" formControlName="card_number" autocomplete="off" maxlength="20" pattern="\d{16}" title="Credit card number" required="" [ngClass]="{'is-invalid': card_number.errors && (card_number.touched || card_number.dirty), 'is-valid':card_number.valid}">
+                                    <input type="text" class="form-control" formControlName="card_number" autocomplete="off" maxlength="16" title="Credit card number" required="" [ngClass]="{'is-invalid': card_number.errors && (card_number.touched || card_number.dirty), 'is-valid':card_number.valid}">
                                     <div *ngIf="!card_number?.valid && (card_number?.dirty || card_number?.touched)" id="error-div">
                                         <div [hidden]="!card_number.errors.required">
                                             Card Number is required
+                                        </div>
+                                        <div [hidden]="!card_number.errors.pattern">
+                                            Only 16 Digit Card Number allowed
                                         </div>
                                     </div>
                                 </div>
