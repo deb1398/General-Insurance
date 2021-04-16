@@ -10,7 +10,6 @@ import { CRUDApiService } from '../crud-api.service';
 export class ForgetPasswordComponent implements OnInit {
 
   forgetForm = new FormGroup({
-    emailid : new FormControl('',[Validators.required, Validators.email]),
     password : new FormControl('',[Validators.required,Validators.minLength(8), Validators.pattern("(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[$@$!%*#?&])[A-Za-z0-9$@$!%*#?&]{8,32}")]),
     cpassword : new FormControl ('', [Validators.required])
   })
@@ -21,10 +20,7 @@ export class ForgetPasswordComponent implements OnInit {
   ngOnInit():void {
     
   }
-  get emailid()
-  {
-    return this.forgetForm.get('emailid');
-  }
+  
   get password()
   {
     return this.forgetForm.get('password');
