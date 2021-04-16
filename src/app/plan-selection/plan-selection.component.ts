@@ -4,6 +4,7 @@ import { CRUDApiService } from '../crud-api.service';
 import { BuyInsClass } from '../buy-insurance/buy-insurance.component';
 import { SharedService } from '../shared/shared.service';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 
 
 @Component({
@@ -122,8 +123,10 @@ export class PlanSelectionComponent implements OnInit {
     premamtobj.Model_Name = this.buyInsData.model_name;
     premamtobj.vehicle_cc = this.buyInsData.vehicleCC;
     premamtobj.vehicle_type = this.buyInsData.veh_type;
-    let timeDiff = Math.abs(Date.now() - new Date(this.buyInsData.purchase_date).getTime())
-    let age = Math.floor((timeDiff / (1000 * 3600 * 24))/365.25);
+    let age = moment().diff(this.buyInsData.purchase_date, 'years');
+    // let timeDiff = Math.abs(Date.now() - new Date(this.buyInsData.purchase_date).getTime())
+    // let age = Math.floor((timeDiff / (1000 * 3600 * 24))/365.25);
+    console.log(age);
     premamtobj.age = age;
   
     this.service.getpremfacors(premamtobj).subscribe((data) => {
