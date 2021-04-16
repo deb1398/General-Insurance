@@ -107,8 +107,8 @@
                                 <label for="any_thirdparty_damage">Any injury to Third Party or Property Damage ?</label>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="radio" class="form-check-inline" value="yes" id="any_thirdparty_damage" name="any_thirdparty_damage" formControlName="any_thirdparty_damage">Yes
-                                        <input type="radio" class="form-check-inline" value="No" id="any_thirdparty_damage" name="any_thirdparty_damage" formControlName="any_thirdparty_damage">No
+                                        <input type="radio" class="form-check-inline" value=TRUE id="any_thirdparty_damage1" name="any_thirdparty_damage" formControlName="any_thirdparty_damage">Yes
+                                        <input type="radio" class="form-check-inline" value=FALSE id="any_thirdparty_damage2" name="any_thirdparty_damage" formControlName="any_thirdparty_damage">No
                                     </label>
                                 </div>
                                 <div *ngIf="!any_thirdparty_damage?.valid && (any_thirdparty_damage?.dirty || any_thirdparty_damage?.touched)" id="error-div">

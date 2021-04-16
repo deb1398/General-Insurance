@@ -55,6 +55,10 @@ export class CRUDApiService {
     return this.httpClient.post<any>(this.apiServer + '/Reset_pwd/', JSON.stringify(fuser), this.httpOptions)
   }
 
+  claim(clins): Observable<claiminsurance> {
+    return this.httpClient.post<claiminsurance>(this.apiServer + '/ClaimInsurance/', JSON.stringify(clins), this.httpOptions);
+  }
+
   handleError(error)
   {
     let errorMessage = '';
@@ -123,3 +127,16 @@ export class reset_pwd
 //   Brand_Id:number;
 
 // }
+
+export class claiminsurance
+{
+  Policy_No : string;
+  Reasons : string;
+  Date_claimed : Date;
+  Date_of_Loss : Date;
+  Place_of_Loss : string;
+  Damage_Description : string;
+  Injury_to_Thirdparty : number;
+  Claim_approval_status : string;
+  Claim_amt : number;
+}

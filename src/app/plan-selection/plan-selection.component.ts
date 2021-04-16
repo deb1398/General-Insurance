@@ -4,6 +4,7 @@ import { CRUDApiService } from '../crud-api.service';
 import { BuyInsClass } from '../buy-insurance/buy-insurance.component';
 import { SharedService } from '../shared/shared.service';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 
 
 @Component({
@@ -42,10 +43,13 @@ export class PlanSelectionComponent implements OnInit {
   buyInsData: BuyInsClass;
 
   ngOnInit(): void {
-    this.buyInsData = this.shared.getBuyInsData();
+    //this.buyInsData = this.shared.getBuyInsData();
     //console.log(this.buyInsData);
     var temp = sessionStorage.getItem('sessionbuyins');
     var sessionbuyInsData = JSON.parse(temp);
+    
+    this.buyInsData = sessionbuyInsData;
+
     console.log(sessionbuyInsData);
   }
 
@@ -119,13 +123,15 @@ export class PlanSelectionComponent implements OnInit {
     premamtobj.Model_Name = this.buyInsData.model_name;
     premamtobj.vehicle_cc = this.buyInsData.vehicleCC;
     premamtobj.vehicle_type = this.buyInsData.veh_type;
-    let timeDiff = Math.abs(Date.now() - new Date(this.buyInsData.purchase_date).getTime())
-    let age = Math.floor((timeDiff / (1000 * 3600 * 24))/365.25);
+    let age = moment().diff(this.buyInsData.purchase_date, 'years');
+    // let timeDiff = Math.abs(Date.now() - new Date(this.buyInsData.purchase_date).getTime())
+    // let age = Math.floor((timeDiff / (1000 * 3600 * 24))/365.25);
+    console.log(age);
     premamtobj.age = age;
   
     this.service.getpremfacors(premamtobj).subscribe((data) => {
       console.log(data);
-      this.idv = this.buyInsData.market_price - data.dep_per/100 * this.buyInsData.market_price;
+      this.idv = this.buyInsData.market_price - (data.dep_per/100 * this.buyInsData.market_price);
       this.basic_third_party = data.thirdpartyprem;
       
       if(this.gloalplantype == 'Comprehensive')
@@ -177,8 +183,11 @@ export class PlanSelectionComponent implements OnInit {
     this.buyInsData.plan_type = this.planType.value;
     this.buyInsData.plan_duration = this.planDuration.value;
     this.buyInsData.total_payable = this.total_premium;
-    this.shared.setBuyInsData(this.buyInsData);
-    console.log(this.buyInsData);
+    //this.shared.setBuyInsData(this.buyInsData);
+    //console.log(this.buyInsData);
+
+    sessionStorage.setItem('sessionbuyins', JSON.stringify(this.buyInsData));
+    
     this.router.navigateByUrl('/payment-gateway');
 
   }

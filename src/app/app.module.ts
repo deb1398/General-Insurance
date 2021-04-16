@@ -29,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { AuthGuardService } from './Auth/auth-guard.service';
 
 
 @NgModule({
@@ -65,7 +66,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     AppRoutingModule, 
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

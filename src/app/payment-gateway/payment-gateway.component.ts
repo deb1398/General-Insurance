@@ -51,9 +51,16 @@ export class PaymentGatewayComponent implements OnInit {
   globalpayableamount:number;
   
   ngOnInit(): void {
-    this.buyInsData = this.shared.getBuyInsData();
+
+    //this.buyInsData = this.shared.getBuyInsData();
+    
+    var temp = sessionStorage.getItem('sessionbuyins');
+    var sessionbuyInsData = JSON.parse(temp);
+    
+    this.buyInsData = sessionbuyInsData;
+
     console.log(this.buyInsData);
-    this.globalpayableamount = this.shared.buyInsuranceData.total_payable;
+    this.globalpayableamount = this.buyInsData.total_payable;
   }
 
   onSubmit()
@@ -64,7 +71,11 @@ export class PaymentGatewayComponent implements OnInit {
     this.buyInsData.card_exp_year = this.cc_exp_yr.value;
     this.buyInsData.card_cvc = this.card_cvc.value;
     
-    this.shared.setBuyInsData(this.buyInsData);
+    //this.shared.setBuyInsData(this.buyInsData);
+    
+
+    sessionStorage.setItem('sessionbuyins', JSON.stringify(this.buyInsData));
+
     console.log(this.buyInsData);
   }
 
