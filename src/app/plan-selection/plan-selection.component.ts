@@ -131,7 +131,7 @@ export class PlanSelectionComponent implements OnInit {
   
     this.service.getpremfacors(premamtobj).subscribe((data) => {
       console.log(data);
-      this.idv = this.buyInsData.market_price - data.dep_per/100 * this.buyInsData.market_price;
+      this.idv = this.buyInsData.market_price - (data.dep_per/100 * this.buyInsData.market_price);
       this.basic_third_party = data.thirdpartyprem;
       
       if(this.gloalplantype == 'Comprehensive')

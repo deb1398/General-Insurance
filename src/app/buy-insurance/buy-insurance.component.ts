@@ -129,7 +129,7 @@ export class BuyInsuranceComponent implements OnInit {
   onSubmit()
   {
     this.buyInsurance = this.buyinsuranceForm.value;
-    this.shared.setBuyInsData(this.buyInsurance);
+    //this.shared.setBuyInsData(this.buyInsurance);
     
     
     //console.log(this.buyInsurance);
