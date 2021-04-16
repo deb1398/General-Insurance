@@ -23,7 +23,7 @@
                                 
                                 <div class="form-group">
                                     <label for="brand">Brand Name</label>
-                                    <select id="brand" (change)="onChange($event.target.value)" class="form-control" name="brand" formControlName="brand_name" [ngClass]="{'is-invalid': brand_name.errors && (brand_name.touched || brand_name.dirty), 'is-valid':brand_name.valid}">
+                                    <select id="brand" ng-value="2" (change)="onChange($event)" class="form-control" name="brand" formControlName="brand_name" [ngClass]="{'is-invalid': brand_name.errors && (brand_name.touched || brand_name.dirty), 'is-valid':brand_name.valid}">
                                         <option *ngFor="let b of brandsList" [ngValue]="b.Brand_Id">
                                             {{b.brand_names}}
                                         </option>
@@ -96,6 +96,16 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="engineNo">Vehicle CC</label>
+                                    <input type="text" class="form-control rounded-0" name="vehicleCC" formControlName="vehicleCC" [ngClass]="{'is-invalid': vehicleCC.errors && (vehicleCC.touched || vehicleCC.dirty), 'is-valid':vehicleCC.valid}">
+                                    <div *ngIf="!vehicleCC?.valid && (vehicleCC?.dirty || vehicleCC?.touched)" id="error-div">
+                                        <div [hidden]="!vehicleCC.errors.required" style="color: red;">
+                                            Vehicle cc is required
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label for="chassisNo">Chasis Number</label>
                                     <input type="text" class="form-control rounded-0" name="chassisNo" formControlName="chassis_number" [ngClass]="{'is-invalid': chassis_number.errors && (chassis_number.touched || chassis_number.dirty), 'is-valid':chassis_number.valid}">
@@ -105,6 +115,20 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="chassisNo">Market Price</label>
+                                    <input type="number" class="form-control rounded-0" name="market_price" formControlName="market_price" [ngClass]="{'is-invalid': market_price.errors && (market_price.touched || market_price.dirty), 'is-valid':market_price.valid}">
+                                    <div *ngIf="!market_price?.valid && (market_price?.dirty || market_price?.touched)" id="error-div">
+                                        <div [hidden]="!market_price.errors.required" style="color: red;">
+                                            Market price is required
+                                        </div>
+                                        <div [hidden]="!market_price.errors.pattern" style="color: red;">
+                                            Invalid Market price
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div>
                                     <button type="submit" class="btn btn-default text-white text-center" [disabled]="!buyinsuranceForm.valid">Submit</button>
                                 </div>

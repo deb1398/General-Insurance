@@ -19,13 +19,16 @@ import { ClaimDetailsComponent } from './claim-details/claim-details.component';
 import { UserHomePageComponent } from './user-home-page/user-home-page.component';
 import { PaymentGatewayComponent } from './payment-gateway/payment-gateway.component';
 import { ResetPasswordComponent} from './reset-password/reset-password.component';
+import { AuthGuardService } from './Auth/auth-guard.service';
 const routes: Routes = [
+
   {path:'', component : HomeComponent},
   {path:'Home', component : HomeComponent},
   {path:'Login', component : LoginComponent},
   {path:'Adminlogin', component : AdminLoginComponent},
   {path:'Contact', component : ContactComponent},
   {path:'BuyInsurance', component : BuyInsuranceComponent},
+  // {path:'BuyInsurance', component : BuyInsuranceComponent, canActivate: [AuthGuardService]}
   {path:'AboutUs', component : AboutusComponent},
   {path:'ForgetPwd', component : ForgetPasswordComponent},
   {path:'register', component : RegisterComponent},
@@ -38,8 +41,8 @@ const routes: Routes = [
   {path:'user-home-page', component : UserHomePageComponent},
   {path:'payment-gateway', component : PaymentGatewayComponent},
   {path:'claim-details', component : ClaimDetailsComponent},
-  {path: 'reset-pwd', component : ResetPasswordComponent}
-
+  {path: 'reset-pwd', component : ResetPasswordComponent},
+  {path: '**', component: HomeComponent}
   
 ];
 @NgModule({

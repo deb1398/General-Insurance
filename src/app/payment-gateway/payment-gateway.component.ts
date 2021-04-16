@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BuyInsClass } from '../buy-insurance/buy-insurance.component';
+import { SharedService } from '../shared/shared.service';
 
 @Component({
   selector: 'app-payment-gateway',
@@ -11,7 +13,8 @@ export class PaymentGatewayComponent implements OnInit {
 
   constructor(
     public fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    public shared: SharedService
   ) { }
 
   paymentForm = new FormGroup({
@@ -44,13 +47,36 @@ export class PaymentGatewayComponent implements OnInit {
     return this.paymentForm.get('card_cvc');
   }
 
+  buyInsData: BuyInsClass;
+  globalpayableamount:number;
   
   ngOnInit(): void {
+
+    //this.buyInsData = this.shared.getBuyInsData();
+    
+    var temp = sessionStorage.getItem('sessionbuyins');
+    var sessionbuyInsData = JSON.parse(temp);
+    
+    this.buyInsData = sessionbuyInsData;
+
+    console.log(this.buyInsData);
+    this.globalpayableamount = this.buyInsData.total_payable;
   }
 
   onSubmit()
   {
-    console.log(this.paymentForm.value);
+    this.buyInsData.card_holder_name = this.card_name.value;
+    this.buyInsData.card_no = this.card_number.value;
+    this.buyInsData.card_exp_month = this.card_exp_no.value;
+    this.buyInsData.card_exp_year = this.cc_exp_yr.value;
+    this.buyInsData.card_cvc = this.card_cvc.value;
+    
+    //this.shared.setBuyInsData(this.buyInsData);
+    
+
+    sessionStorage.setItem('sessionbuyins', JSON.stringify(this.buyInsData));
+
+    console.log(this.buyInsData);
   }
 
 
