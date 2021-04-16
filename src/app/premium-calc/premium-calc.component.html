@@ -42,7 +42,7 @@
                             <div class="col-sm-12 col-md-6 col-lg-4 form-group">
                                 <label for="model_name">Model Name</label>
                                 <select id="model_name" class="form-control" name="model_name" formControlName="model_name" [ngClass]="{'is-invalid': model_name.errors && (model_name.touched || model_name.dirty), 'is-valid':model_name.valid}">
-                                    <option [ngValue]="m.id" *ngFor="let m of ModelsList">
+                                    <option [ngValue]="m.name" *ngFor="let m of ModelsList">
                                     {{m.name}}
                                     </option>
                                 </select>
@@ -87,15 +87,19 @@
                         </p>
                     </form>
 
+                    <div class="row ml-2" *ngIf="idv!=0?true:false">
+                        <h6>Insured Amount: Rs. {{idv | number : '1.0-2'}}</h6>
+                    </div>
+
                     <div class="row">
-                        <div class="col-sm-12 col-md-6">
+                        <div *ngIf="total_premium_comp!=0?true:false" class="col-sm-12 col-md-6">
                             <div class="card h-100 text-center inner-card">
                                 <div class="card-header inner-card-header">
                                     <h5 class="card-title">Comprehensive Plan</h5>
                                 </div>
                                 <div class="card-body inner-card-body">
                                     <div class="card-text">
-                                        <p>Price Rs.5800</p>
+                                        <p>Price Rs.{{total_premium_comp | number : '1.0-2'}}</p>
                                         <p>Covers</p>
                                         <p>Third party Insurance</p>
                                         <p>Own Damage Insurance</p>
@@ -105,14 +109,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-6">
+                        <div *ngIf="total_premium_tp!=0?true:false" class="col-sm-12 col-md-6">
                             <div class="card h-100 text-center inner-card">
                                 <div class="card-header inner-card-header">
                                     <h5 class="card-title">Third Party Plan</h5>
                                 </div>
                                 <div class="card-body inner-card-body">
                                     <div class="card-text">
-                                        <p>Price Rs.2900</p>
+                                        <p>Price Rs.{{total_premium_tp | number : '1.0-2'}}</p>
                                         <p>Covers</p>
                                         <p>Only Third party Insurance</p>
                                     </div>
@@ -141,25 +145,25 @@
         <div class="modal-body">
             <div class="row">
               <div class="col-md-9">Basic Third Party</div>
-              <div class="col-md-3">2072</div>
+              <div class="col-md-3">{{basic_third_party | number : '1.0-2'}}</div>
             </div>
             <hr class="my-2">
             <div class="row">
                 <div class="col-md-9">Net Premium</div>
-                <div class="col-md-3">2072</div>
+                <div class="col-md-3">{{net_premium_tp | number : '1.0-2'}}</div>
             </div>
             <div class="row">
                 <div class="col-md-9">GST</div>
-                <div class="col-md-3">616</div>
+                <div class="col-md-3">{{gst_tp | number : '1.0-2'}}</div>
             </div>
             <div class="row">
                 <div class="col-md-9">Total Premium</div>
-                <div class="col-md-3">2688</div>
+                <div class="col-md-3">{{total_premium_tp | number : '1.0-2'}}</div>
             </div>
             <hr class="my-3">
             <div class="row">
                 <div class="col-md-9">Total Payable</div>
-                <div class="col-md-3">2688</div>
+                <div class="col-md-3">{{total_premium_tp | number : '1.0-2'}}</div>
             </div>
         </div>
         <!-- <div class="modal-footer">
@@ -183,30 +187,30 @@
         <div class="modal-body">
             <div class="row">
                 <div class="col-md-9">Basic Own Damage</div>
-                <div class="col-md-3">3079</div>
+                <div class="col-md-3">{{basic_own_damage | number : '1.0-2'}}</div>
               </div>
               <hr class="my-2">
             <div class="row">
               <div class="col-md-9">Basic Third Party</div>
-              <div class="col-md-3">2072</div>
+              <div class="col-md-3">{{basic_third_party | number : '1.0-2'}}</div>
             </div>
             <hr class="my-2">
             <div class="row">
                 <div class="col-md-9">Net Premium</div>
-                <div class="col-md-3">5151</div>
+                <div class="col-md-3">{{net_premium_comp | number : '1.0-2'}}</div>
             </div>
             <div class="row">
                 <div class="col-md-9">GST</div>
-                <div class="col-md-3">616</div>
+                <div class="col-md-3">{{gst_comp | number : '1.0-2'}}</div>
             </div>
             <div class="row">
                 <div class="col-md-9">Total Premium</div>
-                <div class="col-md-3">5767</div>
+                <div class="col-md-3">{{total_premium_comp | number : '1.0-2'}}</div>
             </div>
             <hr class="my-3">
             <div class="row">
                 <div class="col-md-9">Total Payable</div>
-                <div class="col-md-3">5767</div>
+                <div class="col-md-3">{{total_premium_comp | number : '1.0-2'}}</div>
             </div>
         </div>
         <!-- <div class="modal-footer">
