@@ -56,8 +56,8 @@ export class CRUDApiService {
     return this.httpClient.post<any>(this.apiServer + '/Reset_pwd/', JSON.stringify(fuser), this.httpOptions)
   }
 
-  claim(clins): Observable<claiminsurance> {
-    return this.httpClient.post<claiminsurance>(this.apiServer + '/ClaimInsurance/', JSON.stringify(clins), this.httpOptions);
+  claim(clins): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + '/ClaimInsurance/', JSON.stringify(clins), this.httpOptions);
   }
 
   getadminclaims(): Observable<any> {
