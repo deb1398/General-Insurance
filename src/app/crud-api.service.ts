@@ -104,7 +104,9 @@ export class CRUDApiService {
     return this.httpClient.post<any>(this.apiServer + '/RenewInsurance/', JSON.stringify(buyInsData), this.httpOptions);
   }
 
-
+  checkAdmin(aluser): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + '/AdminLogin/', JSON.stringify(aluser), this.httpOptions)
+  }
 
 
   handleError(error)
@@ -159,7 +161,12 @@ export class LoginUser
   Password:string;
   message: string;
 }
-
+export class Adminlogindetails
+{
+  Admin_id : string;
+  Password : string;
+  message: string;
+}
 export class Mailuser
 {
   Email_ID : string;
