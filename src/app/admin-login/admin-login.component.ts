@@ -51,7 +51,7 @@ export class AdminLoginComponent implements OnInit {
 
         this.router.navigateByUrl('/admin-page');
         console.log(sessionStorage.length);
-        this.crudService.loginstatus.next(true);
+        this.crudService.adminstatus.next(true);
 
       }
       else
