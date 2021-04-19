@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 import { CRUDApiService } from '../crud-api.service';
 import { SharedService } from '../shared/shared.service';
 
@@ -15,9 +16,9 @@ export class BuyInsuranceComponent implements OnInit {
   buyinsuranceForm = new FormGroup({
     veh_type : new FormControl('',[Validators.required]),
     brand_name : new FormControl('',[Validators.required]),
-    model_name : new FormControl('',[Validators.required]),
+    model_name : new FormControl('',[Validators.required,]),
     license_no : new FormControl('',[Validators.required, Validators.minLength(16),Validators.pattern("(?=.*[A-Z]{2})(?=.*[0-9]{2})[A-Za-z0-9]{16}")]),
-    purchase_date : new FormControl('',[Validators.required]),
+    purchase_date : new FormControl('',[Validators.required,this.dateValidator]),
     registeration_number : new FormControl('',[Validators.required, Validators.minLength(10),Validators.pattern("(?=.*[A-Z]{2})(?=.*[0-9]{2})[A-Za-z0-9]{10}")]),
     engine_number : new FormControl('',[Validators.required]),
     vehicleCC: new FormControl('',[Validators.required]),
@@ -25,6 +26,16 @@ export class BuyInsuranceComponent implements OnInit {
     market_price : new FormControl('',[Validators.required, Validators.pattern("[0-9]{4,7}")])
   })
 
+  dateValidator(control: FormControl): { [s: string]: boolean } {
+    if (control.value) {
+      const date = moment(control.value);
+      const today = moment();
+      if (date.isAfter(today)) {
+        return { 'invalidDate': true }
+      }
+    }
+    return null;
+  }
   
 
   
@@ -33,10 +44,12 @@ export class BuyInsuranceComponent implements OnInit {
   
   modelsList:WheelerModel[];
 
-  constructor( public service: CRUDApiService, public shared: SharedService, private router: Router) { }
+  constructor( public service: CRUDApiService, public shared: SharedService, private router: Router, public crudService:CRUDApiService) { }
   
   
+  maxdate:Date;
   ngOnInit(): void {
+    this.maxdate = new Date(Date.now());
     
   }
 
@@ -128,18 +141,41 @@ export class BuyInsuranceComponent implements OnInit {
 
   onSubmit()
   {
-    this.buyInsurance = this.buyinsuranceForm.value;
-    //this.shared.setBuyInsData(this.buyInsurance);
     
+    let reg= new registrationNo;
+    reg.registration_no=String(this.registeration_number.value);
     
-    //console.log(this.buyInsurance);
-    sessionStorage.setItem('sessionbuyins', JSON.stringify(this.buyInsurance));
-    //var temp = sessionStorage.getItem('sessionbuyins');
-    //var sessionbuyInsData = JSON.parse(temp);
-    //console.log(sessionbuyInsData);
-    this.router.navigateByUrl('/plan-selection');
+    this.crudService.BuyInsuranceCheck(reg).subscribe(res => {
+      console.log(res);
+      if(res.message === "Valid")
+      {
+        this.buyInsurance = this.buyinsuranceForm.value;
+        this.buyInsurance.User_Id = Number(sessionStorage.getItem('User_Id'));
+        this.buyInsurance.inusrance_type = "Buy_New";
+        //this.shared.setBuyInsData(this.buyInsurance);
+        
+        
+        //console.log(this.buyInsurance);
+        sessionStorage.setItem('sessionbuyins', JSON.stringify(this.buyInsurance));
+        //var temp = sessionStorage.getItem('sessionbuyins');
+        //var sessionbuyInsData = JSON.parse(temp);
+        //console.log(sessionbuyInsData);
+        this.router.navigateByUrl('/plan-selection');
+
+      }
+      else
+      {
+        window.alert("This Vehicle Registration already has active subscription");
+      }
+    });
+
+    
   }
 
+}
+
+export class registrationNo{
+  registration_no:string;
 }
 
 export class VehicleType{
@@ -173,19 +209,25 @@ export class WheelerModel {
 }
 
 export class BuyInsClass {
+  User_Id:number;
+  policy_no:number;
+
   veh_type:string;
-  brand_name:string;
+  brand_name:number;
   model_name:string;
   license_no:string;
   purchase_date:string;
   registeration_number:string;
-  engine_number:string;
+  engine_number:number;
   vehicleCC:number;
-  chassis_number:string;
+  chassis_number:number;  
   market_price:number;
 
-  plan_type:number;
+  plan_type:string;
   plan_duration:number;
+  idv:number;
+  total_tp:number;
+  total_od:number;
   total_payable:number;
 
   card_holder_name:string;
@@ -193,6 +235,8 @@ export class BuyInsClass {
   card_exp_month:number;
   card_exp_year:number;
   card_cvc:number;
+
+  inusrance_type:string;
+
   
 
-}
