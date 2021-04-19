@@ -205,6 +205,8 @@
                     <a href="#" class="card-link tstyle" routerLink="/claim-insurance">Claim </a>
                     <span class="tstyle"><strong>(Active)</strong></span>
                   </ng-template>
+
+                  <a href="" [routerLink]="['/policy-details']" [queryParams]="{policy_no:planlist.Policy_No}">View</a>
         </div>
       </div>
     </div>

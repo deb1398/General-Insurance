@@ -114,6 +114,10 @@ export class CRUDApiService {
     return this.httpClient.post<any>(this.apiServer + '/AdminLogin/', JSON.stringify(aluser), this.httpOptions)
   }
 
+  getPolicyDetails(userpolicy): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + '/PolicyDetails/', JSON.stringify(userpolicy), this.httpOptions)
+  }
+
 
   handleError(error)
   {

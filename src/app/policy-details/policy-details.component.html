@@ -1,0 +1,137 @@
+<div class="container bootdey">
+    <div class="row invoice row-printable">
+        <div class="col-md-12">
+            <!-- col-lg-12 start here -->
+            <div class="panel panel-default plain" id="dash_0">
+                <!-- Start .panel -->
+                <div class="panel-body p30">
+                    <div class="row">
+                        <!-- Start .row -->
+                        <div class="col-lg-4">
+                            <!-- col-lg-6 start here -->
+                            <div class="invoice-logo"><img width="200" src="assets/images/final.png" alt="Invoice logo"></div>
+                        </div>
+                        <!-- col-lg-6 end here -->
+                        <div class="col-lg-8">
+                            <!-- col-lg-6 start here -->
+                            <div class="text-center">
+                                <h1 class="text-left">Policy Details</h1>
+                            </div>
+                        </div>
+                    </div>
+                    
+                        <hr class="my-5">
+                        <!-- col-lg-6 end here -->
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <ul class="list-unstyled mb0">
+                                    <li><strong>Name:</strong> {{policy_details.Name}}</li>
+                                    <li><strong>Address:</strong> {{policy_details.Address}}</li>
+                                    <li><strong>Phone No:</strong> {{policy_details.Phone_no}}</li>
+                                    <li><strong>Email ID:</strong> {{policy_details.Address}}</li>
+                                </ul>
+
+                            </div>
+                            <div class="col-sm-4">
+                                <ul class="list-unstyled mb0">
+                                    <li><strong>Vehicle Reg No:</strong> {{policy_details.Reg_No}}</li>
+                                    <li><strong>Vehicle Type :</strong> {{policy_details.Vehicle_Type}}</li>
+                                    <li><strong>Manufacturer Name:</strong> {{policy_details.Manufacturer_Name}}</li>
+                                    <li><strong>Model Name:</strong> {{policy_details.Model_Name}}</li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-4">
+                                <ul class="list-unstyled mb0">
+                                    <li><strong>License No:</strong> {{policy_details.license_no}}</li>
+                                    <li><strong>Engine No :</strong> {{policy_details.Engine_No}}</li>
+                                    <li><strong>Chasis No:</strong> {{policy_details.Chasis_No}}</li>
+                                    <li><strong>Vehicle Purchase Date:</strong> {{policy_details.veh_purchase_date | date: 'dd/MM/yyyy'}}</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <ul class="list-unstyled mb0">
+                                    <li><strong>Market Price :</strong> {{policy_details.market_price}}</li>
+                                    <li><strong>Insured Declared Value :</strong> {{policy_details.idv}}</li>
+                                    
+                                </ul>
+                            </div>
+                            <div class="col-sm-4">
+                                <ul class="list-unstyled mb0">
+                                    <li><strong>Plan Type :</strong> {{policy_details.plan_type}}</li>
+                                    <li><strong>Plan Duration :</strong> {{policy_details.plan_duration}} year/s</li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <ul class="list-unstyled mb0">
+                                    <li><strong>Policy No :</strong> {{policy_details.Policy_No}}</li>
+                                    <li><strong>{{policy_details.Status_of_sub}}</strong> {{policy_details.Sub_date | date: 'dd/MM/yyyy'}} to {{policy_details.End_date | date: 'dd/MM/yyyy'}}</li>
+                                    
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+
+
+                        <div class="col-lg-12">
+                            <!-- col-lg-12 start here -->
+                            
+                            <div class="invoice-items">
+                                <div class="table-responsive" style="overflow: hidden; outline: none;" tabindex="0">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="per70 text-center">Description</th>
+                                                <th class="per25 text-center">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Total Third Party Premium</td>
+                                                <td class="text-center">Rs. {{policy_details.total_tp}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Total Own Damage Premium</td>
+                                                <td class="text-center">Rs. {{policy_details.total_od}}</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th  class="text-right">Sub Total:</th>
+                                                <th class="text-center">Rs. {{policy_details.total_tp + policy_details.total_od}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th  class="text-right">18% GST:</th>
+                                                <th class="text-center">Rs. {{0.18 * (policy_details.total_tp + policy_details.total_od)}}</th>
+                                            </tr>
+                                            <tr>
+                                                <th  class="text-right">Total:</th>
+                                                <th class="text-center">Rs. {{policy_details.total_payable}}</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="invoice-footer mt25">
+                                <p class="text-center">Generated on  {{ currentDate | date}} <a  href="javascript:;" onclick="window.print()" class="btn btn-default ml15"><i class="fa fa-print mr5"></i> Print</a></p>
+                            </div>
+                        </div>
+                        <!-- col-lg-12 end here -->
+                    </div>
+                    <!-- End .row -->
+                </div>
+            </div>
+            <!-- End .panel -->
+        </div>
+        <!-- col-lg-12 end here -->
+    </div>
+    </div>
