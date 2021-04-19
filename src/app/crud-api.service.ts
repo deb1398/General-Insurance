@@ -7,7 +7,11 @@ import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, retry} from 'rxjs/operators';
 
 import { fakeAsync } from '@angular/core/testing';
+
 import { ClaimInfo} from './claim-info'
+
+import { RenewForm } from './user-home-page/user-home-page.component';
+
 
 
 @Injectable({
@@ -60,6 +64,7 @@ export class CRUDApiService {
     return this.httpClient.post<any>(this.apiServer + '/ClaimInsurance/', JSON.stringify(clins), this.httpOptions);
   }
 
+
   getadminclaims(): Observable<any> {
     return this.httpClient.get<any>(this.apiServer + '/Admin/')
   }
@@ -79,6 +84,25 @@ export class CRUDApiService {
   claim_details(User_Id): Observable<any>{
     return this.httpClient.post<any>(this.apiServer + '/ClaimHistory?User_Id='+User_Id, JSON.stringify(User_Id), this.httpOptions)
   }
+
+
+  RenewDetailsConfirm(renewFormObj): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + '/RenewCheck/', JSON.stringify(renewFormObj), this.httpOptions);
+  }
+
+  BuyInsuranceCheck(buyformobj): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + '/BuyInsuranceCheck/', JSON.stringify(buyformobj), this.httpOptions);
+  }
+
+  BuyInsurance(buyInsData):Observable<any>{
+    return this.httpClient.post<any>(this.apiServer + '/BuyInsurance/', JSON.stringify(buyInsData), this.httpOptions);
+  }
+
+  RenewInsurance(buyInsData):Observable<any>{
+    return this.httpClient.post<any>(this.apiServer + '/RenewInsurance/', JSON.stringify(buyInsData), this.httpOptions);
+  }
+
+
 
   handleError(error)
   {
@@ -108,6 +132,9 @@ export class CRUDApiService {
   getpremfacors(premamtobj): Observable<any> {
     return this.httpClient.post<any>(this.apiServer + '/PremiumAmount/', JSON.stringify(premamtobj), this.httpOptions)
   }
+
+
+
 
 
 
