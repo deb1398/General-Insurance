@@ -13,7 +13,7 @@
                                     <label for="planType" class="h6">Plan Type</label>
                                     <br>
                                     <span class="float-left">
-                                        <input (change)="plantypechange($event)" type="radio" class="form-check-inline" value="Third-Party" id="planType"
+                                        <input (change)="plantypechange($event)" type="radio" class="form-check-inline" value="ThirdParty" id="planType"
                                             name="planType" formControlName="planType">Third Party Liability
                                     </span>
                                     <span class="float-right">
@@ -99,7 +99,7 @@
                                 </div>
                                 <br>
                                 <div>
-                                    <button type="submit" [disabled]="!planForm.valid" class="btn btn-default submit-button" id="pay">Make Payment</button>
+                                    <button type="button" data-toggle="modal" data-target="#thirdpartymodal" [disabled]="!planForm.valid" class="btn btn-default submit-button" id="pay">Make Payment</button>
                                 </div>
                                 <div ng-if="planForm.valid" ng-init="calcprem()"></div>
                             </form>
@@ -107,6 +107,136 @@
 
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#thirdpartymodal">Large modal</button>
+
+<div class="modal fade bd-example-modal-lg" id="thirdpartymodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Confirm Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="buyInsData.inusrance_type=='renew'?true:false" class="row">
+                    <div class="col-sm-3">
+                    <h6 class="mb-0">Insurance Type</h6>
+                    </div>
+                    <div class="col-sm-3 text-secondary">
+                        {{buyInsData.inusrance_type}}
+                    </div>
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Policy Number</h6>
+                    </div>
+                    <div class="col-sm-3 text-secondary">
+                        {{buyInsData.policy_no}}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                    <h6 class="mb-0">Registration Number</h6>
+                    </div>
+                    <div class="col-sm-3 text-secondary">
+                        {{buyInsData.registeration_number}}
+                    </div>
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">License Number</h6>
+                    </div>
+                    <div class="col-sm-3 text-secondary">
+                        {{buyInsData.license_no}}
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Manufacturer Name</h6>
+                    </div>
+                    <div class="col-sm-3 text-secondary">
+                        {{buyInsData.brand_name}}
+                    </div>
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Model Name</h6>
+                    </div>
+                    <div class="col-sm-3 text-secondary">
+                        {{buyInsData.model_name}}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Engine Number</h6>
+                    </div>
+                    <div class="col-sm-3 text-secondary">
+                        {{buyInsData.engine_number}}
+                    </div>
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Chassis Number</h6>
+                    </div>
+                    <div class="col-sm-3 text-secondary">
+                        {{buyInsData.chassis_number}}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Vehicle Type</h6>
+                    </div>
+                    <div class="col-sm-3 text-secondary">
+                        {{buyInsData.veh_type}}
+                    </div>
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Vehicle CC</h6>
+                    </div>
+                    <div class="col-sm-3 text-secondary">
+                        {{buyInsData.vehicleCC}}
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Market Price</h6>
+                    </div>
+                    <div class="col-sm-3 text-secondary">
+                        {{buyInsData.market_price}}
+                    </div>
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Purchase Date</h6>
+                    </div>
+                    <div class="col-sm-3 text-secondary">
+                        {{buyInsData.purchase_date}}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Plan Type</h6>
+                    </div>
+                    <div class="col-sm-3 text-secondary">
+                        {{gloalplantype}}
+                    </div>
+                    <div class="col-sm-3">
+                        <h6 class="mb-0">Plan Duration</h6>
+                    </div>
+                    <div class="col-sm-3 text-secondary">
+                        {{globalplanduration}}
+                    </div>
+                </div>
+
+                <h5 class="text-center mt-2">Total Amount: {{total_premium}}</h5>
+
+
+
+                
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="onSubmit()" data-dismiss="modal">Confirm and Make Payment</button>
             </div>
         </div>
     </div>

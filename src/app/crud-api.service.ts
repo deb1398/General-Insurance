@@ -7,6 +7,7 @@ import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, retry} from 'rxjs/operators';
 
 import { fakeAsync } from '@angular/core/testing';
+import { RenewForm } from './user-home-page/user-home-page.component';
 
 
 @Injectable({
@@ -59,6 +60,23 @@ export class CRUDApiService {
     return this.httpClient.post<claiminsurance>(this.apiServer + '/ClaimInsurance/', JSON.stringify(clins), this.httpOptions);
   }
 
+  RenewDetailsConfirm(renewFormObj): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + '/RenewCheck/', JSON.stringify(renewFormObj), this.httpOptions);
+  }
+
+  BuyInsuranceCheck(buyformobj): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + '/BuyInsuranceCheck/', JSON.stringify(buyformobj), this.httpOptions);
+  }
+
+  BuyInsurance(buyInsData):Observable<any>{
+    return this.httpClient.post<any>(this.apiServer + '/BuyInsurance/', JSON.stringify(buyInsData), this.httpOptions);
+  }
+
+  RenewInsurance(buyInsData):Observable<any>{
+    return this.httpClient.post<any>(this.apiServer + '/RenewInsurance/', JSON.stringify(buyInsData), this.httpOptions);
+  }
+
+
   handleError(error)
   {
     let errorMessage = '';
@@ -87,6 +105,9 @@ export class CRUDApiService {
   getpremfacors(premamtobj): Observable<any> {
     return this.httpClient.post<any>(this.apiServer + '/PremiumAmount/', JSON.stringify(premamtobj), this.httpOptions)
   }
+
+
+
 
 
 
