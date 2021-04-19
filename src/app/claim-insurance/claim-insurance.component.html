@@ -72,10 +72,13 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-4 col-lg-4 form-group">
                                 <label for="date_of_loss">Date of Loss/Damage</label>
-                                <input type="date" class="form-control" id="date_of_loss" name="date_of_loss" formControlName="date_of_loss" [ngClass]="{'is-invalid': date_of_loss.errors && (date_of_loss.touched || date_of_loss.dirty), 'is-valid':date_of_loss.valid}">
+                                <input type="date" class="form-control" id="date_of_loss" name="date_of_loss" [max]="maxdate | date:'yyyy-MM-dd'" formControlName="date_of_loss" [ngClass]="{'is-invalid': date_of_loss.errors && (date_of_loss.touched || date_of_loss.dirty), 'is-valid':date_of_loss.valid}">
                                 <div *ngIf="!date_of_loss?.valid && (date_of_loss?.dirty || date_of_loss?.touched)" id="error-div">
                                     <div [hidden]="!date_of_loss.errors.required">
                                         Date of Loss is required
+                                    </div>
+                                    <div [hidden]="!purchase_date.errors.invalidDate" style="color: red;">
+                                        Date of loss cannot be greater than Current Date
                                     </div>
                                 </div>
                             </div>
