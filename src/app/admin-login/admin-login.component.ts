@@ -47,7 +47,7 @@ export class AdminLoginComponent implements OnInit {
         console.log("Successfull");    
         window.alert("Login Successful");
         
-        sessionStorage.setItem('Admin_id',res.Admin_id);
+        sessionStorage.setItem('Admin_username',res.Admin_id);
 
         this.router.navigateByUrl('/admin-page');
         console.log(sessionStorage.length);
