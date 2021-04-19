@@ -74,10 +74,13 @@
                             </div>
                             <div class="col-sm-12 col-md-6 form-group">
                                 <label for="veh_pur_date">Vehicle Purchase Date</label>
-                                <input type="date" class="form-control" id="veh_pur_date" name="veh_pur_date" formControlName="veh_pur_date" [ngClass]="{'is-invalid': veh_pur_date.errors && (veh_pur_date.touched || veh_pur_date.dirty), 'is-valid':veh_pur_date.valid}">
+                                <input type="date" class="form-control" id="veh_pur_date" [max]="maxdate | date:'yyyy-MM-dd'" name="veh_pur_date" formControlName="veh_pur_date" [ngClass]="{'is-invalid': veh_pur_date.errors && (veh_pur_date.touched || veh_pur_date.dirty), 'is-valid':veh_pur_date.valid}">
                                 <div *ngIf="!veh_pur_date?.valid && (veh_pur_date?.dirty || veh_pur_date?.touched)" id="error-div">
                                     <div [hidden]="!veh_pur_date.errors.required">
                                         Vehicle Purchase Date is required
+                                    </div>
+                                    <div [hidden]="!veh_pur_date.errors.invalidDate" style="color: red;">
+                                        Purchase date cannot be greater than Current Date
                                     </div>
                                 </div>
                             </div>
