@@ -103,12 +103,12 @@ export class ClaimInsuranceComponent implements OnInit {
       console.log(res);
       if(res.message=='Invalid')
       {
-        window.alert('You dont have any current plans or its expired');
+        window.alert('You do not have this current policy \n or it is expired');
       }
       else{
         console.log('Submitted Successfully'),
        window.alert('Submitted Successfully'),
-      this.router.navigateByUrl('')
+      this.router.navigateByUrl('user-home-page')
       }
     });
   }
