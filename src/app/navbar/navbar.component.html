@@ -78,6 +78,9 @@
             <li class="nav-item">
                 <a class="nav-link" *ngIf="loginstatus$ | async as loginstatus" (click)="logout()" href="#">Logout</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" *ngIf="adminstatus$ | async as adminstatus" (click)="adminLogout()" href="#">Logout</a>
+            </li>
         </ul>
         </div>
       </nav>

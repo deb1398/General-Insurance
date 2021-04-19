@@ -22,10 +22,16 @@ export class CRUDApiService {
 
 
   public loginstatus = new BehaviorSubject<boolean>((sessionStorage.length!=0)?true:false);
+  public adminstatus = new BehaviorSubject<boolean>((sessionStorage.length!=0)?true:false);
 
   get isLoggedin()
   {
     return this.loginstatus.asObservable();
+  }
+
+  get adminLoggedin()
+  {
+    return this.adminstatus.asObservable();
   }
 
   private apiServer = "http://localhost:64977/api";
