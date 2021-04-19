@@ -43,7 +43,7 @@ export class UserHomePageComponent implements OnInit {
     console.log(User_Id);
     this.crudService.subscriptionPlan_details(User_Id).subscribe((data : Subscription[]) => {
       this.subscriptionplan_list=data;
-      //console.log(this.subscriptionplan_list)
+      console.log(this.subscriptionplan_list)
 
     })
      this.crudService.claim_details(User_Id).subscribe((data : ClaimHistory[])=>
@@ -110,7 +110,7 @@ export class UserHomePageComponent implements OnInit {
       {
         window.alert("You don't have this current Policy")
       }
-      else if(res.subscription_status == "Active")
+      else if(res.message == "Already having active policy")
       {
         window.alert("Policy is still Active")
       }
@@ -129,6 +129,7 @@ export class RenewForm {
 }
 export class Subscription
 {
+  Plan_type:string;
   Vehicle_Type : string;
   Manufacturer_Name :string;
   Model_Name :string;
@@ -136,6 +137,7 @@ export class Subscription
   Engine_No :number;
   Chasis_No :number;
   Sub_date :Date;
+  End_date:Date;
   Policy_No :number;
   Status_of_sub : string;
   message : string;

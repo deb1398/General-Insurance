@@ -21,8 +21,8 @@ import { RenewForm } from './user-home-page/user-home-page.component';
 export class CRUDApiService {
 
 
-  public loginstatus = new BehaviorSubject<boolean>((sessionStorage.length!=0)?true:false);
-  public adminstatus = new BehaviorSubject<boolean>((sessionStorage.length!=0)?true:false);
+  public loginstatus = new BehaviorSubject<boolean>((sessionStorage.getItem('User_Id')!=null)?true:false);
+  public adminstatus = new BehaviorSubject<boolean>((sessionStorage.getItem('Admin_username')!=null)?true:false);
 
   get isLoggedin()
   {
