@@ -97,7 +97,9 @@ export class PaymentGatewayComponent implements OnInit {
 
     console.log(this.buyInsData);
     sessionStorage.removeItem('sessionbuyins');
+
     this.router.navigateByUrl("/user-home-page");
+
   }
 
 

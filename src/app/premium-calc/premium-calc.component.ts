@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 import { CRUDApiService } from '../crud-api.service';
 import { PremiumAmount } from '../plan-selection/plan-selection.component';
 
@@ -77,10 +78,21 @@ export class PremiumCalcComponent implements OnInit {
     model_name: new FormControl('',[Validators.required]),
     market_price: new FormControl('',[Validators.required, Validators.pattern("[0-9]{4,7}")]),
     veh_cc: new FormControl('',[Validators.required]),
-    veh_pur_date: new FormControl('',[Validators.required]),
+    veh_pur_date: new FormControl('',[Validators.required,this.dateValidator]),
     
    
   })
+
+  dateValidator(control: FormControl): { [s: string]: boolean } {
+    if (control.value) {
+      const date = moment(control.value);
+      const today = moment();
+      if (date.isAfter(today)) {
+        return { 'invalidDate': true }
+      }
+    }
+    return null;
+  }
 
   get veh_type()
   { 
@@ -107,7 +119,10 @@ export class PremiumCalcComponent implements OnInit {
     return this.calcForm.get('veh_pur_date');
   }
 
+  maxdate:Date;
   ngOnInit(): void {
+
+    this.maxdate = new Date(Date.now());
 
   }
 

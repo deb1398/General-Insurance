@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 import { CRUDApiService } from '../crud-api.service';
 
 @Component({
@@ -20,13 +21,24 @@ export class ClaimInsuranceComponent implements OnInit {
     policy_no: new FormControl('',[Validators.required,Validators.pattern("^[a-zA-Z0-9]*$")]),
     mobile_no: new FormControl('', [Validators.required, Validators.pattern("[0-9]{10}")]),
     claim_reason: new FormControl('',[Validators.required]),
-    date_of_loss: new FormControl('',[Validators.required]),
+    date_of_loss: new FormControl('',[Validators.required,this.dateValidator]),
     place_of_loss: new FormControl('',[Validators.required,Validators.pattern("^[a-zA-Z]*$")]),
     loss_desc: new FormControl('',[Validators.required]),
     any_thirdparty_damage: new FormControl('',[Validators.required]),
     
    
   })
+
+  dateValidator(control: FormControl): { [s: string]: boolean } {
+    if (control.value) {
+      const date = moment(control.value);
+      const today = moment();
+      if (date.isAfter(today)) {
+        return { 'invalidDate': true }
+      }
+    }
+    return null;
+  }
 
 
   get policy_no()
@@ -64,7 +76,10 @@ export class ClaimInsuranceComponent implements OnInit {
     return this.claimForm.get('any_thirdparty_damage');
   }
 
+  maxdate:Date;
   ngOnInit(): void {
+    
+    this.maxdate = new Date(Date.now());
 
   }
 
@@ -85,9 +100,16 @@ export class ClaimInsuranceComponent implements OnInit {
 
 
     this.crudService.claim(cl).subscribe(res => {
-      console.log('Submitted Successfully'),
+      console.log(res);
+      if(res.message=='Invalid')
+      {
+        window.alert('You do not have this current policy \n or it is expired');
+      }
+      else{
+        console.log('Submitted Successfully'),
        window.alert('Submitted Successfully'),
-      this.router.navigateByUrl('')
+      this.router.navigateByUrl('user-home-page')
+      }
     });
   }
 

@@ -7,6 +7,7 @@ import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, retry} from 'rxjs/operators';
 
 import { fakeAsync } from '@angular/core/testing';
+//import { ClaimInfo} from './claim-info'
 
 import { ClaimInfo} from './claim-info'
 
@@ -60,10 +61,23 @@ export class CRUDApiService {
     return this.httpClient.post<any>(this.apiServer + '/Reset_pwd/', JSON.stringify(fuser), this.httpOptions)
   }
 
-  claim(clins): Observable<claiminsurance> {
-    return this.httpClient.post<claiminsurance>(this.apiServer + '/ClaimInsurance/', JSON.stringify(clins), this.httpOptions);
+  claim(clins): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + '/ClaimInsurance/', JSON.stringify(clins), this.httpOptions);
   }
 
+
+  
+  subscriptionPlan_details(User_Id): Observable<any>{
+    return this.httpClient.post<any>(this.apiServer + '/Subscription?User_Id='+User_Id, JSON.stringify(User_Id), this.httpOptions)
+  }
+  claim_details(User_Id): Observable<any>{
+    return this.httpClient.post<any>(this.apiServer + '/ClaimHistory?User_Id='+User_Id, JSON.stringify(User_Id), this.httpOptions)
+  }
+
+
+  RenewDetailsConfirm(renewFormObj): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + '/RenewCheck/', JSON.stringify(renewFormObj), this.httpOptions);
+  }
 
   getadminclaims(): Observable<any> {
     return this.httpClient.get<any>(this.apiServer + '/Admin/')
@@ -78,18 +92,6 @@ export class CRUDApiService {
     return this.httpClient.put<any>(this.apiServer + '/Admin?Claim_no='+Claim_no, JSON.stringify(claim_info), this.httpOptions)
   }
 
-  subscriptionPlan_details(User_Id): Observable<any>{
-    return this.httpClient.post<any>(this.apiServer + '/Subscription?User_Id='+User_Id, JSON.stringify(User_Id), this.httpOptions)
-  }
-  claim_details(User_Id): Observable<any>{
-    return this.httpClient.post<any>(this.apiServer + '/ClaimHistory?User_Id='+User_Id, JSON.stringify(User_Id), this.httpOptions)
-  }
-
-
-  RenewDetailsConfirm(renewFormObj): Observable<any> {
-    return this.httpClient.post<any>(this.apiServer + '/RenewCheck/', JSON.stringify(renewFormObj), this.httpOptions);
-  }
-
   BuyInsuranceCheck(buyformobj): Observable<any> {
     return this.httpClient.post<any>(this.apiServer + '/BuyInsuranceCheck/', JSON.stringify(buyformobj), this.httpOptions);
   }
@@ -101,6 +103,7 @@ export class CRUDApiService {
   RenewInsurance(buyInsData):Observable<any>{
     return this.httpClient.post<any>(this.apiServer + '/RenewInsurance/', JSON.stringify(buyInsData), this.httpOptions);
   }
+
 
 
 
