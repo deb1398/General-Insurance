@@ -65,10 +65,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="purchaseDate">Purchase Date</label>
-                                    <input type="date" class="form-control  rounded-0" name="purchaseDate" formControlName="purchase_date" [ngClass]="{'is-invalid': purchase_date.errors && (purchase_date.touched || purchase_date.dirty), 'is-valid':purchase_date.valid}">
+                                    <input type="date" class="form-control  rounded-0" [max]="maxdate | date:'yyyy-MM-dd'" name="purchase_date" formControlName="purchase_date" [ngClass]="{'is-invalid': purchase_date.errors && (purchase_date.touched || purchase_date.dirty), 'is-valid':purchase_date.valid}">
                                     <div *ngIf="!purchase_date?.valid && (purchase_date?.dirty || purchase_date?.touched)" id="error-div">
                                         <div [hidden]="!purchase_date.errors.required" style="color: red;">
                                             Purchase Date is required
+                                        </div>
+                                        <div [hidden]="!purchase_date.errors.invalidDate" style="color: red;">
+                                            Purchase date cannot be greater than Current Date
                                         </div>
                                     </div>
                                 </div>
@@ -89,7 +92,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="engineNo">Engine Number</label>
-                                    <input type="text" class="form-control rounded-0" name="engineNo" formControlName="engine_number" [ngClass]="{'is-invalid': engine_number.errors && (engine_number.touched || engine_number.dirty), 'is-valid':engine_number.valid}">
+                                    <input type="number" class="form-control rounded-0" name="engineNo" formControlName="engine_number" [ngClass]="{'is-invalid': engine_number.errors && (engine_number.touched || engine_number.dirty), 'is-valid':engine_number.valid}">
                                     <div *ngIf="!engine_number?.valid && (engine_number?.dirty || engine_number?.touched)" id="error-div">
                                         <div [hidden]="!engine_number.errors.required" style="color: red;">
                                             Engine Number is required
@@ -99,7 +102,7 @@
 
                                 <div class="form-group">
                                     <label for="engineNo">Vehicle CC</label>
-                                    <input type="text" class="form-control rounded-0" name="vehicleCC" formControlName="vehicleCC" [ngClass]="{'is-invalid': vehicleCC.errors && (vehicleCC.touched || vehicleCC.dirty), 'is-valid':vehicleCC.valid}">
+                                    <input type="number" class="form-control rounded-0" name="vehicleCC" formControlName="vehicleCC" [ngClass]="{'is-invalid': vehicleCC.errors && (vehicleCC.touched || vehicleCC.dirty), 'is-valid':vehicleCC.valid}">
                                     <div *ngIf="!vehicleCC?.valid && (vehicleCC?.dirty || vehicleCC?.touched)" id="error-div">
                                         <div [hidden]="!vehicleCC.errors.required" style="color: red;">
                                             Vehicle cc is required
@@ -108,7 +111,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="chassisNo">Chasis Number</label>
-                                    <input type="text" class="form-control rounded-0" name="chassisNo" formControlName="chassis_number" [ngClass]="{'is-invalid': chassis_number.errors && (chassis_number.touched || chassis_number.dirty), 'is-valid':chassis_number.valid}">
+                                    <input type="number" class="form-control rounded-0" name="chassisNo" formControlName="chassis_number" [ngClass]="{'is-invalid': chassis_number.errors && (chassis_number.touched || chassis_number.dirty), 'is-valid':chassis_number.valid}">
                                     <div *ngIf="!chassis_number?.valid && (chassis_number?.dirty || chassis_number?.touched)" id="error-div">
                                         <div [hidden]="!chassis_number.errors.required" style="color: red;">
                                             Chassis Number is required

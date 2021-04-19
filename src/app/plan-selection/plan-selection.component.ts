@@ -5,6 +5,7 @@ import { BuyInsClass } from '../buy-insurance/buy-insurance.component';
 import { SharedService } from '../shared/shared.service';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { RenewIns } from 'src/Models/renew-ins';
 
 
 @Component({
@@ -41,6 +42,7 @@ export class PlanSelectionComponent implements OnInit {
     private router: Router) { }
 
   buyInsData: BuyInsClass;
+  renewInsData: RenewIns;
 
   ngOnInit(): void {
     //this.buyInsData = this.shared.getBuyInsData();
@@ -180,8 +182,9 @@ export class PlanSelectionComponent implements OnInit {
   onSubmit()
   {
     console.log(this.planForm.value);
+    
     this.buyInsData.plan_type = this.planType.value;
-    this.buyInsData.plan_duration = this.planDuration.value;
+    this.buyInsData.plan_duration = Number(this.planDuration.value);
     this.buyInsData.total_payable = this.total_premium;
     this.buyInsData.total_tp = this.basic_third_partyf;
     this.buyInsData.total_od = this.basic_own_damagef;
@@ -190,6 +193,8 @@ export class PlanSelectionComponent implements OnInit {
     //console.log(this.buyInsData);
 
     sessionStorage.setItem('sessionbuyins', JSON.stringify(this.buyInsData));
+
+    
     
     this.router.navigateByUrl('/payment-gateway');
 
