@@ -85,9 +85,16 @@ export class ClaimInsuranceComponent implements OnInit {
 
 
     this.crudService.claim(cl).subscribe(res => {
-      console.log('Submitted Successfully'),
+      console.log(res);
+      if(res.message=='Invalid')
+      {
+        window.alert('You dont have any current plans or its expired');
+      }
+      else{
+        console.log('Submitted Successfully'),
        window.alert('Submitted Successfully'),
       this.router.navigateByUrl('')
+      }
     });
   }
 
