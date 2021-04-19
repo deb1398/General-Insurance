@@ -16,19 +16,30 @@
                             <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()" novalidate role="form" autocomplete="off">
                                 <div class="form-group">
                                     <label for="cc_name">Card Holder's Name</label>
-                                    <input type="text" class="form-control" formControlName="card_name" id="cc_name" pattern="\w+ \w+.*" title="First and last name" required="required" [ngClass]="{'is-invalid': card_name.errors && (card_name.touched || card_name.dirty), 'is-valid':card_name.valid}">
+                                    <input type="text" class="form-control" formControlName="card_name" id="cc_name" title="First and last name" required="" [ngClass]="{'is-invalid': card_name.errors && (card_name.touched || card_name.dirty), 'is-valid':card_name.valid}">
                                     <div *ngIf="!card_name?.valid && (card_name?.dirty || card_name?.touched)" id="error-div">
                                         <div [hidden]="!card_name.errors.required">
                                             Card Holder Name is required
+                                        </div>
+                                        <div [hidden]="!card_name.errors.minlength">
+                                            Should contain atleast 3 letters
+                                        </div>
+                                        <div [hidden]="!card_name.errors.pattern">
+                                            Only alphabets are allowed
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Card Number</label>
-                                    <input type="text" class="form-control" formControlName="card_number" autocomplete="off" maxlength="20" pattern="\d{16}" title="Credit card number" required="" [ngClass]="{'is-invalid': card_number.errors && (card_number.touched || card_number.dirty), 'is-valid':card_number.valid}">
+
+                                    <input type="text" class="form-control" formControlName="card_number" autocomplete="off" maxlength="16" pattern="\d{16}" title="Credit card number" required="" [ngClass]="{'is-invalid': card_number.errors && (card_number.touched || card_number.dirty), 'is-valid':card_number.valid}">
+
                                     <div *ngIf="!card_number?.valid && (card_number?.dirty || card_number?.touched)" id="error-div">
                                         <div [hidden]="!card_number.errors.required">
                                             Card Number is required
+                                        </div>
+                                        <div [hidden]="!card_number.errors.pattern">
+                                            Only 16 Digit Card Number allowed
                                         </div>
                                     </div>
                                 </div>
@@ -37,18 +48,18 @@
                                     <label class="col-md-12">Card Exp. Date</label>
                                     <div class="col-md-4">
                                         <select class="form-control" formControlName="card_exp_no" name="cc_exp_mo" size="0" [ngClass]="{'is-invalid': card_exp_no.errors && (card_exp_no.touched || card_exp_no.dirty), 'is-valid':card_exp_no.valid}">
-                                            <option value="01">01</option>
-                                            <option value="02">02</option>
-                                            <option value="03">03</option>
-                                            <option value="04">04</option>
-                                            <option value="05">05</option>
-                                            <option value="06">06</option>
-                                            <option value="07">07</option>
-                                            <option value="08">08</option>
-                                            <option value="09">09</option>
-                                            <option value="10">10</option>
-                                            <option value="11">11</option>
-                                            <option value="12">12</option>
+                                            <option value=1>01</option>
+                                            <option value=2>02</option>
+                                            <option value=3>03</option>
+                                            <option value=4>04</option>
+                                            <option value=5>05</option>
+                                            <option value=6>06</option>
+                                            <option value=7>07</option>
+                                            <option value=8>08</option>
+                                            <option value=9>09</option>
+                                            <option value=10>10</option>
+                                            <option value=11>11</option>
+                                            <option value=12>12</option>
                                         </select>
                                         <div *ngIf="!card_exp_no?.valid && (card_exp_no?.dirty || card_exp_no?.touched)" id="error-div">
                                             <div [hidden]="!card_exp_no.errors.required">
@@ -58,11 +69,11 @@
                                     </div>
                                     <div class="col-md-4">
                                         <select class="form-control" formControlName="cc_exp_yr" name="cc_exp_yr" size="0" [ngClass]="{'is-invalid': cc_exp_yr.errors && (cc_exp_yr.touched || cc_exp_yr.dirty), 'is-valid':cc_exp_yr.valid}">
-                                            <option>2018</option>
-                                            <option>2019</option>
-                                            <option>2020</option>
-                                            <option>2021</option>
-                                            <option>2022</option>
+                                            <option value=2018>2018</option>
+                                            <option value=2019>2019</option>
+                                            <option value=2020>2020</option>
+                                            <option value=2021>2021</option>
+                                            <option value=2022>2022</option>
                                         </select>
                                         <div *ngIf="!cc_exp_yr?.valid && (cc_exp_yr?.dirty || cc_exp_yr?.touched)" id="error-div">
                                             <div [hidden]="!cc_exp_yr.errors.required">

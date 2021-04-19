@@ -109,7 +109,7 @@
             </div>
           </div>
         </div> -->
-        <div class="col-sm-6 mb-3">
+        <!-- <div class="col-sm-6 mb-3">
           <div class="card h-100">
             <div class="card-body">
               <h6 class="d-flex align-items-center mb-3"><i class="material-icons tstyle mr-2">2-Wheeler</i>Honda &nbsp;<i class="material-icons tstyle mr-3">(Hornet)</i></h6><hr>
@@ -123,26 +123,53 @@
               <a href="#" class="card-link tstyle" data-toggle="modal" data-target="#exampleModal">Renew</a>
             </div>
           </div>
-        </div>
+        </div> -->
 
-        <div class="col-sm-6 mb-3">
+        <div class="col-sm-6 mb-3"*ngFor= "let planlist of subscriptionplan_list">
           <div class="card h-100">
-            <div class="card-body">
-              <h6 class="d-flex align-items-center mb-3"><i class="material-icons tstyle mr-2">2-Wheeler</i>Honda &nbsp;<i class="material-icons tstyle mr-3">(Hornet)</i></h6><hr>
+            <div class="card-body" >
+              <h6 class="d-flex align-items-center mb-3"><i class="material-icons tstyle mr-2">{{planlist.Vehicle_Type}}</i>{{planlist.Manufacturer_Name}} &nbsp;<i class="material-icons tstyle mr-3">({{planlist.Model_Name}})</i></h6><hr>
               
-              <h6 class="d-flex align-items-center mb-3">Subscription Plan: 12/10/2019 - 12/10/2020</h6>
-              <h6 class="d-flex align-items-center mb-3">Policy Number: 123123123</h6>
-              <h6 class="d-flex align-items-center mb-3">Vehicle Number: 123123123</h6>
-              <h6 class="d-flex align-items-center mb-3">Engine Number: 32321f2ggf</h6>
-              <h6 class="d-flex align-items-center mb-3">Chassis Number: 123321</h6><hr>
-              <a href="#" class="card-link tstyle" routerLink="/claim-insurance">Claim</a>
-              <a href="#" class="card-link tstyle" data-toggle="modal" data-target="#exampleModal">Renew</a>
+              <h6 class="d-flex align-items-center mb-3">Subscription Plan: {{planlist.Sub_date}}</h6>
+              <h6 class="d-flex align-items-center mb-3">Policy Number: {{planlist.Policy_No}}</h6>
+              <h6 class="d-flex align-items-center mb-3">Vehicle Number: {{planlist.Reg_No}}</h6>
+              <h6 class="d-flex align-items-center mb-3">Engine Number: {{planlist.Engine_No}}</h6>
+              <h6 class="d-flex align-items-center mb-3">Chassis Number: {{planlist.Chasis_No}}</h6><hr>
+              <span *ngIf="planlist.Status_of_sub == 'expired'; else elseBlock">
+                <a href="#" class="card-link tstyle" data-toggle="modal" data-target="#exampleModal">Renew</a>
+              </span>  
+              <ng-template #elseBlock>
+                <a href="#" class="card-link tstyle" routerLink="/claim-insurance">Claim</a>
+                <a href="#" class="card-link tstyle" data-toggle="modal" data-target="#exampleModal">Renew</a>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-8 themed-grid-col">
+      <div class="pb-3">
+        <h5>Claim History</h5>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 mb-3"*ngFor= "let info of claim_history">
+          <div class="card h-100">
+            <div class="card-body" >
+              <!-- <h6 class="d-flex align-items-center mb-3"><i class="material-icons tstyle mr-2">{{planlist.Vehicle_Type}}</i>{{planlist.Manufacturer_Name}} &nbsp;<i class="material-icons tstyle mr-3">({{planlist.Model_Name}})</i></h6><hr> -->
+              
+              <h6 class="d-flex align-items-center mb-3">Claim Number: {{info.Claim_no}}</h6>
+              <h6 class="d-flex align-items-center mb-3">Policy Number: {{info.Policy_No}}</h6>
+              <h6 class="d-flex align-items-center mb-3">Date Claimed: {{info.Date_claimed}}</h6>
+              <h6 class="d-flex align-items-center mb-3">Approval Status: {{info.Claim_approval_status}}</h6>
+              <h6 class="d-flex align-items-center mb-3">Claim Amount: {{info.Claim_amt}}</h6>
+              <!-- <a href="#" class="card-link tstyle" routerLink="/claim-insurance">Claim</a> -->
             </div>
           </div>
         </div>
       </div>
     </div>
-    
   </div>
 </div>
 
@@ -158,6 +185,7 @@
       </div>
       <div class="modal-body">
         <form [formGroup]="renewForm" (ngSubmit)="onSubmit()" novalidate>
+          <p>Give Details as per registered Policy Subscription</p>
           <div class="form-group">
             <label for="policyNumber" class="col-form-label">Policy Number</label>
             <input type="number" class="form-control" formControlName="policyNumber" name="policyNumber" id="policyNumber" required>
@@ -169,7 +197,7 @@
           </div>
           <div class="form-group">
             <label for="mobile" class="col-form-label">Mobile Number</label>
-            <input type="number" class="form-control" formControlName="mobile" name="mobile" id="mobile">
+            <input type="text" class="form-control" formControlName="mobile" name="mobile" id="mobile">
             <div *ngIf="!mobile?.valid && (mobile?.dirty ||mobile?.touched)">
               <div [hidden]="!mobile.errors.required">
                 <p style="color: red;">Mobile is required.</p>
@@ -192,7 +220,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" #closeModal>Close</button>
             <button type="submit" [disabled]="!renewForm.valid" class="btn btn-primary submit-button">Proceed</button>
           </div>
         </form>

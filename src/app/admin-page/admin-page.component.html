@@ -54,7 +54,9 @@
           <th>Claim Number</th>
           <th>Policy Number</th>
           <th>Claim Date</th>
-          <th>Approval status</th>                            
+          <th>Approval status</th>
+          <th>Claim Amount</th>                            
+
          <th>Details</th>
       </tr>
   </thead>
@@ -64,6 +66,7 @@
         <td>{{claim_details.Policy_No}}</td>
         <td>{{claim_details.Date_claimed}}</td>
         <td>{{claim_details.Claim_approval_status}}</td>
+        <td>{{claim_details.Claim_amt}}</td>
         <td><a href="" [routerLink]="['/claim-details']" [queryParams]="{Claim_no:claim_details.Claim_no}">View</a></td>
       </tr>
   </tbody>

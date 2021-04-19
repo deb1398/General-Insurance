@@ -32,7 +32,7 @@ const routes: Routes = [
   {path:'AboutUs', component : AboutusComponent},
   {path:'ForgetPwd', component : ForgetPasswordComponent},
   {path:'register', component : RegisterComponent},
-  {path:'user-profile', component : UserProfileComponent},
+  {path:'user-profile', component : UserProfileComponent,canActivate: [AuthGuardService]},
   {path:'premium-calc', component : PremiumCalcComponent},
   {path:'plan-selection', component : PlanSelectionComponent},
   {path:'claim-insurance', component : ClaimInsuranceComponent},

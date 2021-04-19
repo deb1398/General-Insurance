@@ -80,13 +80,21 @@ export class ClaimInsuranceComponent implements OnInit {
     cl.Place_of_Loss=this.place_of_loss.value;
     cl.Damage_Description=this.loss_desc.value;
     cl.Injury_to_Thirdparty=this.any_thirdparty_damage.value;
-    cl.Claim_approval_status="Pending";
-    cl.Claim_amt=40000;
+    cl.Claim_approval_status="";
+    cl.message="";
+
 
     this.crudService.claim(cl).subscribe(res => {
-      console.log('Submitted Successfully'),
-      window.alert('Submitted Successfully'),
+      console.log(res);
+      if(res.message=='Invalid')
+      {
+        window.alert('You dont have any current plans or its expired');
+      }
+      else{
+        console.log('Submitted Successfully'),
+       window.alert('Submitted Successfully'),
       this.router.navigateByUrl('')
+      }
     });
   }
 
@@ -102,5 +110,5 @@ export class claim
   Damage_Description : string;
   Injury_to_Thirdparty : boolean;
   Claim_approval_status : string;
-  Claim_amt : number;
+  message : string;
 }
