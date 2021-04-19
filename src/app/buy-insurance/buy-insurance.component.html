@@ -80,13 +80,13 @@
                                     <input type="text" class="form-control  rounded-0" name="RegNo" formControlName="registeration_number" [ngClass]="{'is-invalid': registeration_number.errors && (registeration_number.touched || registeration_number.dirty), 'is-valid':registeration_number.valid}">
                                     <div *ngIf="!registeration_number?.valid && (registeration_number?.dirty || registeration_number?.touched)" id="error-div">
                                         <div [hidden]="!registeration_number.errors.required" style="color: red;">
-                                            Registeration Number is required
+                                            Registration Number is required
                                         </div>
                                         <div [hidden]="!registeration_number.errors.minlength" style="color: red;">
-                                            Registeration Number should be of length 10
+                                            Registration Number should be of length 10
                                         </div>
                                         <div [hidden]="!registeration_number.errors.pattern" style="color: red;">
-                                            Invalid Registeration Number
+                                            Invalid Registration Number
                                         </div>
                                     </div>
                                 </div>

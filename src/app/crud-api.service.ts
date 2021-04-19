@@ -88,8 +88,8 @@ export class CRUDApiService {
     return this.httpClient.get<any>(this.apiServer + '/Admin?Claim_no='+Claim_no)
   }
 
-  updateclaims(claim_info): Observable<any>{
-    return this.httpClient.put<any>(this.apiServer + '/Admin/', JSON.stringify(claim_info), this.httpOptions)
+  updateclaims(Claim_no,claim_info): Observable<any>{
+    return this.httpClient.put<any>(this.apiServer + '/Admin?Claim_no='+Claim_no, JSON.stringify(claim_info), this.httpOptions)
   }
 
   BuyInsuranceCheck(buyformobj): Observable<any> {
