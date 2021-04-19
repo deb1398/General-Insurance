@@ -1,7 +1,7 @@
 <!-- <p>admin-page works!</p> -->
 
 
-<section class="jumbotron text-center">
+<!-- <section class="jumbotron text-center">
   <div class="container">
       <h1 class="jumbotron-heading tcolor">Admin Claim Approval</h1>
       <p class="lead text-muted mb-0">Welcome to General Insurance. The RAID!!</p>
@@ -46,4 +46,25 @@
     </tr>
   </tbody>
 </table>
-</div>
+</div> -->
+
+<table class="table">
+  <thead>
+      <tr>
+          <th>Claim Number</th>
+          <th>Policy Number</th>
+          <th>Claim Date</th>
+          <th>Approval status</th>                            
+         <th>Details</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor= "let claim_details of ClaimsList">
+        <td>{{claim_details.Claim_no}}</td>
+        <td>{{claim_details.Policy_No}}</td>
+        <td>{{claim_details.Date_claimed}}</td>
+        <td>{{claim_details.Claim_approval_status}}</td>
+        <td><a href="" [routerLink]="['/claim-details']" [queryParams]="{Claim_no:claim_details.Claim_no}">View</a></td>
+      </tr>
+  </tbody>
+</table>

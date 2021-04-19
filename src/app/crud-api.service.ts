@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { WheelerBrand, WheelerModel } from './buy-insurance/buy-insurance.component';
@@ -7,6 +7,7 @@ import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, retry} from 'rxjs/operators';
 
 import { fakeAsync } from '@angular/core/testing';
+//import { ClaimInfo} from './claim-info'
 
 
 @Injectable({
@@ -57,6 +58,19 @@ export class CRUDApiService {
 
   claim(clins): Observable<claiminsurance> {
     return this.httpClient.post<claiminsurance>(this.apiServer + '/ClaimInsurance/', JSON.stringify(clins), this.httpOptions);
+  }
+
+  getadminclaims(): Observable<any> {
+    return this.httpClient.get<any>(this.apiServer + '/Admin/')
+  }
+
+  getdetailsById(Claim_no): Observable<any> {
+    const opts = { params: new HttpParams({fromString: "Claim_no="+ Claim_no}) };
+    return this.httpClient.get<any>(this.apiServer + '/Admin?Claim_no='+Claim_no)
+  }
+
+  updateclaims(claim_info): Observable<any>{
+    return this.httpClient.put<any>(this.apiServer + '/Admin/', JSON.stringify(claim_info), this.httpOptions)
   }
 
   handleError(error)
