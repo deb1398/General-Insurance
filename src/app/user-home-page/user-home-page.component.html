@@ -135,12 +135,13 @@
               <h6 class="d-flex align-items-center mb-3">Vehicle Number: {{planlist.Reg_No}}</h6>
               <h6 class="d-flex align-items-center mb-3">Engine Number: {{planlist.Engine_No}}</h6>
               <h6 class="d-flex align-items-center mb-3">Chassis Number: {{planlist.Chasis_No}}</h6><hr>
-              <span *ngIf="planlist.Status_of_sub == 'expired'; else elseBlock">
-                <a href="#" class="card-link tstyle" data-toggle="modal" data-target="#exampleModal">Renew</a>
+              <span *ngIf="planlist.Status_of_sub == 'Expired'; else elseBlock">
+                <a href="#" class="card-link tstyle" data-toggle="modal" data-target="#exampleModal">Renew </a>
+                <span style="color: red;">(Your Plan has expired)</span>
               </span>  
               <ng-template #elseBlock>
-                <a href="#" class="card-link tstyle" routerLink="/claim-insurance">Claim</a>
-                <a href="#" class="card-link tstyle" data-toggle="modal" data-target="#exampleModal">Renew</a>
+                <a href="#" class="card-link tstyle" routerLink="/claim-insurance">Claim </a>
+                <span class="tstyle"><strong>(Active)</strong></span>
               </ng-template>
             </div>
           </div>
@@ -162,7 +163,17 @@
               <h6 class="d-flex align-items-center mb-3">Claim Number: {{info.Claim_no}}</h6>
               <h6 class="d-flex align-items-center mb-3">Policy Number: {{info.Policy_No}}</h6>
               <h6 class="d-flex align-items-center mb-3">Date Claimed: {{info.Date_claimed}}</h6>
-              <h6 class="d-flex align-items-center mb-3">Approval Status: {{info.Claim_approval_status}}</h6>
+              <span *ngIf="info.Claim_approval_status=='Approved'; else second_condition">
+                <h6 class="d-flex align-items-center mb-3" style="color: #264A9F;">Approval Status: {{info.Claim_approval_status}}</h6>
+              </span>
+              <ng-template #second_condition>
+                <span *ngIf="info.Claim_approval_status=='Pending' || info.Claim_approval_status=='Under Verification'; else third_condition">
+                  <h6 class="d-flex align-items-center mb-3" style="color: gray;">Approval Status: {{info.Claim_approval_status}}</h6>
+                </span>
+              </ng-template>
+              <ng-template #third_condition>
+                <h6 class="d-flex align-items-center mb-3" style="color: red;">Approval Status: {{info.Claim_approval_status}}</h6>
+              </ng-template>
               <h6 class="d-flex align-items-center mb-3">Claim Amount: {{info.Claim_amt}}</h6>
               <!-- <a href="#" class="card-link tstyle" routerLink="/claim-insurance">Claim</a> -->
             </div>
