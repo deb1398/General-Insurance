@@ -34,6 +34,6 @@ export class AdminLoginComponent implements OnInit {
 }
 export class logindetails
 {
-  username : string;
-  password : string;
+  Email_ID : string;
+  Password : string;
 }

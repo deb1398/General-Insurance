@@ -31,7 +31,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Card Number</label>
-                                    <input type="text" class="form-control" formControlName="card_number" autocomplete="off" maxlength="16" title="Credit card number" required="" [ngClass]="{'is-invalid': card_number.errors && (card_number.touched || card_number.dirty), 'is-valid':card_number.valid}">
+
+                                    <input type="text" class="form-control" formControlName="card_number" autocomplete="off" maxlength="16" pattern="\d{16}" title="Credit card number" required="" [ngClass]="{'is-invalid': card_number.errors && (card_number.touched || card_number.dirty), 'is-valid':card_number.valid}">
+
                                     <div *ngIf="!card_number?.valid && (card_number?.dirty || card_number?.touched)" id="error-div">
                                         <div [hidden]="!card_number.errors.required">
                                             Card Number is required

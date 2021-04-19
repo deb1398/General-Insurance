@@ -240,5 +240,3 @@ export class BuyInsClass {
 
   
 
-
-}

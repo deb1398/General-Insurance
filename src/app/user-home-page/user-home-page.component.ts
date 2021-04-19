@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 //import { EmailValidator } from '@angular/forms';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
+
+import { ClaimInfo} from '../claim-info'
+
 import { Router } from '@angular/router';
 import { RenewIns } from 'src/Models/renew-ins';
 import { BuyInsClass } from '../buy-insurance/buy-insurance.component';
 import { CRUDApiService } from '../crud-api.service';
 import { ViewChild, ElementRef} from '@angular/core';
+
 
 @Component({
   selector: 'app-user-home-page',
@@ -14,7 +18,12 @@ import { ViewChild, ElementRef} from '@angular/core';
 })
 export class UserHomePageComponent implements OnInit {
 
+
+  public subscriptionplan_list : Subscription[] = [];
+  public claim_history : ClaimHistory[]=[];
+
   @ViewChild('closeModal') closeModal: ElementRef;
+
 
   renewForm = new FormGroup({
     policyNumber: new FormControl('',[Validators.required]),
@@ -22,14 +31,24 @@ export class UserHomePageComponent implements OnInit {
     email:new FormControl('',[Validators.email,Validators.required])
   })
 
-  constructor(
-    public crudService:CRUDApiService,
-    public router:Router
-  ) { }
 
-  ngOnInit(): void {
+  
 
-    
+  constructor(public crudService: CRUDApiService, public router:Router) { }
+
+  ngOnInit() {
+    const User_Id=sessionStorage.getItem('User_Id');
+    console.log(User_Id);
+    this.crudService.subscriptionPlan_details(User_Id).subscribe((data : Subscription[]) => {
+      this.subscriptionplan_list=data;
+      //console.log(this.subscriptionplan_list)
+
+    })
+     this.crudService.claim_details(User_Id).subscribe((data : ClaimHistory[])=>
+     {
+       this.claim_history=data;
+     })
+
   }
 
   get policyNumber(){
@@ -105,4 +124,25 @@ export class RenewForm {
   mobile: string;
   email: string;
   User_Id:number;
+}
+export class Subscription
+{
+  Vehicle_Type : string;
+  Manufacturer_Name :string;
+  Model_Name :string;
+  Reg_No :string;
+  Engine_No :number;
+  Chasis_No :number;
+  Sub_date :Date;
+  Policy_No :number;
+  Status_of_sub : string;
+  message : string;
+}
+export class ClaimHistory
+{
+  Claim_no : number
+  Policy_No : number;
+  Date_claimed : Date;
+  Claim_approval_status : string;
+  Claim_amt : number;
 }

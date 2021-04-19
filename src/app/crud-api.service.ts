@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { WheelerBrand, WheelerModel } from './buy-insurance/buy-insurance.component';
@@ -7,7 +7,11 @@ import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, retry} from 'rxjs/operators';
 
 import { fakeAsync } from '@angular/core/testing';
+
+import { ClaimInfo} from './claim-info'
+
 import { RenewForm } from './user-home-page/user-home-page.component';
+
 
 
 @Injectable({
@@ -60,6 +64,28 @@ export class CRUDApiService {
     return this.httpClient.post<claiminsurance>(this.apiServer + '/ClaimInsurance/', JSON.stringify(clins), this.httpOptions);
   }
 
+
+  getadminclaims(): Observable<any> {
+    return this.httpClient.get<any>(this.apiServer + '/Admin/')
+  }
+
+  getdetailsById(Claim_no): Observable<any> {
+    const opts = { params: new HttpParams({fromString: "Claim_no="+ Claim_no}) };
+    return this.httpClient.get<any>(this.apiServer + '/Admin?Claim_no='+Claim_no)
+  }
+
+  updateclaims(Claim_no,claim_info): Observable<any>{
+    return this.httpClient.put<any>(this.apiServer + '/Admin?Claim_no='+Claim_no, JSON.stringify(claim_info), this.httpOptions)
+  }
+
+  subscriptionPlan_details(User_Id): Observable<any>{
+    return this.httpClient.post<any>(this.apiServer + '/Subscription?User_Id='+User_Id, JSON.stringify(User_Id), this.httpOptions)
+  }
+  claim_details(User_Id): Observable<any>{
+    return this.httpClient.post<any>(this.apiServer + '/ClaimHistory?User_Id='+User_Id, JSON.stringify(User_Id), this.httpOptions)
+  }
+
+
   RenewDetailsConfirm(renewFormObj): Observable<any> {
     return this.httpClient.post<any>(this.apiServer + '/RenewCheck/', JSON.stringify(renewFormObj), this.httpOptions);
   }
@@ -75,6 +101,7 @@ export class CRUDApiService {
   RenewInsurance(buyInsData):Observable<any>{
     return this.httpClient.post<any>(this.apiServer + '/RenewInsurance/', JSON.stringify(buyInsData), this.httpOptions);
   }
+
 
 
   handleError(error)
@@ -160,4 +187,16 @@ export class claiminsurance
   Injury_to_Thirdparty : number;
   Claim_approval_status : string;
   Claim_amt : number;
+}
+
+export class Subscription_plan
+{
+  Vehicle_Type : string;
+  Manufacturer_Name : string;
+  Model_Name : string;
+  Reg_No : string;
+  Engine_No : number;
+  Chasis_No : number;
+  Sub_date : Date;
+  Policy_No : number;
 }
