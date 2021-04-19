@@ -37,6 +37,8 @@ export class UserHomePageComponent implements OnInit {
   constructor(public crudService: CRUDApiService, public router:Router) { }
 
   ngOnInit() {
+
+    
     const User_Id=sessionStorage.getItem('User_Id');
     console.log(User_Id);
     this.crudService.subscriptionPlan_details(User_Id).subscribe((data : Subscription[]) => {
