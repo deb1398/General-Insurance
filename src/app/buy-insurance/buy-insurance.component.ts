@@ -239,4 +239,4 @@ export class BuyInsClass {
   inusrance_type:string;
 
   
-
+}
