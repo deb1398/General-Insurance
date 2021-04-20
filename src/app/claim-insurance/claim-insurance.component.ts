@@ -88,6 +88,7 @@ export class ClaimInsuranceComponent implements OnInit {
     
     console.log(this.claimForm.value);
     let cl=new claim();
+    cl.User_Id=Number(sessionStorage.getItem('User_Id'));
     cl.Policy_No=this.policy_no.value;
     cl.Reasons=this.claim_reason.value;
     cl.Date_claimed=new Date();
@@ -101,15 +102,21 @@ export class ClaimInsuranceComponent implements OnInit {
 
     this.crudService.claim(cl).subscribe(res => {
       console.log(res);
-      if(res.message=='Invalid')
+      window.alert(res.message);
+
+      if(res.message=='Successfull')
       {
-        window.alert('You do not have this current policy \n or it is expired');
+        this.router.navigateByUrl('/user-home-page');
       }
-      else{
-        console.log('Submitted Successfully'),
-       window.alert('Submitted Successfully'),
-      this.router.navigateByUrl('user-home-page')
-      }
+      // if(res.message=='Invalid')
+      // {
+      //   window.alert('You do not have this current policy \n or it is expired');
+      // }
+      // else{
+      //   console.log('Submitted Successfully'),
+      //  window.alert('Submitted Successfully'),
+      // this.router.navigateByUrl('user-home-page')
+      // }
     });
   }
 
@@ -117,6 +124,7 @@ export class ClaimInsuranceComponent implements OnInit {
 
 export class claim
 {
+  User_Id : number;
   Policy_No : string;
   Reasons : string;
   Date_claimed : Date;

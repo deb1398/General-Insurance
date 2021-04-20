@@ -58,6 +58,22 @@ export class PremiumCalcComponent implements OnInit {
 
   }
 
+
+  Market_Price_Response:number=0;
+  public getMarketPrice(model_name:string)
+  {
+    console.log("Inside");
+    var index = model_name.indexOf(":")
+    model_name = model_name.substring(index+1,).trim();
+    this.crudService.getMarketPriceApi(model_name).subscribe(res => {
+      console.log(res);
+      this.Market_Price_Response = Number(res.Market_Price);
+      console.log(res.Market_Price);
+    });
+
+    console.log(model_name);
+  }
+
   
 
   public BrandsList:Brand[] =[];
@@ -76,7 +92,7 @@ export class PremiumCalcComponent implements OnInit {
     veh_type: new FormControl('',[Validators.required]),
     brand_name: new FormControl('',[Validators.required]),
     model_name: new FormControl('',[Validators.required]),
-    market_price: new FormControl('',[Validators.required, Validators.pattern("[0-9]{4,7}")]),
+    market_price: new FormControl(''),
     veh_cc: new FormControl('',[Validators.required]),
     veh_pur_date: new FormControl('',[Validators.required,this.dateValidator]),
     
@@ -142,6 +158,7 @@ export class PremiumCalcComponent implements OnInit {
   
   onSubmit()
   {
+    
     let premamtobj = new PremiumAmount();
     premamtobj.Model_Name = this.model_name.value;
     premamtobj.vehicle_cc = this.veh_cc.value;
@@ -153,7 +170,7 @@ export class PremiumCalcComponent implements OnInit {
   
     this.crudService.getpremfacors(premamtobj).subscribe((data) => {
       console.log(data);
-      this.idv = this.market_price.value - (data.dep_per/100 * this.market_price.value);
+      this.idv = this.Market_Price_Response - (data.dep_per/100 * this.Market_Price_Response);
       this.basic_third_party = data.thirdpartyprem;
       this.basic_own_damage = data.od_prem_per/100 * Number(this.idv);
       
@@ -172,6 +189,7 @@ export class PremiumCalcComponent implements OnInit {
     });
     
     console.log(this.calcForm.value);
+    console.log(this.calcForm.controls['market_price'].value);
   }
 
 }

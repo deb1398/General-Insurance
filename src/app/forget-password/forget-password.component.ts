@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
 import { CRUDApiService } from '../crud-api.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class ForgetPasswordComponent implements OnInit {
   })
 
 
-  constructor(public crudService: CRUDApiService) { }
+  constructor(public crudService: CRUDApiService, private router:Router) { }
 
   ngOnInit():void {
     
@@ -52,6 +53,7 @@ export class ForgetPasswordComponent implements OnInit {
       {
         console.log("Successfull");    
         window.alert("Password Changed successfully");
+        this.router.navigateByUrl('/Login');
       }
       else
       {

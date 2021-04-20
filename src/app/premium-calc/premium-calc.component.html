@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container footer-fix">
     <div class="row">
         <div class="col-lg-8 offset-lg-2">
 
@@ -41,7 +41,7 @@
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-4 form-group">
                                 <label for="model_name">Model Name</label>
-                                <select id="model_name" class="form-control" name="model_name" formControlName="model_name" [ngClass]="{'is-invalid': model_name.errors && (model_name.touched || model_name.dirty), 'is-valid':model_name.valid}">
+                                <select id="model_name" class="form-control" (change)="getMarketPrice($event.target.value)" name="model_name" formControlName="model_name" [ngClass]="{'is-invalid': model_name.errors && (model_name.touched || model_name.dirty), 'is-valid':model_name.valid}">
                                     <option [ngValue]="m.name" *ngFor="let m of ModelsList">
                                     {{m.name}}
                                     </option>
@@ -54,7 +54,8 @@
                             </div>
                             <div class="col-sm-12 col-md-6 col-lg-4 form-group">
                                 <label for="market_price">Market Price</label>
-                                <input type="number" class="form-control" id="market_price" name="market_price" formControlName="market_price" [ngClass]="{'is-invalid': market_price.errors && (market_price.touched || market_price.dirty), 'is-valid':market_price.valid}">
+                                <input type="number" class="form-control" id="market_price" name="market_price" readonly="readonly" value="{{Market_Price_Response}}" formControlName="market_price" >
+                                <!-- [ngClass]="{'is-invalid': market_price.errors && (market_price.touched || market_price.dirty), 'is-valid':market_price.valid}" -->
                                 <div *ngIf="!market_price?.valid && (market_price?.dirty || market_price?.touched)" id="error-div">
                                     <div [hidden]="!market_price.errors.required">
                                         Market Price is required

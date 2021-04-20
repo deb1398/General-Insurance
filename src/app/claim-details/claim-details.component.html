@@ -6,7 +6,7 @@
                     <div>
                         <div class="card-header">
                             <h3>Detailed Claim Information</h3>
-                            <div class="text-center"><img src="assets/images/claim logo.jpeg" alt="claim logo"></div>
+                            <div class="text-center"><img img width="150" src="assets/images/claim logo.jpeg" alt="claim logo"></div>
                         </div>
                         <div class="card-body">
                             <form [formGroup]="claimDetailForm" (ngSubmit)="onSubmit()" novalidate>
@@ -31,6 +31,10 @@
                                                 value="{{Claim_info.Date_claimed}}"></td>
                                     </tr>
                                     <tr>
+                                        <th>IDV</th>
+                                        <td><input type="text" id="idv" name="idv" formControlName="idv" class="form-control form-control-lg rounded-0" [value]="Claim_info.IDV" disabled></td>
+                                    </tr>
+                                    <tr>
                                         <th>Claim Approval Status</th>
                                         <td>
                                             <select class="form-control form-control-lg rounded-0" id="status" name="status" formControlName="status" required>
@@ -44,7 +48,7 @@
                                         <div [hidden]="!status.errors.required">
                                           <p style="color: red;">Status is required</p>
                                         </div>
-                                      </div>
+                                    </div>
                                     <tr>
                                         <th>Claim Amount</th>
                                         <td><input type="text" id="amount" name="amount" formControlName="amount" class="form-control form-control-lg rounded-0" [value]="Claim_info.Claim_amt" ></td>

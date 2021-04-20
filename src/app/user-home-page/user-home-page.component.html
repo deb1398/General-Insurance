@@ -173,47 +173,74 @@
   </div> -->
 
   <h5>List of Insurance:</h5>
-<div *ngFor="let planlist of subscriptionplan_list">
-  <div class="card mb-2">
-    
-      <h6 class="card-header d-flex align-items-center"><i
-          class="material-icons tstyle mr-2">{{planlist.Vehicle_Type}}</i>{{planlist.Manufacturer_Name}} &nbsp;<i
-          class="material-icons tstyle mr-3">({{planlist.Model_Name}})</i></h6>
+  <div *ngIf="subscriptionplan_list.length==0; else elseShowSubsPlan">No Subscriptions Available</div>
+  <ng-template #elseShowSubsPlan>
+    <div *ngFor="let planlist of subscriptionplan_list">
+      <div class="card mb-2">
+        
+          <h6 class="card-header d-flex align-items-center"><i
+              class="material-icons tstyle mr-2">{{planlist.Vehicle_Type}}</i>{{planlist.Manufacturer_Name}} &nbsp;<i
+              class="material-icons tstyle mr-3">({{planlist.Model_Name}})</i></h6>
+              
+        <div class="card-body">
+          <h6 class="d-flex align-items-center mb-3">Subscription Plan: {{planlist.Plan_type}} ( {{planlist.Sub_date | date: 'dd/MM/yyyy'}} to {{planlist.End_date | date: 'dd/MM/yyyy'}} )</h6>
+          <div class="row">
+            <div class="col-6 text-center">
+              <h6 class="d-flex align-items-center mb-3">Policy Number: {{planlist.Policy_No}}</h6>
+              <h6 class="d-flex align-items-center mb-3">Vehicle Number: {{planlist.Reg_No}}</h6>
+            </div>
+            <div class="col-6 text-center">
+              <h6 class="d-flex align-items-center mb-3">Engine Number: {{planlist.Engine_No}}</h6>
+              <h6 class="d-flex align-items-center mb-3">Chassis Number: {{planlist.Chasis_No}}</h6>
+            </div>
+          </div>
+          <hr>
+
           
-    <div class="card-body">
-      <h6 class="d-flex align-items-center mb-3">Subscription Plan: {{planlist.Sub_date}}</h6>
-      <div class="row">
-        <div class="col-6 text-center">
-          <h6 class="d-flex align-items-center mb-3">Policy Number: {{planlist.Policy_No}}</h6><br>
-          <h6 class="d-flex align-items-center mb-3">Vehicle Number: {{planlist.Reg_No}}</h6>
-        </div>
-        <div class="col-6 text-center">
-          <h6 class="d-flex align-items-center mb-3">Engine Number: {{planlist.Engine_No}}</h6><br>
-          <h6 class="d-flex align-items-center mb-3">Chassis Number: {{planlist.Chasis_No}}</h6>
+      <span *ngIf="planlist.Status_of_sub == 'Expired'; else elseBlock">
+                <span style="color: red;">(Your Plan has expired)</span><span class="tstyle"> | </span>
+              </span>
+
+
+                  <ng-template #elseBlock>
+                    <a href="#" class=" tstyle" routerLink="/claim-insurance">Claim</a>
+                    <span class="tstyle"><strong> | (Active) | </strong></span>
+                  </ng-template>
+
+                  <a href="" class="tstyle" [routerLink]="['/policy-details']" [queryParams]="{policy_no:planlist.Policy_No}">View Details</a>
         </div>
       </div>
-      <hr>
-
-      <span *ngIf="planlist.Status_of_sub == 'Expired'; else elseBlock">
-                <a href="#" class="card-link tstyle" data-toggle="modal" data-target="#exampleModal">Renew </a>
-                <span style="color: red;">(Your Plan has expired)</span>
-              </span>  
-
-              <ng-template #elseBlock>
-                <a href="#" class="card-link tstyle" routerLink="/claim-insurance">Claim </a>
-                <span class="tstyle"><strong>(Active)</strong></span>
-              </ng-template>
     </div>
+  </ng-template>
+<hr>
+
+<h5>Claim History</h5>
+<div *ngIf="claim_history.length==0; else elseShowClaimHistory">No Claim History Available</div>
+<ng-template #elseShowClaimHistory>
+  <!-- <div *ngFor="let info of claim_history">
+    <div class="card mb-2">
+      
+      <div class="card-body">
+        <h6 class="d-flex align-items-center mb-3">Claim Number: {{info.Claim_no}}</h6>
+        <div class="row">
+          <div class="col-6 text-center">
+            <h6 class="d-flex align-items-center mb-3">Policy Number: {{info.Policy_No}}</h6>
+            <h6 class="d-flex align-items-center mb-3">Date Claimed: {{info.Date_claimed}}</h6>
+          </div>
+          <div class="col-6 text-center">
+            <span *ngIf="info.Claim_approval_status=='Approved'; else second_condition">
+              <h6 class="d-flex align-items-center mb-3" style="color: #264A9F;">Approval Status: {{info.Claim_approval_status}}</h6>
   </div>
 </div>
 
-<h5>Claim History</h5>
+ <hr> -->
+
+<!-- 
+<h5>Claim History:</h5> -->
 <div *ngFor="let info of claim_history">
   <div class="card mb-2">
     
-      <h6 class="card-header d-flex align-items-center"><i
-          class="material-icons tstyle mr-2">{{planlist.Vehicle_Type}}</i>{{planlist.Manufacturer_Name}} &nbsp;<i
-          class="material-icons tstyle mr-3">({{planlist.Model_Name}})</i></h6>
+    
           
     <div class="card-body">
       <h6 class="d-flex align-items-center mb-3">Claim Number: {{info.Claim_no}}</h6>
@@ -226,24 +253,27 @@
           <span *ngIf="info.Claim_approval_status=='Approved'; else second_condition">
             <h6 class="d-flex align-items-center mb-3" style="color: #264A9F;">Approval Status: {{info.Claim_approval_status}}</h6>
           </span>
-          <ng-template #second_condition>
+          <!-- <ng-template #second_condition>
             <span *ngIf="info.Claim_approval_status=='Pending' || info.Claim_approval_status=='Under Verification'; else third_condition">
-              <h6 class="d-flex align-items-center mb-3" style="color: grey;">Approval Status: {{info.Claim_approval_status}}</h6>
-            </span>
-          </ng-template>
-          <ng-template #third_condition>
-            <h6 class="d-flex align-items-center mb-3" style="color: red;">Approval Status: {{info.Claim_approval_status}}</h6>
-          </ng-template>
-          <h6 class="d-flex align-items-center mb-3">Claim Amount: {{info.Claim_amt}}</h6>
+              <h6 class="d-flex align-items-center mb-3" style="color: #323F4B;"><strong> Approval Status: {{info.Claim_approval_status}}</strong></h6>
+            </span> -->
+            <ng-template #second_condition>
+              <span *ngIf="info.Claim_approval_status=='Pending' || info.Claim_approval_status=='Under Verification'; else third_condition">
+                <h6 class="d-flex align-items-center mb-3" style="color: #323F4B;"><strong> Approval Status: {{info.Claim_approval_status}}</strong></h6>
+              </span>
+            </ng-template>
+            <ng-template #third_condition>
+              <h6 class="d-flex align-items-center mb-3" style="color: red;">Approval Status: {{info.Claim_approval_status}}</h6>
+            </ng-template>
+            <h6 class="d-flex align-items-center mb-3">Claim Amount: {{info.Claim_amt==null?'N/A':info.Claim_amt}}</h6>
+          </div>
         </div>
+        <hr>
+        
       </div>
-      <hr>
-      
     </div>
   </div>
-</div>
-
-
+</ng-template>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
