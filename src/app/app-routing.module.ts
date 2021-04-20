@@ -28,7 +28,7 @@ const routes: Routes = [
   {path:'Login', component : LoginComponent},
   {path:'Adminlogin', component : AdminLoginComponent},
   {path:'Contact', component : ContactComponent},
-  {path:'BuyInsurance', component : BuyInsuranceComponent},
+  {path:'BuyInsurance', component : BuyInsuranceComponent, canActivate: [AuthGuardService]},
   // {path:'BuyInsurance', component : BuyInsuranceComponent, canActivate: [AuthGuardService]}
   {path:'AboutUs', component : AboutusComponent},
   {path:'ForgetPwd', component : ForgetPasswordComponent},

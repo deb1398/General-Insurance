@@ -4,14 +4,15 @@ import { Injectable } from '@angular/core';
 import { WheelerBrand, WheelerModel } from './buy-insurance/buy-insurance.component';
 
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
-import { catchError, retry} from 'rxjs/operators';
+import { catchError, retry } from 'rxjs/operators';
 
 import { fakeAsync } from '@angular/core/testing';
 //import { ClaimInfo} from './claim-info'
 
-import { ClaimInfo} from './claim-info'
+import { ClaimInfo } from './claim-info'
 
 import { RenewForm } from './user-home-page/user-home-page.component';
+import { Router } from '@angular/router';
 
 
 
@@ -21,16 +22,14 @@ import { RenewForm } from './user-home-page/user-home-page.component';
 export class CRUDApiService {
 
 
-  public loginstatus = new BehaviorSubject<boolean>((sessionStorage.getItem('User_Id')!=null)?true:false);
-  public adminstatus = new BehaviorSubject<boolean>((sessionStorage.getItem('Admin_username')!=null)?true:false);
+  public loginstatus = new BehaviorSubject<boolean>((sessionStorage.getItem('User_Id') != null) ? true : false);
+  public adminstatus = new BehaviorSubject<boolean>((sessionStorage.getItem('Admin_username') != null) ? true : false);
 
-  get isLoggedin()
-  {
+  get isLoggedin() {
     return this.loginstatus.asObservable();
   }
 
-  get adminLoggedin()
-  {
+  get adminLoggedin() {
     return this.adminstatus.asObservable();
   }
 
@@ -40,8 +39,8 @@ export class CRUDApiService {
       'Content-Type': 'application/json'
     })
   }
-  
-  constructor(private httpClient: HttpClient) { }
+
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
   create(ruser): Observable<RegisterUser> {
     return this.httpClient.post<RegisterUser>(this.apiServer + '/Register/', JSON.stringify(ruser), this.httpOptions).pipe(catchError(this.handleError));
@@ -51,11 +50,11 @@ export class CRUDApiService {
     return this.httpClient.post<any>(this.apiServer + '/Login/', JSON.stringify(luser), this.httpOptions)
   }
 
-  getBrands(VehicleType): Observable<any>{
-    return this.httpClient.post<any>(this.apiServer + '/BrandName/', JSON.stringify(VehicleType), this.httpOptions)
+  getBrands(VehicleType): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + '/BrandName/', JSON.stringify(VehicleType), this.httpOptions).pipe(catchError(this.handleCommonErrors));
   }
 
-  getModels(ModelType): Observable<any>{
+  getModels(ModelType): Observable<any> {
     return this.httpClient.post<any>(this.apiServer + '/ModelName/', JSON.stringify(ModelType), this.httpOptions)
   }
 
@@ -72,12 +71,12 @@ export class CRUDApiService {
   }
 
 
-  
-  subscriptionPlan_details(User_Id): Observable<any>{
-    return this.httpClient.post<any>(this.apiServer + '/Subscription?User_Id='+User_Id, JSON.stringify(User_Id), this.httpOptions)
+
+  subscriptionPlan_details(User_Id): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + '/Subscription?User_Id=' + User_Id, JSON.stringify(User_Id), this.httpOptions)
   }
-  claim_details(User_Id): Observable<any>{
-    return this.httpClient.post<any>(this.apiServer + '/ClaimHistory?User_Id='+User_Id, JSON.stringify(User_Id), this.httpOptions)
+  claim_details(User_Id): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + '/ClaimHistory?User_Id=' + User_Id, JSON.stringify(User_Id), this.httpOptions)
   }
 
 
@@ -90,28 +89,28 @@ export class CRUDApiService {
   }
 
   getdetailsById(Claim_no): Observable<any> {
-    const opts = { params: new HttpParams({fromString: "Claim_no="+ Claim_no}) };
-    return this.httpClient.get<any>(this.apiServer + '/Admin?Claim_no='+Claim_no)
+    const opts = { params: new HttpParams({ fromString: "Claim_no=" + Claim_no }) };
+    return this.httpClient.get<any>(this.apiServer + '/Admin?Claim_no=' + Claim_no)
   }
 
   getMarketPriceApi(Model_Name): Observable<any> {
-    const opts = { params: new HttpParams({fromString: "Model_Name="+ Model_Name}) };
-    return this.httpClient.get<any>(this.apiServer + '/MarketPrice/?model_name='+Model_Name)
+    const opts = { params: new HttpParams({ fromString: "Model_Name=" + Model_Name }) };
+    return this.httpClient.get<any>(this.apiServer + '/MarketPrice/?model_name=' + Model_Name)
   }
 
-  updateclaims(Claim_no,claim_info): Observable<any>{
-    return this.httpClient.put<any>(this.apiServer + '/Admin?Claim_no='+Claim_no, JSON.stringify(claim_info), this.httpOptions)
+  updateclaims(Claim_no, claim_info): Observable<any> {
+    return this.httpClient.put<any>(this.apiServer + '/Admin?Claim_no=' + Claim_no, JSON.stringify(claim_info), this.httpOptions)
   }
 
   BuyInsuranceCheck(buyformobj): Observable<any> {
     return this.httpClient.post<any>(this.apiServer + '/BuyInsuranceCheck/', JSON.stringify(buyformobj), this.httpOptions);
   }
 
-  BuyInsurance(buyInsData):Observable<any>{
+  BuyInsurance(buyInsData): Observable<any> {
     return this.httpClient.post<any>(this.apiServer + '/BuyInsurance/', JSON.stringify(buyInsData), this.httpOptions);
   }
 
-  RenewInsurance(buyInsData):Observable<any>{
+  RenewInsurance(buyInsData): Observable<any> {
     return this.httpClient.post<any>(this.apiServer + '/RenewInsurance/', JSON.stringify(buyInsData), this.httpOptions);
   }
 
@@ -124,30 +123,46 @@ export class CRUDApiService {
   }
 
 
-  handleError(error)
-  {
+  handleError = error => {
     let errorMessage = '';
-    if(error.error instanceof ErrorEvent)
-    {
+    if (error.error instanceof ErrorEvent) {
       errorMessage = `Error: ${error.error.message}`;
     }
-    else
-    {
+    else {
       errorMessage = `Email Id or Phone Number is already taken`;
     }
 
     window.alert(errorMessage);
     return throwError(errorMessage);
   }
-  
 
-  getbrandsapi(vehtype): Observable<any> {
-    return this.httpClient.post<any>(this.apiServer + '/BrandName/', JSON.stringify(vehtype), this.httpOptions)
+  handleCommonErrors = error => {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = `Error: ${error.error.message}`;
+    }
+    else {
+      errorMessage = `Bad Request.`;
+    }
+    window.alert(errorMessage);
+    sessionStorage.clear();
+    this.router.navigate(['/'])
+      .then(() => {
+        window.location.reload();
+      });
+
+
+    return throwError(errorMessage);
   }
-  
-  getmodelsapi(vehtypebrandid): Observable<any> {
-    return this.httpClient.post<any>(this.apiServer + '/ModelName/', JSON.stringify(vehtypebrandid), this.httpOptions)
-  }
+
+
+  // getbrandsapi(vehtype): Observable<any> {
+  //   return this.httpClient.post<any>(this.apiServer + '/BrandName/', JSON.stringify(vehtype), this.httpOptions)
+  // }
+
+  // getmodelsapi(vehtypebrandid): Observable<any> {
+  //   return this.httpClient.post<any>(this.apiServer + '/ModelName/', JSON.stringify(vehtypebrandid), this.httpOptions)
+  // }
 
   getpremfacors(premamtobj): Observable<any> {
     return this.httpClient.post<any>(this.apiServer + '/PremiumAmount/', JSON.stringify(premamtobj), this.httpOptions)
@@ -170,27 +185,23 @@ export class RegisterUser {
   Password: String;
 }
 
-export class LoginUser
-{
-  Email_ID:string;
-  Password:string;
+export class LoginUser {
+  Email_ID: string;
+  Password: string;
   message: string;
 }
-export class Adminlogindetails
-{
-  Admin_id : string;
-  Password : string;
+export class Adminlogindetails {
+  Admin_id: string;
+  Password: string;
   message: string;
 }
-export class Mailuser
-{
-  Email_ID : string;
-  message : string;
+export class Mailuser {
+  Email_ID: string;
+  message: string;
 }
-export class reset_pwd
-{
-  token : string;
-  password : string;
+export class reset_pwd {
+  token: string;
+  password: string;
   //cpassword : string;
 }
 // export class brands
@@ -201,27 +212,25 @@ export class reset_pwd
 
 // }
 
-export class claiminsurance
-{
-  Policy_No : string;
-  Reasons : string;
-  Date_claimed : Date;
-  Date_of_Loss : Date;
-  Place_of_Loss : string;
-  Damage_Description : string;
-  Injury_to_Thirdparty : number;
-  Claim_approval_status : string;
-  Claim_amt : number;
+export class claiminsurance {
+  Policy_No: string;
+  Reasons: string;
+  Date_claimed: Date;
+  Date_of_Loss: Date;
+  Place_of_Loss: string;
+  Damage_Description: string;
+  Injury_to_Thirdparty: number;
+  Claim_approval_status: string;
+  Claim_amt: number;
 }
 
-export class Subscription_plan
-{
-  Vehicle_Type : string;
-  Manufacturer_Name : string;
-  Model_Name : string;
-  Reg_No : string;
-  Engine_No : number;
-  Chasis_No : number;
-  Sub_date : Date;
-  Policy_No : number;
+export class Subscription_plan {
+  Vehicle_Type: string;
+  Manufacturer_Name: string;
+  Model_Name: string;
+  Reg_No: string;
+  Engine_No: number;
+  Chasis_No: number;
+  Sub_date: Date;
+  Policy_No: number;
 }
