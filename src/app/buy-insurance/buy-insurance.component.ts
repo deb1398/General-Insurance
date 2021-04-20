@@ -23,7 +23,8 @@ export class BuyInsuranceComponent implements OnInit {
     engine_number : new FormControl('',[Validators.required]),
     vehicleCC: new FormControl('',[Validators.required]),
     chassis_number : new FormControl('',[Validators.required]),
-    market_price : new FormControl('',[Validators.required, Validators.pattern("[0-9]{4,7}")])
+    //market_price : new FormControl('',[Validators.required, Validators.pattern("[0-9]{4,7}")])
+    market_price : new FormControl('')
   })
 
   dateValidator(control: FormControl): { [s: string]: boolean } {
@@ -137,6 +138,21 @@ export class BuyInsuranceComponent implements OnInit {
     // console.log(e.target.value);
   }
 
+  Market_Price_Response:number=0;
+  public getMarketPrice(model_name:string)
+  {
+    console.log("Inside");
+    var index = model_name.indexOf(":")
+    model_name = model_name.substring(index+1,).trim();
+    this.crudService.getMarketPriceApi(model_name).subscribe(res => {
+      console.log(res);
+      this.Market_Price_Response = Number(res.Market_Price);
+      console.log(res.Market_Price);
+    });
+
+    console.log(model_name);
+  }
+
   buyInsurance: BuyInsClass;
 
   onSubmit()
@@ -145,11 +161,13 @@ export class BuyInsuranceComponent implements OnInit {
     let reg= new registrationNo;
     reg.registration_no=String(this.registeration_number.value);
     
+    
     this.crudService.BuyInsuranceCheck(reg).subscribe(res => {
       console.log(res);
       if(res.message === "Valid")
       {
         this.buyInsurance = this.buyinsuranceForm.value;
+        this.buyInsurance.market_price = this.Market_Price_Response;
         this.buyInsurance.User_Id = Number(sessionStorage.getItem('User_Id'));
         this.buyInsurance.inusrance_type = "Buy_New";
         //this.shared.setBuyInsData(this.buyInsurance);

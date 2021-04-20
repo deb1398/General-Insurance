@@ -20,6 +20,7 @@ import { UserHomePageComponent } from './user-home-page/user-home-page.component
 import { PaymentGatewayComponent } from './payment-gateway/payment-gateway.component';
 import { ResetPasswordComponent} from './reset-password/reset-password.component';
 import { AuthGuardService } from './Auth/auth-guard.service';
+import { PolicyDetailsComponent } from './policy-details/policy-details.component';
 const routes: Routes = [
 
   {path:'', component : HomeComponent},
@@ -42,6 +43,7 @@ const routes: Routes = [
   {path:'payment-gateway', component : PaymentGatewayComponent},
   {path:'claim-details', component : ClaimDetailsComponent},
   {path: 'reset-pwd', component : ResetPasswordComponent},
+  {path: 'policy-details', component : PolicyDetailsComponent},
   {path: '**', component: HomeComponent}
   
 ];
