@@ -9,6 +9,7 @@ export class ClaimInfo {
   Injury_to_Thirdparty : boolean;
   Claim_approval_status : string;
   Claim_amt : number;
+  IDV : number;
   constructor(
     Claim_approval_status : string,
   Claim_amt : number

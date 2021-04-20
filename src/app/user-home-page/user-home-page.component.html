@@ -196,10 +196,11 @@
           </div>
           <hr>
 
-          <span *ngIf="planlist.Status_of_sub == 'Expired'; else elseBlock">
-                    <a href="#" class="card-link tstyle" data-toggle="modal" data-target="#exampleModal">Renew </a>
-                    <span style="color: red;">(Your Plan has expired)</span>
-                  </span>  
+          
+      <span *ngIf="planlist.Status_of_sub == 'Expired'; else elseBlock">
+                <span style="color: red;">(Your Plan has expired)</span>
+              </span>  
+
 
                   <ng-template #elseBlock>
                     <a href="#" class="card-link tstyle" routerLink="/claim-insurance">Claim </a>
