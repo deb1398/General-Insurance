@@ -47,7 +47,7 @@ export class CRUDApiService {
   }
 
   check(luser): Observable<any> {
-    return this.httpClient.post<any>(this.apiServer + '/Login/', JSON.stringify(luser), this.httpOptions)
+    return this.httpClient.post<any>(this.apiServer + '/Login/', JSON.stringify(luser), this.httpOptions).pipe(catchError(this.handleCommonErrors));
   }
 
   getBrands(VehicleType): Observable<any> {
@@ -55,71 +55,71 @@ export class CRUDApiService {
   }
 
   getModels(ModelType): Observable<any> {
-    return this.httpClient.post<any>(this.apiServer + '/ModelName/', JSON.stringify(ModelType), this.httpOptions)
+    return this.httpClient.post<any>(this.apiServer + '/ModelName/', JSON.stringify(ModelType), this.httpOptions).pipe(catchError(this.handleCommonErrors));
   }
 
   mail(muser): Observable<any> {
-    return this.httpClient.post<any>(this.apiServer + '/Mail/', JSON.stringify(muser), this.httpOptions)
+    return this.httpClient.post<any>(this.apiServer + '/Mail/', JSON.stringify(muser), this.httpOptions).pipe(catchError(this.handleCommonErrors));
   }
 
   reset_pwd(fuser): Observable<any> {
-    return this.httpClient.post<any>(this.apiServer + '/Reset_pwd/', JSON.stringify(fuser), this.httpOptions)
+    return this.httpClient.post<any>(this.apiServer + '/Reset_pwd/', JSON.stringify(fuser), this.httpOptions).pipe(catchError(this.handleCommonErrors));
   }
 
   claim(clins): Observable<any> {
-    return this.httpClient.post<any>(this.apiServer + '/ClaimInsurance/', JSON.stringify(clins), this.httpOptions);
+    return this.httpClient.post<any>(this.apiServer + '/ClaimInsurance/', JSON.stringify(clins), this.httpOptions).pipe(catchError(this.handleCommonErrors));
   }
 
 
 
   subscriptionPlan_details(User_Id): Observable<any> {
-    return this.httpClient.post<any>(this.apiServer + '/Subscription?User_Id=' + User_Id, JSON.stringify(User_Id), this.httpOptions)
+    return this.httpClient.post<any>(this.apiServer + '/Subscription?User_Id=' + User_Id, JSON.stringify(User_Id), this.httpOptions).pipe(catchError(this.handleCommonErrors));
   }
   claim_details(User_Id): Observable<any> {
-    return this.httpClient.post<any>(this.apiServer + '/ClaimHistory?User_Id=' + User_Id, JSON.stringify(User_Id), this.httpOptions)
+    return this.httpClient.post<any>(this.apiServer + '/ClaimHistory?User_Id=' + User_Id, JSON.stringify(User_Id), this.httpOptions).pipe(catchError(this.handleCommonErrors));
   }
 
 
   RenewDetailsConfirm(renewFormObj): Observable<any> {
-    return this.httpClient.post<any>(this.apiServer + '/RenewCheck/', JSON.stringify(renewFormObj), this.httpOptions);
+    return this.httpClient.post<any>(this.apiServer + '/RenewCheck/', JSON.stringify(renewFormObj), this.httpOptions).pipe(catchError(this.handleCommonErrors));
   }
 
   getadminclaims(): Observable<any> {
-    return this.httpClient.get<any>(this.apiServer + '/Admin/')
+    return this.httpClient.get<any>(this.apiServer + '/Admin/').pipe(catchError(this.handleCommonErrors));
   }
 
   getdetailsById(Claim_no): Observable<any> {
     const opts = { params: new HttpParams({ fromString: "Claim_no=" + Claim_no }) };
-    return this.httpClient.get<any>(this.apiServer + '/Admin?Claim_no=' + Claim_no)
+    return this.httpClient.get<any>(this.apiServer + '/Admin?Claim_no=' + Claim_no).pipe(catchError(this.handleCommonErrors));
   }
 
   getMarketPriceApi(Model_Name): Observable<any> {
     const opts = { params: new HttpParams({ fromString: "Model_Name=" + Model_Name }) };
-    return this.httpClient.get<any>(this.apiServer + '/MarketPrice/?model_name=' + Model_Name)
+    return this.httpClient.get<any>(this.apiServer + '/MarketPrice/?model_name=' + Model_Name).pipe(catchError(this.handleCommonErrors));
   }
 
   updateclaims(Claim_no, claim_info): Observable<any> {
-    return this.httpClient.put<any>(this.apiServer + '/Admin?Claim_no=' + Claim_no, JSON.stringify(claim_info), this.httpOptions)
+    return this.httpClient.put<any>(this.apiServer + '/Admin?Claim_no=' + Claim_no, JSON.stringify(claim_info), this.httpOptions).pipe(catchError(this.handleCommonErrors));
   }
 
   BuyInsuranceCheck(buyformobj): Observable<any> {
-    return this.httpClient.post<any>(this.apiServer + '/BuyInsuranceCheck/', JSON.stringify(buyformobj), this.httpOptions);
+    return this.httpClient.post<any>(this.apiServer + '/BuyInsuranceCheck/', JSON.stringify(buyformobj), this.httpOptions).pipe(catchError(this.handleCommonErrors));
   }
 
   BuyInsurance(buyInsData): Observable<any> {
-    return this.httpClient.post<any>(this.apiServer + '/BuyInsurance/', JSON.stringify(buyInsData), this.httpOptions);
+    return this.httpClient.post<any>(this.apiServer + '/BuyInsurance/', JSON.stringify(buyInsData), this.httpOptions).pipe(catchError(this.handleCommonErrors));
   }
 
   RenewInsurance(buyInsData): Observable<any> {
-    return this.httpClient.post<any>(this.apiServer + '/RenewInsurance/', JSON.stringify(buyInsData), this.httpOptions);
+    return this.httpClient.post<any>(this.apiServer + '/RenewInsurance/', JSON.stringify(buyInsData), this.httpOptions).pipe(catchError(this.handleCommonErrors));
   }
 
   checkAdmin(aluser): Observable<any> {
-    return this.httpClient.post<any>(this.apiServer + '/AdminLogin/', JSON.stringify(aluser), this.httpOptions)
+    return this.httpClient.post<any>(this.apiServer + '/AdminLogin/', JSON.stringify(aluser), this.httpOptions).pipe(catchError(this.handleCommonErrors));
   }
 
   getPolicyDetails(userpolicy): Observable<any> {
-    return this.httpClient.post<any>(this.apiServer + '/PolicyDetails/', JSON.stringify(userpolicy), this.httpOptions)
+    return this.httpClient.post<any>(this.apiServer + '/PolicyDetails/', JSON.stringify(userpolicy), this.httpOptions).pipe(catchError(this.handleCommonErrors));
   }
 
 
