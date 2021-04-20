@@ -198,16 +198,16 @@
 
           
       <span *ngIf="planlist.Status_of_sub == 'Expired'; else elseBlock">
-                <span style="color: red;">(Your Plan has expired)</span>
-              </span>  
+                <span style="color: red;">(Your Plan has expired)</span><span class="tstyle"> | </span>
+              </span>
 
 
                   <ng-template #elseBlock>
-                    <a href="#" class="card-link tstyle" routerLink="/claim-insurance">Claim </a>
-                    <span class="tstyle"><strong>(Active)</strong></span>
+                    <a href="#" class=" tstyle" routerLink="/claim-insurance">Claim</a>
+                    <span class="tstyle"><strong> | (Active) | </strong></span>
                   </ng-template>
 
-                  <a href="" [routerLink]="['/policy-details']" [queryParams]="{policy_no:planlist.Policy_No}">View</a>
+                  <a href="" class="tstyle" [routerLink]="['/policy-details']" [queryParams]="{policy_no:planlist.Policy_No}">View Details</a>
         </div>
       </div>
     </div>
