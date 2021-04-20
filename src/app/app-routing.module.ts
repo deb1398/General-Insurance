@@ -19,7 +19,8 @@ import { ClaimDetailsComponent } from './claim-details/claim-details.component';
 import { UserHomePageComponent } from './user-home-page/user-home-page.component';
 import { PaymentGatewayComponent } from './payment-gateway/payment-gateway.component';
 import { ResetPasswordComponent} from './reset-password/reset-password.component';
-import { AuthGuardService } from './Auth/auth-guard.service';
+import { AdminAuthGuardService, AuthGuardService } from './Auth/auth-guard.service';
+import { PolicyDetailsComponent } from './policy-details/policy-details.component';
 const routes: Routes = [
 
   {path:'', component : HomeComponent},
@@ -27,21 +28,22 @@ const routes: Routes = [
   {path:'Login', component : LoginComponent},
   {path:'Adminlogin', component : AdminLoginComponent},
   {path:'Contact', component : ContactComponent},
-  {path:'BuyInsurance', component : BuyInsuranceComponent},
+  {path:'BuyInsurance', component : BuyInsuranceComponent, canActivate: [AuthGuardService]},
   // {path:'BuyInsurance', component : BuyInsuranceComponent, canActivate: [AuthGuardService]}
   {path:'AboutUs', component : AboutusComponent},
   {path:'ForgetPwd', component : ForgetPasswordComponent},
   {path:'register', component : RegisterComponent},
   {path:'user-profile', component : UserProfileComponent,canActivate: [AuthGuardService]},
   {path:'premium-calc', component : PremiumCalcComponent},
-  {path:'plan-selection', component : PlanSelectionComponent},
-  {path:'claim-insurance', component : ClaimInsuranceComponent},
+  {path:'plan-selection', component : PlanSelectionComponent, canActivate: [AuthGuardService]},
+  {path:'claim-insurance', component : ClaimInsuranceComponent, canActivate: [AuthGuardService]},
   {path:'faq', component : FAQComponent},
-  {path:'admin-page', component : AdminPageComponent},
-  {path:'user-home-page', component : UserHomePageComponent},
-  {path:'payment-gateway', component : PaymentGatewayComponent},
-  {path:'claim-details', component : ClaimDetailsComponent},
+  {path:'admin-page', component : AdminPageComponent, canActivate: [AdminAuthGuardService]},
+  {path:'user-home-page', component : UserHomePageComponent, canActivate: [AuthGuardService]},
+  {path:'payment-gateway', component : PaymentGatewayComponent, canActivate: [AuthGuardService]},
+  {path:'claim-details', component : ClaimDetailsComponent, canActivate: [AdminAuthGuardService]},
   {path: 'reset-pwd', component : ResetPasswordComponent},
+  {path: 'policy-details', component : PolicyDetailsComponent, canActivate: [AuthGuardService]},
   {path: '**', component: HomeComponent}
   
 ];
