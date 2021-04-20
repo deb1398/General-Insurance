@@ -84,6 +84,11 @@ export class PaymentGatewayComponent implements OnInit {
 
         window.alert('Insurance Policy Subscribed Successfully');
       });
+      console.log(this.buyInsData);
+    sessionStorage.removeItem('sessionbuyins');
+
+    this.router.navigateByUrl("/user-home-page");
+
 
     }
     else
@@ -92,13 +97,18 @@ export class PaymentGatewayComponent implements OnInit {
         console.log(res),
         window.alert('Insurance Policy Renewed Successfully');
       });    
-
-    }
-
-    console.log(this.buyInsData);
+      console.log(this.buyInsData);
     sessionStorage.removeItem('sessionbuyins');
 
     this.router.navigateByUrl("/user-home-page");
+
+
+    }
+
+    // console.log(this.buyInsData);
+    // sessionStorage.removeItem('sessionbuyins');
+
+    // this.router.navigateByUrl("/user-home-page");
 
   }
 
