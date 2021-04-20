@@ -17,6 +17,10 @@ body{
 .container
 {
     margin-top:2%;
+}
 
+.footer-fix
+{
+    min-height: 568px;
 }
 
