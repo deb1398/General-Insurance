@@ -103,6 +103,11 @@ export class ClaimInsuranceComponent implements OnInit {
     this.crudService.claim(cl).subscribe(res => {
       console.log(res);
       window.alert(res.message);
+
+      if(res.message=='Successfull')
+      {
+        this.router.navigateByUrl('/user-home-page');
+      }
       // if(res.message=='Invalid')
       // {
       //   window.alert('You do not have this current policy \n or it is expired');

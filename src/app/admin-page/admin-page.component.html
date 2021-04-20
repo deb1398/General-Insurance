@@ -1,5 +1,5 @@
 <!-- <p>admin-page works!</p> -->
-
+<div class="footer-fix" style="margin: 2%;">
 
 <section class="jumbotron text-center">
   <div class="container">
@@ -67,7 +67,9 @@
         <td>{{claim_details.Date_claimed}}</td>
         <td>{{claim_details.Claim_approval_status}}</td>
         <td>{{claim_details.Claim_amt == null ? 'N/A' : claim_details.Claim_amt}}</td>
-        <td><a href="" [routerLink]="['/claim-details']" [queryParams]="{Claim_no:claim_details.Claim_no}">View</a></td>
+        <td><a href="" class="tcolor" [routerLink]="['/claim-details']" [queryParams]="{Claim_no:claim_details.Claim_no}">View</a></td>
       </tr>
   </tbody>
 </table>
+
+</div>
