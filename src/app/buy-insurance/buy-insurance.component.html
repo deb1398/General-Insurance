@@ -37,7 +37,7 @@
                                 
                                 <div class="form-group">
                                     <label for="model">Model Name</label>
-                                    <select id="model" class="form-control" name="model" formControlName="model_name" [ngClass]="{'is-invalid': model_name.errors && (model_name.touched || model_name.dirty), 'is-valid':model_name.valid}">
+                                    <select id="model" class="form-control" (change)="getMarketPrice($event.target.value)" name="model" formControlName="model_name" [ngClass]="{'is-invalid': model_name.errors && (model_name.touched || model_name.dirty), 'is-valid':model_name.valid}">
                                         <option [ngValue]="m.Model_Name" *ngFor="let m of modelsList">
                                             {{m.Model_Name}}
                                         </option>
@@ -121,7 +121,7 @@
 
                                 <div class="form-group">
                                     <label for="chassisNo">Market Price</label>
-                                    <input type="number" class="form-control rounded-0" name="market_price" formControlName="market_price" [ngClass]="{'is-invalid': market_price.errors && (market_price.touched || market_price.dirty), 'is-valid':market_price.valid}">
+                                    <input type="number" class="form-control rounded-0" name="market_price" readonly="readonly" value="{{Market_Price_Response}}" formControlName="market_price" [ngClass]="{'is-invalid': market_price.errors && (market_price.touched || market_price.dirty), 'is-valid':market_price.valid}">
                                     <div *ngIf="!market_price?.valid && (market_price?.dirty || market_price?.touched)" id="error-div">
                                         <div [hidden]="!market_price.errors.required" style="color: red;">
                                             Market price is required

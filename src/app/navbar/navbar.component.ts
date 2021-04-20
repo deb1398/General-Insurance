@@ -14,6 +14,7 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   public loginstatus$:Observable<boolean>;
+  public adminstatus$: Observable<boolean>;
 
   logout()
   {
@@ -21,8 +22,15 @@ export class NavbarComponent implements OnInit {
     this.service.loginstatus.next(false); 
   }
 
+  adminLogout() {
+    
+    sessionStorage.clear();
+    this.service.adminstatus.next(false);
+  }
+
   ngOnInit(): void {
     this.loginstatus$ = this.service.isLoggedin;
+    this.adminstatus$ = this.service.adminLoggedin;
   }
 
 }

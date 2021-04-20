@@ -21,11 +21,17 @@ import { RenewForm } from './user-home-page/user-home-page.component';
 export class CRUDApiService {
 
 
-  public loginstatus = new BehaviorSubject<boolean>((sessionStorage.length!=0)?true:false);
+  public loginstatus = new BehaviorSubject<boolean>((sessionStorage.getItem('User_Id')!=null)?true:false);
+  public adminstatus = new BehaviorSubject<boolean>((sessionStorage.getItem('Admin_username')!=null)?true:false);
 
   get isLoggedin()
   {
     return this.loginstatus.asObservable();
+  }
+
+  get adminLoggedin()
+  {
+    return this.adminstatus.asObservable();
   }
 
   private apiServer = "http://localhost:64977/api";
@@ -88,6 +94,11 @@ export class CRUDApiService {
     return this.httpClient.get<any>(this.apiServer + '/Admin?Claim_no='+Claim_no)
   }
 
+  getMarketPriceApi(Model_Name): Observable<any> {
+    const opts = { params: new HttpParams({fromString: "Model_Name="+ Model_Name}) };
+    return this.httpClient.get<any>(this.apiServer + '/MarketPrice/?model_name='+Model_Name)
+  }
+
   updateclaims(Claim_no,claim_info): Observable<any>{
     return this.httpClient.put<any>(this.apiServer + '/Admin?Claim_no='+Claim_no, JSON.stringify(claim_info), this.httpOptions)
   }
@@ -106,6 +117,10 @@ export class CRUDApiService {
 
   checkAdmin(aluser): Observable<any> {
     return this.httpClient.post<any>(this.apiServer + '/AdminLogin/', JSON.stringify(aluser), this.httpOptions)
+  }
+
+  getPolicyDetails(userpolicy): Observable<any> {
+    return this.httpClient.post<any>(this.apiServer + '/PolicyDetails/', JSON.stringify(userpolicy), this.httpOptions)
   }
 
 
