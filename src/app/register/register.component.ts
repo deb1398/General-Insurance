@@ -10,6 +10,7 @@ import { CRUDApiService } from '../crud-api.service';
 })
 export class RegisterComponent implements OnInit {
 
+  //form validations
   registerForm = new FormGroup({
     firstName : new FormControl('',[Validators.required, Validators.minLength(3) ,Validators.pattern("^[a-zA-Z]+$")]),
     lastName : new FormControl('',[Validators.required]),
@@ -20,9 +21,6 @@ export class RegisterComponent implements OnInit {
     password : new FormControl('',[Validators.required,Validators.minLength(8), Validators.pattern("(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[$@$!%*#?&])[A-Za-z0-9$@$!%*#?&]{8,32}")]),
     cpassword : new FormControl ('', [Validators.required])
   })
-  // },{ 
-  //   validators: this.passwordcheck.bind(this)
-  // })
 
   constructor(
     public fb: FormBuilder,
@@ -72,16 +70,12 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get('cpassword');
   }
 
-  // passwordcheck(formGroup: FormGroup) {
-  //   const { value: password } = formGroup.get('password');
-  //   const { value: confirmPassword } = formGroup.get('cpassword');
-  //   return password === confirmPassword ? null : { passwordNotMatch: true };
-  // }
 
   onSubmit()
   {
     console.log(this.registerForm.value);
-
+    
+    //creating object for details of user in CRUS api service
     let us = new user(
       this.firstName.value+" "+this.lastName.value,
       this.emailid.value,
@@ -91,16 +85,17 @@ export class RegisterComponent implements OnInit {
       this.password.value,      
       );
 
-    
+    //gets entire details through CRUD api service
     this.crudService.create(us).subscribe(res => {
       console.log('User Registrations created!'),
-      window.alert('Registration Successful'),
+      window.alert('Registration Successful'),//user is registed
       this.router.navigateByUrl('/Login')
     });
   }
 
 }
 
+//class declarations for creating objects to pass in pass CRUD api service
 export class user
 {
   Name : string;
