@@ -44,7 +44,7 @@
       <p class="lead text-muted mb-0">We at general insurance are more than happy to help!!</p>
   </div>
 </section> -->
-<div class="container">
+<div class="container footer-fix">
   <div class="row">
     <!-- <div class="col-xl-3">
       <button type="button" class="btn btn-primary btn-lg btn-block mr-1"><i class="fa fa-shopping-cart fa-5x center" aria-hidden="true"></i><br>Buy Insurance</button>
@@ -249,7 +249,7 @@
       <div class="row">
         <div class="col-6 text-center">
           <h6 class="d-flex align-items-center mb-3">Policy Number: {{info.Policy_No}}</h6>
-          <h6 class="d-flex align-items-center mb-3">Date Claimed: {{info.Date_claimed}}</h6>
+          <h6 class="d-flex align-items-center mb-3">Date Claimed: {{info.Date_claimed | date}}</h6>
         </div>
         <div class="col-6 text-center">
           <span *ngIf="info.Claim_approval_status=='Approved'; else second_condition">
