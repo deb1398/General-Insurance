@@ -17,8 +17,6 @@
                             <label class="form-check-label">
                                 <input type="radio" (click)="getbrands('2-wheeler')" class="form-check-inline" value="2-wheeler" id="veh_type2" name="veh_type" formControlName="veh_type">2-Wheeler
                             </label>
-                            <!-- <input type="radio" class="form-check-inline" value="4-wheeler" id="veh_type1" name="veh_type" formControlName="veh_type" >4-Wheeler&nbsp;
-                            <input type="radio" class="form-check-inline" value="2-wheeler" id="veh_type2" name="veh_type" formControlName="veh_type">2-Wheeler -->
                             <div *ngIf="!veh_type?.valid && (veh_type?.dirty || veh_type?.touched)" id="error-div">
                                 <div [hidden]="!veh_type.errors.required">
                                     Vehicle Type is required
@@ -55,7 +53,6 @@
                             <div class="col-sm-12 col-md-6 col-lg-4 form-group">
                                 <label for="market_price">Market Price</label>
                                 <input type="number" class="form-control" id="market_price" name="market_price" readonly="readonly" value="{{Market_Price_Response}}" formControlName="market_price" >
-                                <!-- [ngClass]="{'is-invalid': market_price.errors && (market_price.touched || market_price.dirty), 'is-valid':market_price.valid}" -->
                                 <div *ngIf="!market_price?.valid && (market_price?.dirty || market_price?.touched)" id="error-div">
                                     <div [hidden]="!market_price.errors.required">
                                         Market Price is required
@@ -139,88 +136,81 @@
 
 <div class="modal fade" id="thirdpartymodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Third Party Price Breakup</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Third Party Price Breakup</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                <div class="col-md-9">Basic Third Party</div>
+                <div class="col-md-3">{{basic_third_party | number : '1.0-2'}}</div>
+                </div>
+                <hr class="my-2">
+                <div class="row">
+                    <div class="col-md-9">Net Premium</div>
+                    <div class="col-md-3">{{net_premium_tp | number : '1.0-2'}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9">GST</div>
+                    <div class="col-md-3">{{gst_tp | number : '1.0-2'}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9">Total Premium</div>
+                    <div class="col-md-3">{{total_premium_tp | number : '1.0-2'}}</div>
+                </div>
+                <hr class="my-3">
+                <div class="row">
+                    <div class="col-md-9">Total Payable</div>
+                    <div class="col-md-3">{{total_premium_tp | number : '1.0-2'}}</div>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-            <div class="row">
-              <div class="col-md-9">Basic Third Party</div>
-              <div class="col-md-3">{{basic_third_party | number : '1.0-2'}}</div>
-            </div>
-            <hr class="my-2">
-            <div class="row">
-                <div class="col-md-9">Net Premium</div>
-                <div class="col-md-3">{{net_premium_tp | number : '1.0-2'}}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-9">GST</div>
-                <div class="col-md-3">{{gst_tp | number : '1.0-2'}}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-9">Total Premium</div>
-                <div class="col-md-3">{{total_premium_tp | number : '1.0-2'}}</div>
-            </div>
-            <hr class="my-3">
-            <div class="row">
-                <div class="col-md-9">Total Payable</div>
-                <div class="col-md-3">{{total_premium_tp | number : '1.0-2'}}</div>
-            </div>
-        </div>
-        <!-- <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div> -->
-      </div>
     </div>
-  </div>
-
+</div>
 
   
 <div class="modal fade" id="comprehensivemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Comprehensive Price Breakup</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Comprehensive Price Breakup</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-9">Basic Own Damage</div>
+                    <div class="col-md-3">{{basic_own_damage | number : '1.0-2'}}</div>
+                </div>
+                <hr class="my-2">
+                <div class="row">
+                <div class="col-md-9">Basic Third Party</div>
+                <div class="col-md-3">{{basic_third_party | number : '1.0-2'}}</div>
+                </div>
+                <hr class="my-2">
+                <div class="row">
+                    <div class="col-md-9">Net Premium</div>
+                    <div class="col-md-3">{{net_premium_comp | number : '1.0-2'}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9">GST</div>
+                    <div class="col-md-3">{{gst_comp | number : '1.0-2'}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9">Total Premium</div>
+                    <div class="col-md-3">{{total_premium_comp | number : '1.0-2'}}</div>
+                </div>
+                <hr class="my-3">
+                <div class="row">
+                    <div class="col-md-9">Total Payable</div>
+                    <div class="col-md-3">{{total_premium_comp | number : '1.0-2'}}</div>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-            <div class="row">
-                <div class="col-md-9">Basic Own Damage</div>
-                <div class="col-md-3">{{basic_own_damage | number : '1.0-2'}}</div>
-              </div>
-              <hr class="my-2">
-            <div class="row">
-              <div class="col-md-9">Basic Third Party</div>
-              <div class="col-md-3">{{basic_third_party | number : '1.0-2'}}</div>
-            </div>
-            <hr class="my-2">
-            <div class="row">
-                <div class="col-md-9">Net Premium</div>
-                <div class="col-md-3">{{net_premium_comp | number : '1.0-2'}}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-9">GST</div>
-                <div class="col-md-3">{{gst_comp | number : '1.0-2'}}</div>
-            </div>
-            <div class="row">
-                <div class="col-md-9">Total Premium</div>
-                <div class="col-md-3">{{total_premium_comp | number : '1.0-2'}}</div>
-            </div>
-            <hr class="my-3">
-            <div class="row">
-                <div class="col-md-9">Total Payable</div>
-                <div class="col-md-3">{{total_premium_comp | number : '1.0-2'}}</div>
-            </div>
-        </div>
-        <!-- <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div> -->
-      </div>
     </div>
 </div>
 
