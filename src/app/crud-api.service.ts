@@ -153,7 +153,7 @@ export class CRUDApiService {
       errorMessage = `Error: ${error.error.message}`;
     }
     else {
-      errorMessage = `Email Id or Phone Number is already taken`;
+      errorMessage = `Email Id  is already taken`;
     }
 
     window.alert(errorMessage);

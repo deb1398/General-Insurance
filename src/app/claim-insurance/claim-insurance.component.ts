@@ -40,7 +40,7 @@ export class ClaimInsuranceComponent implements OnInit {
     return null;
   }
 
-
+  //convenience getter for easy access to form fields
   get policy_no()
   {
     return this.claimForm.get('policy_no');
@@ -76,6 +76,7 @@ export class ClaimInsuranceComponent implements OnInit {
     return this.claimForm.get('any_thirdparty_damage');
   }
 
+  //set max date for date validation
   maxdate:Date;
   ngOnInit(): void {
     
@@ -85,8 +86,10 @@ export class ClaimInsuranceComponent implements OnInit {
 
   onSubmit()
   {
-    
+    // display form values on successfull submission
     console.log(this.claimForm.value);
+
+    //adding element values to the object of class
     let cl=new claim();
     cl.User_Id=Number(sessionStorage.getItem('User_Id'));
     cl.Policy_No=this.policy_no.value;
@@ -99,29 +102,22 @@ export class ClaimInsuranceComponent implements OnInit {
     cl.Claim_approval_status="";
     cl.message="";
 
-
+    //api service for Claim insurance details
     this.crudService.claim(cl).subscribe(res => {
       console.log(res);
       window.alert(res.message);
 
+      // display message on successfull service
       if(res.message=='Successfull')
       {
         this.router.navigateByUrl('/user-home-page');
       }
-      // if(res.message=='Invalid')
-      // {
-      //   window.alert('You do not have this current policy \n or it is expired');
-      // }
-      // else{
-      //   console.log('Submitted Successfully'),
-      //  window.alert('Submitted Successfully'),
-      // this.router.navigateByUrl('user-home-page')
-      // }
     });
   }
 
 }
 
+//Class Declaration for creating objects to pass in CRUD API Service
 export class claim
 {
   User_Id : number;

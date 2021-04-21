@@ -39,21 +39,21 @@ export class BuyInsuranceComponent implements OnInit {
   }
   
 
-  
-
+  //declaration
   brandsList:WheelerBrand[];
   
   modelsList:WheelerModel[];
 
   constructor( public service: CRUDApiService, public shared: SharedService, private router: Router, public crudService:CRUDApiService) { }
   
-  
+  //set max date for date validation 
   maxdate:Date;
+
   ngOnInit(): void {
     this.maxdate = new Date(Date.now());
-    
   }
 
+  //convenience getter for easy access to form fields
   get f(){
     return this.buyinsuranceForm.controls;
   }
@@ -113,29 +113,33 @@ export class BuyInsuranceComponent implements OnInit {
   modelType: ModelType;
 
   onItemChange(e){
+
     this.globalVehicleType = e.target.value;
+
+    //adding element values to the object of vehicle type class
     let vehicleType = new VehicleType;
     vehicleType.vehicle_type = e.target.value; 
+
+    //api service for getting brand names
     this.service.getBrands(vehicleType).subscribe((data) => {
       this.brandsList = data;
     })
     
-    //this.vehicle_type = e.target.value;
-    // console.log(e.target.value);
   }
 
   onChange(e){
     var index = e.target.value.indexOf(":")
     var id = e.target.value.substring(index+1,);
+
+    //adding element values to the object of model type class
     let modelType = new ModelType;
-    
     modelType.Brand_ID = id;
     modelType.vehicle_type = this.globalVehicleType;
-    // console.log(modelType);
+
+    //api service for getting model names
     this.service.getModels(modelType).subscribe((data) => {
       this.modelsList = data;
     })
-    // console.log(e.target.value);
   }
 
   Market_Price_Response:number=0;
@@ -157,27 +161,28 @@ export class BuyInsuranceComponent implements OnInit {
 
   onSubmit()
   {
-    
+    //adding element values to the object of registration class
     let reg= new registrationNo;
     reg.registration_no=String(this.registeration_number.value);
     
-    
+    //api service for buy insurance
     this.crudService.BuyInsuranceCheck(reg).subscribe(res => {
       console.log(res);
+
+
       if(res.message === "Valid")
       {
+
+        //add element values to buy insurance object
         this.buyInsurance = this.buyinsuranceForm.value;
         this.buyInsurance.market_price = this.Market_Price_Response;
         this.buyInsurance.User_Id = Number(sessionStorage.getItem('User_Id'));
         this.buyInsurance.inusrance_type = "Buy_New";
-        //this.shared.setBuyInsData(this.buyInsurance);
         
-        
-        //console.log(this.buyInsurance);
+        //set session storage
         sessionStorage.setItem('sessionbuyins', JSON.stringify(this.buyInsurance));
-        //var temp = sessionStorage.getItem('sessionbuyins');
-        //var sessionbuyInsData = JSON.parse(temp);
-        //console.log(sessionbuyInsData);
+        
+        //redirecting to another page
         this.router.navigateByUrl('/plan-selection');
 
       }
@@ -185,12 +190,12 @@ export class BuyInsuranceComponent implements OnInit {
       {
         window.alert("This Vehicle Registration already has active subscription");
       }
-    });
-
-    
+    });  
   }
 
 }
+
+//Class Declaration for creating objects to pass in CRUD API Service
 
 export class registrationNo{
   registration_no:string;
@@ -211,15 +216,6 @@ export class WheelerBrand {
   Brand_Id: number
 }
 
-// export class twoWheelerBrand {
-//   id:string;
-//   name:string;
- 
-//   constructor(id:string, name:string) {
-//     this.id=id;
-//     this.name=name;
-//   }
-// }
 
 export class WheelerModel {
   Brand_Id:number;
