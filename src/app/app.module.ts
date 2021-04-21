@@ -29,7 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { AuthGuardService } from './Auth/auth-guard.service';
+import { AuthGuardService, AdminAuthGuardService } from './Auth/auth-guard.service';
 import { PolicyDetailsComponent } from './policy-details/policy-details.component';
 
 

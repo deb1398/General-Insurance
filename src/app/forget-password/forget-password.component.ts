@@ -21,7 +21,8 @@ export class ForgetPasswordComponent implements OnInit {
   ngOnInit():void {
     
   }
-  
+
+  //convenience getter for easy access to form fields
   get password()
   {
     return this.forgetForm.get('password');
@@ -35,40 +36,46 @@ export class ForgetPasswordComponent implements OnInit {
 
   onSubmit()
   {
+    //get parameters from URL
     const urlParams = new URLSearchParams(window.location.search);
-    const token = decodeURI(urlParams.get('token'));
-    console.log(token);
-    console.log(decodeURI(token));
 
+    //decodes URI by getting the tokens
+    const token = decodeURI(urlParams.get('token'));
+
+    // display form values on successfull submission
     console.log(this.forgetForm.value);
+
+    //adding element values to the object of class
     let forgot_pwdobj = new user();
     forgot_pwdobj.token = token;
     forgot_pwdobj.password=this.password.value;
     forgot_pwdobj.message="";
 
+    //api service for forgot password
     this.crudService.reset_pwd(forgot_pwdobj).subscribe(res => {
       console.log(res);
-      //window.alert(res);
+
+      // display message on successfull service
       if(res == "Successfull")
       {
         console.log("Successfull");    
         window.alert("Password Changed successfully");
         this.router.navigateByUrl('/Login');
       }
+
+      // display message on invalid conditions
       else
       {
         console.log("Failed to change");
         window.alert("Failed to change");
-        //this.Display Error Message
       }
     });
   }
 }
-
+//Class Declaration for creating objects to pass in CRUD API Service
 export class user
 {
   token : string;
   password : string;
   message : string;
-  //cpassword : string;
 }
