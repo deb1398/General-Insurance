@@ -11,7 +11,7 @@ export class AuthGuardService implements CanActivate {
   constructor(private service: CRUDApiService, private router: Router) { }
   
   canActivate(): boolean {
-    if(!sessionStorage.getItem('Email_ID') || !sessionStorage.getItem('Phone_No') || !sessionStorage.getItem('Admin_username')) {
+    if(!sessionStorage.getItem('Email_ID') || !sessionStorage.getItem('Phone_No')) {
       alert("Not logged in.");
       this.router.navigateByUrl("/Home");
       return false;
