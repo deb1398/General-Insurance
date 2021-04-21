@@ -39,7 +39,7 @@ const routes: Routes = [
   {path:'plan-selection', component : PlanSelectionComponent, canActivate: [AuthGuardService]},
   {path:'claim-insurance', component : ClaimInsuranceComponent, canActivate: [AuthGuardService]},
   {path:'faq', component : FAQComponent},
-  {path:'admin-page', component : AdminPageComponent, canActivate: [AdminAuthGuardService]},
+  {path:'admin-page', component : AdminPageComponent},
   {path:'user-home-page', component : UserHomePageComponent, canActivate: [AuthGuardService]},
   {path:'payment-gateway', component : PaymentGatewayComponent, canActivate: [AuthGuardService]},
   {path:'claim-details', component : ClaimDetailsComponent},
