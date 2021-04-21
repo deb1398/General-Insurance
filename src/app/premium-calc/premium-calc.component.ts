@@ -15,6 +15,9 @@ export class PremiumCalcComponent implements OnInit {
   
 
   public vehicle_typeg:string;
+
+  // Creates List of Brand Names of Vehicles based on Vehicle type selected by User 
+  // Method called when user Selects or Changes value of Vehicle Type radio button
   public getbrands(vehicle_type:string)
   {
     this.vehicle_typeg = vehicle_type;
@@ -23,6 +26,8 @@ export class PremiumCalcComponent implements OnInit {
 
     let vehtypeobj = new vehicletypeclass();
     vehtypeobj.vehicle_type = vehicle_type;
+
+    // Gets List of Brand Names using CRUD Api Service
     this.crudService.getBrands(vehtypeobj).subscribe(res => {
       res.forEach(element => {
         console.log(element.brand_names)
@@ -34,11 +39,10 @@ export class PremiumCalcComponent implements OnInit {
     
   }
 
-
+  // Creates List of Model Names of Vehicles based on Brand Name selected by User 
+  // Method called when user Selects or Changes value of Brand Name drop down
   public getmodels(Brand_Id)
   {
-    //console.log(Brand_Id[3]+""+Brand_Id);
-
     var index = Brand_Id.indexOf(":")
     var id = Brand_Id.substring(index+1,);
     this.ModelsList = [];
@@ -46,6 +50,8 @@ export class PremiumCalcComponent implements OnInit {
     let brandidobj = new brandidclass();
     brandidobj.Brand_Id = id;
     brandidobj.vehicle_type = this.vehicle_typeg;
+
+    // Gets List of Model Names using CRUD Api Service
     this.crudService.getModels(brandidobj).subscribe(res => {
       console.log(res)
       res.forEach(element => {
@@ -60,11 +66,16 @@ export class PremiumCalcComponent implements OnInit {
 
 
   Market_Price_Response:number=0;
+
+  // Gets Market Price of Vehicle based on Model Name selected by User 
+  // Method called when user Selects or Changes value of Model Name dropdown
   public getMarketPrice(model_name:string)
   {
     console.log("Inside");
     var index = model_name.indexOf(":")
     model_name = model_name.substring(index+1,).trim();
+
+    // Gets Market Price of Vehicle using CRUD Api Service
     this.crudService.getMarketPriceApi(model_name).subscribe(res => {
       console.log(res);
       this.Market_Price_Response = Number(res.Market_Price);
@@ -99,6 +110,7 @@ export class PremiumCalcComponent implements OnInit {
    
   })
 
+  // Custom Date Validator for checking if the selected date is greaer than Current Date
   dateValidator(control: FormControl): { [s: string]: boolean } {
     if (control.value) {
       const date = moment(control.value);
@@ -138,6 +150,7 @@ export class PremiumCalcComponent implements OnInit {
   maxdate:Date;
   ngOnInit(): void {
 
+    // setting max date as current date
     this.maxdate = new Date(Date.now());
 
   }
@@ -158,17 +171,20 @@ export class PremiumCalcComponent implements OnInit {
   
   onSubmit()
   {
-    
+    // Creating object to pass model name, veh_cc, veeh_type, age in CRUD Api Service
     let premamtobj = new PremiumAmount();
     premamtobj.Model_Name = this.model_name.value;
     premamtobj.vehicle_cc = this.veh_cc.value;
     premamtobj.vehicle_type = this.veh_type.value;
     
+    // Calculating Age of vehicle from User's entered Vehicle Purchase Date
     let timeDiff = Math.abs(Date.now() - new Date(this.veh_pur_date.value).getTime())
     let age = Math.floor((timeDiff / (1000 * 3600 * 24))/365.25);
     premamtobj.age = age;
   
+    // Gets Prem Amount Factor required for Calulationg IDV and Premium Amount
     this.crudService.getpremfacors(premamtobj).subscribe((data) => {
+
       console.log(data);
       this.idv = this.Market_Price_Response - (data.dep_per/100 * this.Market_Price_Response);
       this.basic_third_party = data.thirdpartyprem;
@@ -194,11 +210,13 @@ export class PremiumCalcComponent implements OnInit {
 
 }
 
+// Class Declaration for passing Vehicle Type in object to CRUD Api Service
 export class vehicletypeclass
 {
   vehicle_type:string;
 }
 
+// Class Declaration for passing Brand Id in object to CRUD Api Service
 export class brandidclass
 {
   Brand_Id:number;
@@ -206,6 +224,7 @@ export class brandidclass
 }
 
 
+// Class Declaration for Creating list of objects Brand
 export class Brand {
   id:number;
   name:string;
@@ -216,7 +235,7 @@ export class Brand {
   }
 }
 
-
+// Class Declaration for Creating list of objects Model
 export class Model {
   id:number;
   name:string;

@@ -19,8 +19,9 @@ import { ClaimDetailsComponent } from './claim-details/claim-details.component';
 import { UserHomePageComponent } from './user-home-page/user-home-page.component';
 import { PaymentGatewayComponent } from './payment-gateway/payment-gateway.component';
 import { ResetPasswordComponent} from './reset-password/reset-password.component';
-import { AdminAuthGuardService, AuthGuardService } from './Auth/auth-guard.service';
+import { AuthGuardService } from './Auth/auth-guard.service';
 import { PolicyDetailsComponent } from './policy-details/policy-details.component';
+import { AdminAuthGuardService } from './Auth/admin-auth-guard.service';
 const routes: Routes = [
 
   {path:'', component : HomeComponent},

@@ -29,7 +29,11 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { AuthGuardService, AdminAuthGuardService } from './Auth/auth-guard.service';
+
+import { AuthGuardService } from './Auth/auth-guard.service';
+import { AdminAuthGuardService } from './Auth/admin-auth-guard.service'
+// import { AdminAuthGuardService } from './Auth/auth-guard.service';
+
 import { PolicyDetailsComponent } from './policy-details/policy-details.component';
 
 
@@ -69,7 +73,7 @@ import { PolicyDetailsComponent } from './policy-details/policy-details.componen
     AppRoutingModule, 
     ReactiveFormsModule
   ],
-  providers: [AuthGuardService],
+  providers: [AuthGuardService, AdminAuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

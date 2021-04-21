@@ -22,19 +22,21 @@ export class AuthGuardService implements CanActivate {
   
 
 }
-export class AdminAuthGuardService implements CanActivate {
+// export class AdminAuthGuardService implements CanActivate {
 
-  constructor(private service: CRUDApiService, private router: Router) { }
+//   constructor(private service: CRUDApiService, private router: Router) { }
   
-  canActivate(): boolean {
-    if(sessionStorage.getItem('Admin_username')==null) {
-      alert("Not logged in.");
-      this.router.navigateByUrl("/Home");
-      return false;
-    }
+
+//   canActivate(): boolean {
+//     if(!sessionStorage.getItem('Admin_username')) {
+//       alert("Not logged in.");
+//       this.router.navigateByUrl("/Home");
+//       return false;
+//     }
+
     
-    return true;
-  }
+//     return true;
+//   }
   
 
-}
+// }
