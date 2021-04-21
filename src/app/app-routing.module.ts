@@ -19,7 +19,7 @@ import { ClaimDetailsComponent } from './claim-details/claim-details.component';
 import { UserHomePageComponent } from './user-home-page/user-home-page.component';
 import { PaymentGatewayComponent } from './payment-gateway/payment-gateway.component';
 import { ResetPasswordComponent} from './reset-password/reset-password.component';
-import { AdminAuthGuardService, AuthGuardService } from './Auth/auth-guard.service';
+import { AuthGuardService } from './Auth/auth-guard.service';
 import { PolicyDetailsComponent } from './policy-details/policy-details.component';
 const routes: Routes = [
 
@@ -38,10 +38,10 @@ const routes: Routes = [
   {path:'plan-selection', component : PlanSelectionComponent, canActivate: [AuthGuardService]},
   {path:'claim-insurance', component : ClaimInsuranceComponent, canActivate: [AuthGuardService]},
   {path:'faq', component : FAQComponent},
-  {path:'admin-page', component : AdminPageComponent, canActivate: [AdminAuthGuardService]},
+  {path:'admin-page', component : AdminPageComponent, canActivate: [AuthGuardService]},
   {path:'user-home-page', component : UserHomePageComponent, canActivate: [AuthGuardService]},
   {path:'payment-gateway', component : PaymentGatewayComponent, canActivate: [AuthGuardService]},
-  {path:'claim-details', component : ClaimDetailsComponent, canActivate: [AdminAuthGuardService]},
+  {path:'claim-details', component : ClaimDetailsComponent, canActivate: [AuthGuardService]},
   {path: 'reset-pwd', component : ResetPasswordComponent},
   {path: 'policy-details', component : PolicyDetailsComponent, canActivate: [AuthGuardService]},
   {path: '**', component: HomeComponent}
