@@ -14,22 +14,16 @@ export class AdminPageComponent implements OnInit {
   constructor(public service: CRUDApiService) { }
 
   ngOnInit() {
+    //gets the entire data through CRUD api service
      this.service.getadminclaims().subscribe((data: details[])=>{
          this.ClaimsList = data;
          console.log(this.ClaimsList);
      })  
-    // this.service.getadminclaims().subscribe(res => {
-    //   res.forEach(element => {
-    //    console.log(element)
-    //    //let c = new details(element.Policy_No,element.Reasons);
-    //     this.ClaimsList.push(element);
-    //    });
-    //   console.log(this.ClaimsList);
-    // });
-
   }
 
 }
+
+//class declarations for creating objects to pass in pass CRUD api service
 export class details
 {
   Policy_No : string;

@@ -172,6 +172,7 @@
     </div>
   </div> -->
 
+
   <h5>List of Insurance:</h5>
   <div *ngIf="subscriptionplan_list.length==0; else elseShowSubsPlan">No Subscriptions Available</div>
   <ng-template #elseShowSubsPlan>
@@ -195,6 +196,7 @@
             </div>
           </div>
           <hr>
+
 
           
       <span *ngIf="planlist.Status_of_sub == 'Expired'; else elseBlock">

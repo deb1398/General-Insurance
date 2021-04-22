@@ -84,6 +84,11 @@ export class PaymentGatewayComponent implements OnInit {
 
         window.alert('Insurance Policy Subscribed Successfully');
       });
+      console.log(this.buyInsData);
+    sessionStorage.removeItem('sessionbuyins');
+
+    this.router.navigateByUrl("/user-home-page");
+
 
         
       console.log(this.buyInsData);
@@ -111,6 +116,7 @@ export class PaymentGatewayComponent implements OnInit {
       .then(() => {
         window.location.reload();
       });
+
 
     }
 

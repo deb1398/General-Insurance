@@ -10,6 +10,7 @@ import { CRUDApiService } from '../crud-api.service';
 })
 export class LoginComponent implements OnInit {
 
+  //form validations
   loginForm = new FormGroup({
     username : new FormControl('',[Validators.required]),
     password : new FormControl('',[Validators.required])
@@ -36,20 +37,21 @@ export class LoginComponent implements OnInit {
   onSubmit()
   {
     console.log(this.loginForm.value);
+    //creating object to pass details of user in CRUS api service
     let loginobj = new logindetails();
     loginobj.Email_ID = this.username.value;
     loginobj.Password = this.password.value;
     loginobj.message="";
 
+    //gets entire details through CRUD api service
     this.crudService.check(loginobj).subscribe(res => {
       console.log(res);
       if(res.message === "Successfull")
       {
-        
-
         console.log("Successfull");    
-        window.alert("Login Successful");
+        window.alert("Login Successful");// if email id and password are correct then logged in
         
+        //sessions are stored when logged in
         sessionStorage.setItem('User_Id',res.User_Id);
         sessionStorage.setItem('Name',res.Name);
         sessionStorage.setItem('Email_ID',res.Email_ID);
@@ -67,12 +69,13 @@ export class LoginComponent implements OnInit {
       {
         console.log("Invalid Username/Password");
         window.alert("Invalid User\nEnter the correct credentials");
-        //this.Display Error Message
       }
     });
   }
 
 }
+
+//class declarations for creating objects to pass in pass CRUD api service
 export class logindetails
 {
   Email_ID : string;
